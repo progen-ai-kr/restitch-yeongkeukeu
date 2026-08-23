@@ -7,8 +7,15 @@
       "name": "제품 이름",
       "summary": "목록에 보이는 한 줄 요약",
       "description": "상세 페이지에 보이는 설명입니다.\n\n빈 줄로 문단을 나눌 수 있습니다.",
-      "keywords": ["Keyword", "Keyword", "Keyword"],
-      "images": ["images/look01-1.jpg", "images/look01-2.jpg"],
+      "keywords": [
+        "Keyword",
+        "Keyword",
+        "Keyword"
+      ],
+      "images": [
+        "images/look01-1.jpg",
+        "images/look01-2.jpg"
+      ],
       "buyLink": ""
     },
     {
@@ -17,8 +24,13 @@
       "name": "제품 이름",
       "summary": "목록에 보이는 한 줄 요약",
       "description": "상세 페이지에 보이는 설명입니다.",
-      "keywords": ["Keyword", "Keyword"],
-      "images": ["images/look02-1.jpg"],
+      "keywords": [
+        "Keyword",
+        "Keyword"
+      ],
+      "images": [
+        "images/look02-1.jpg"
+      ],
       "buyLink": ""
     },
     {
@@ -27,8 +39,13 @@
       "name": "제품 이름",
       "summary": "목록에 보이는 한 줄 요약",
       "description": "상세 페이지에 보이는 설명입니다.",
-      "keywords": ["Keyword", "Keyword"],
-      "images": ["images/look03-1.jpg"],
+      "keywords": [
+        "Keyword",
+        "Keyword"
+      ],
+      "images": [
+        "images/look03-1.jpg"
+      ],
       "buyLink": ""
     },
     {
@@ -37,8 +54,23 @@
       "name": "제품 이름",
       "summary": "목록에 보이는 한 줄 요약",
       "description": "상세 페이지에 보이는 설명입니다.",
-      "keywords": ["Keyword", "Keyword"],
-      "images": ["images/look04-1.jpg"],
+      "keywords": [
+        "Keyword",
+        "Keyword"
+      ],
+      "images": [
+        "images/look04-1.jpg"
+      ],
+      "buyLink": ""
+    },
+    {
+      "id": "p-mt5x3r7t",
+      "label": "TEST",
+      "name": "관리자테스트제품",
+      "summary": "admin.html E2E 테스트",
+      "description": "",
+      "keywords": [],
+      "images": [],
       "buyLink": ""
     }
   ]
