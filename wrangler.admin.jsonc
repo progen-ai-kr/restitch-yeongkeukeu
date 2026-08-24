@@ -1,18 +1,20 @@
 {
-  "name": "restitch-yeongkeukeu",
+  "name": "restitch-admin",
   "compatibility_date": "2025-01-01",
   "main": "worker.js",
   "assets": {
     "directory": "./",
     "binding": "ASSETS",
-    "run_worker_first": ["/api/admin/*"]
+    "run_worker_first": ["/*"]
   },
   "vars": {
     "GITHUB_OWNER": "progen-ai-kr",
     "GITHUB_REPO": "restitch-yeongkeukeu",
     "GITHUB_REPOS": "restitch-yeongkeukeu",
     "GITHUB_BRANCH": "main",
-    "ADMIN_ENABLED": "false",
-    "ADMIN_URL": "https://restitch-admin.progen-web.workers.dev/admin"
+    "ADMIN_ENABLED": "true",
+    "ADMIN_STANDALONE": "true",
+    "ADMIN_URL": "https://restitch-admin.progen-web.workers.dev/admin",
+    "PUBLIC_SITE_URL": "https://restitch-yeongkeukeu.progen-web.workers.dev"
   }
 }
