@@ -1,45 +1,97 @@
 {
-  "_설명": "이 파일이 제품 목록입니다. 아래 형식대로 한 덩어리를 복사해 추가하면 제품 페이지와 상세 페이지에 자동으로 나타납니다. 사진은 images 폴더에 올리고 파일명을 적으세요.",
+  "_설명": "브랜드 담당자가 Pages CMS에서 제품과 상세페이지를 관리합니다. 학생은 이 파일을 직접 수정하지 않습니다.",
   "products": [
     {
-      "id": "look-01",
+      "id": "32c5f04d-644f-4a0a-b63c-7d3a79ddf3c8",
+      "published": true,
+      "featured": true,
       "label": "LOOK 01",
       "name": "제품 이름",
-      "summary": "목록에 보이는 한 줄 요약",
-      "description": "상세 페이지에 보이는 설명입니다.\n\n빈 줄로 문단을 나눌 수 있습니다.",
+      "summary": "목록에 보이는 한 줄 소개",
+      "category": "Collection",
+      "price": "129,000원",
       "keywords": ["Keyword", "Keyword", "Keyword"],
       "images": ["images/look01-1.jpg", "images/look01-2.jpg"],
-      "buyLink": ""
+      "buyLabel": "스마트스토어에서 보기",
+      "buyLink": "https://smartstore.naver.com/",
+      "sections": [
+        {
+          "type": "rich_text",
+          "body": "<h2>제품 이야기</h2><p>브랜드 담당자가 편집기에서 <strong>제목, 본문, 목록과 링크</strong>를 블로그 글처럼 작성할 수 있습니다.</p>"
+        },
+        {
+          "type": "image_text",
+          "image": "images/look01-2.jpg",
+          "imagePosition": "left",
+          "heading": "디테일을 소개하세요",
+          "body": "<p>이미지와 설명을 나란히 배치하는 블록입니다. 브랜드 담당자가 순서와 내용을 직접 정합니다.</p>"
+        },
+        {
+          "type": "highlight",
+          "heading": "브랜드가 직접 완성하는 상세페이지",
+          "body": "<p>학생은 이 블록의 색상과 레이아웃을 디자인하고, 브랜드는 제품별 콘텐츠를 채웁니다.</p>"
+        }
+      ]
     },
     {
-      "id": "look-02",
+      "id": "fcf8ba51-8065-4666-93ee-b0cf2acdf87c",
+      "published": true,
+      "featured": true,
       "label": "LOOK 02",
       "name": "제품 이름",
-      "summary": "목록에 보이는 한 줄 요약",
-      "description": "상세 페이지에 보이는 설명입니다.",
+      "summary": "목록에 보이는 한 줄 소개",
+      "category": "Collection",
+      "price": "",
       "keywords": ["Keyword", "Keyword"],
       "images": ["images/look02-1.jpg"],
-      "buyLink": ""
+      "buyLabel": "구매하기",
+      "buyLink": "",
+      "sections": [
+        {
+          "type": "rich_text",
+          "body": "<h2>제품 상세</h2><p>Pages CMS에서 이 글 블록을 자유롭게 편집하세요.</p>"
+        }
+      ]
     },
     {
-      "id": "look-03",
+      "id": "adf64d79-dbee-4a33-89a0-e0d9760876d8",
+      "published": true,
+      "featured": true,
       "label": "LOOK 03",
       "name": "제품 이름",
-      "summary": "목록에 보이는 한 줄 요약",
-      "description": "상세 페이지에 보이는 설명입니다.",
+      "summary": "목록에 보이는 한 줄 소개",
+      "category": "Collection",
+      "price": "",
       "keywords": ["Keyword", "Keyword"],
       "images": ["images/look03-1.jpg"],
-      "buyLink": ""
+      "buyLabel": "구매하기",
+      "buyLink": "",
+      "sections": [
+        {
+          "type": "rich_text",
+          "body": "<h2>제품 상세</h2><p>큰 이미지, 이미지와 글, 갤러리, 강조 문구 블록을 추가할 수 있습니다.</p>"
+        }
+      ]
     },
     {
-      "id": "look-04",
+      "id": "eed5005a-b27c-48e0-a25c-012074712f0e",
+      "published": true,
+      "featured": true,
       "label": "LOOK 04",
       "name": "제품 이름",
-      "summary": "목록에 보이는 한 줄 요약",
-      "description": "상세 페이지에 보이는 설명입니다.",
+      "summary": "목록에 보이는 한 줄 소개",
+      "category": "Collection",
+      "price": "",
       "keywords": ["Keyword", "Keyword"],
       "images": ["images/look04-1.jpg"],
-      "buyLink": ""
+      "buyLabel": "구매하기",
+      "buyLink": "",
+      "sections": [
+        {
+          "type": "rich_text",
+          "body": "<h2>제품 상세</h2><p>구매 링크가 비어 있으면 구매 버튼은 자동으로 숨겨집니다.</p>"
+        }
+      ]
     }
   ]
 }

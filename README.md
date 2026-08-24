@@ -42,4 +42,10 @@
 |---|---|
 | `index.html` | 사이트 내용(글·구조) |
 | `style.css` | 디자인(색·글꼴·간격) |
-| `script.js` | 움직임(효과) |
+| `script.js` | 공통 움직임(효과) |
+| `products.html` | 제품 목록 UI |
+| `product.html` | 브랜드가 만든 상세 블록을 보여주는 제품 상세 UI |
+| `style.css`의 `제품 상세페이지 빌더` 영역 | 상세 블록 디자인 |
+| `catalog.js` | 제품 데이터 로딩·안전 처리(수정 금지) |
+| `products.json` | 브랜드 담당자가 Pages CMS에서 관리하는 제품 데이터 |
+| `.pages.yml` | 브랜드용 제품 편집 화면 설정(수정 금지) |

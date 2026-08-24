@@ -1,0 +1,226 @@
+media:
+  - name: product_images
+    label: 제품 이미지
+    input: images
+    output: /images
+    rename: safe
+    categories: [image]
+    extensions: [jpg, jpeg, png, webp, gif, avif]
+
+settings:
+  content:
+    merge: true
+  commit:
+    identity: user
+    templates:
+      update: "제품 정보 수정: {path}"
+
+content:
+  - name: catalog
+    label: 제품 관리
+    type: file
+    path: products.json
+    format: json
+    fields:
+      - name: _설명
+        label: 안내
+        type: string
+        readonly: true
+        required: false
+
+      - name: products
+        label: 제품 목록
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{fields.name}"
+        fields:
+          - name: id
+            label: 제품 ID
+            type: uuid
+            description: 제품 주소에 쓰이는 자동 생성 값입니다.
+            options:
+              editable: false
+
+          - name: published
+            label: 사이트에 공개
+            type: boolean
+            default: true
+
+          - name: featured
+            label: 홈 대표 제품
+            type: boolean
+            default: false
+
+          - name: label
+            label: 작은 라벨
+            type: string
+            required: false
+            description: "예: NEW, LOOK 01, 2026 S/S"
+
+          - name: name
+            label: 제품 이름
+            type: string
+            required: true
+
+          - name: summary
+            label: 한 줄 소개
+            type: text
+            required: false
+
+          - name: category
+            label: 카테고리
+            type: string
+            required: false
+
+          - name: price
+            label: 표시 가격
+            type: string
+            required: false
+            description: "예: 129,000원 또는 가격 문의"
+
+          - name: keywords
+            label: 키워드
+            type: string
+            list: true
+            required: false
+
+          - name: images
+            label: 대표·갤러리 이미지
+            type: image
+            required: false
+            options:
+              media: product_images
+              path: products
+              multiple:
+                max: 12
+              unique: true
+              rename: safe
+
+          - name: buyLabel
+            label: 구매 버튼 문구
+            type: string
+            default: 구매하기
+            required: false
+
+          - name: buyLink
+            label: 외부 구매 링크
+            type: string
+            required: false
+            description: 스마트스토어·무신사·자사몰의 https:// 주소를 입력하세요. 비우면 버튼이 숨겨집니다.
+            pattern:
+              regex: "^https?://.+"
+              message: "https:// 또는 http://로 시작하는 주소를 입력하세요."
+
+          - name: sections
+            label: 상세페이지 구성
+            type: block
+            list: true
+            required: false
+            blockKey: type
+            blocks:
+              - name: rich_text
+                label: 글
+                fields:
+                  - name: body
+                    label: 본문
+                    type: rich-text
+                    options:
+                      format: html
+                      switcher: false
+                      media: product_images
+                      path: products/details
+                      rename: safe
+
+              - name: full_image
+                label: 큰 이미지
+                fields:
+                  - name: image
+                    label: 이미지
+                    type: image
+                    options:
+                      media: product_images
+                      path: products/details
+                      rename: safe
+                  - name: alt
+                    label: 이미지 설명
+                    type: string
+                    required: false
+                  - name: caption
+                    label: 사진 아래 문구
+                    type: string
+                    required: false
+
+              - name: image_text
+                label: 이미지와 글 2열
+                fields:
+                  - name: image
+                    label: 이미지
+                    type: image
+                    options:
+                      media: product_images
+                      path: products/details
+                      rename: safe
+                  - name: imagePosition
+                    label: 이미지 위치
+                    type: select
+                    default: left
+                    options:
+                      values:
+                        - name: left
+                          label: 왼쪽
+                        - name: right
+                          label: 오른쪽
+                  - name: heading
+                    label: 제목
+                    type: string
+                    required: false
+                  - name: body
+                    label: 본문
+                    type: rich-text
+                    required: false
+                    options:
+                      format: html
+                      switcher: false
+
+              - name: gallery
+                label: 이미지 갤러리
+                fields:
+                  - name: images
+                    label: 이미지
+                    type: image
+                    options:
+                      media: product_images
+                      path: products/details
+                      multiple:
+                        max: 12
+                      unique: true
+                      rename: safe
+                  - name: columns
+                    label: 한 줄 이미지 수
+                    type: select
+                    default: "2"
+                    options:
+                      values:
+                        - name: "1"
+                          label: 1장
+                        - name: "2"
+                          label: 2장
+                        - name: "3"
+                          label: 3장
+
+              - name: highlight
+                label: 강조 문구
+                fields:
+                  - name: heading
+                    label: 제목
+                    type: string
+                    required: false
+                  - name: body
+                    label: 내용
+                    type: rich-text
+                    required: false
+                    options:
+                      format: html
+                      switcher: false
