@@ -389,7 +389,8 @@ async function verifyPassword(password, config) {
 async function createPasswordCredential(password) {
   const saltBytes = crypto.getRandomValues(new Uint8Array(24));
   const salt = encodeBase64(saltBytes);
-  const iterations = 210000;
+  // Cloudflare Workers Web Crypto가 지원하는 PBKDF2 반복 횟수 상한입니다.
+  const iterations = 100000;
   const hash = await derivePasswordHash(password, salt, iterations);
   return { salt, iterations, hash };
 }

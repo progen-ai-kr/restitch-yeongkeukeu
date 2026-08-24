@@ -1,10 +1,10 @@
 {
   "version": 1,
   "algorithm": "PBKDF2-SHA256",
-  "iterations": 210000,
-  "salt": "ToSkyUUD6ohSF7Wkuv4rM69fCgv6o+bA",
-  "hash": "Q5kuuVY0bwds7g4dAwZwVKxKAo9NiJ++bLLekCeGZcQ=",
-  "sessionVersion": "7afe0350-859a-46fe-9d40-5b68928eea26",
+  "iterations": 100000,
+  "salt": "BWFzq1qywC/k5JR4wLaNIfIB0t7NBpMi",
+  "hash": "0hlvmtyS7uZTAe1n6v0gA683tU0zjh/TWtJjL/vszCU=",
+  "sessionVersion": "2040f9e3-0911-4734-92e6-1ae1eb7c32d0",
   "mustChange": true,
-  "updatedAt": "2026-08-24T09:03:25.213Z"
+  "updatedAt": "2026-08-24T09:17:24.693Z"
 }
