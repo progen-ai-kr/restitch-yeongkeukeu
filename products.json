@@ -2,48 +2,6 @@
   "_설명": "브랜드 담당자가 사이트 관리자에서 제품과 상세페이지를 관리합니다. 학생은 이 파일을 직접 수정하지 않습니다.",
   "products": [
     {
-      "id": "d4c9e89a-e162-4390-a596-7bbe76c551a4",
-      "published": true,
-      "featured": true,
-      "label": "NEW",
-      "name": "새 제품",
-      "summary": "",
-      "category": "",
-      "price": "",
-      "keywords": [],
-      "images": [],
-      "buyLabel": "구매하기",
-      "buyLink": "",
-      "sections": [
-        {
-          "type": "rich_text",
-          "body": "<p><img src=\"/images/products/d4c9e89a-e162-4390-a596-7bbe76c551a4/1787613346189-a21590e6.webp\" alt=\"KakaoTalk_Image_2026-08-24-15-03-07_010.jpeg\"><br></p>"
-        }
-      ]
-    },
-    {
-      "id": "c563e086-87f4-4af9-9eeb-c5e03a690085",
-      "published": true,
-      "featured": true,
-      "label": "NEW",
-      "name": "새 제품",
-      "summary": "",
-      "category": "",
-      "price": "",
-      "keywords": [],
-      "images": [
-        "images/products/c563e086-87f4-4af9-9eeb-c5e03a690085/1787611270687-954cb315.webp"
-      ],
-      "buyLabel": "구매하기",
-      "buyLink": "",
-      "sections": [
-        {
-          "type": "rich_text",
-          "body": "<p><br></p>"
-        }
-      ]
-    },
-    {
       "id": "look-01",
       "published": true,
       "featured": true,
@@ -63,7 +21,7 @@
       "sections": [
         {
           "type": "rich_text",
-          "body": "<p>dfsfssfdsfsdf</p><p><br></p><p>fasdfasdf!</p><p><br></p><p><img src=\"/images/products/look-01/1787611131581-61ca2bd6.webp\" alt=\"KakaoTalk_Image_2026-08-24-15-03-09_013.jpeg\"></p>"
+          "body": "<p><br></p>"
         }
       ]
     },
