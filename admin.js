@@ -10,6 +10,8 @@
     uploading: 0,
   };
   let toastTimer;
+  let detailPreviewMedia;
+  let detailPreviewMediaHandler;
   const toastEditors = new Map();
 
   const $ = (selector, parent = document) => parent.querySelector(selector);
@@ -40,13 +42,6 @@
     mainImageGrid: $("#mainImageGrid"),
     mainImageEmpty: $("#mainImageEmpty"),
     detailEditorMount: $("#detailEditorMount"),
-    detailPreview: $("#detailPreview"),
-    addVideo: $("#addVideoButton"),
-    videoDialog: $("#videoDialog"),
-    videoForm: $("#videoForm"),
-    videoUrl: $("#videoUrl"),
-    videoError: $("#videoError"),
-    videoCancel: $("#videoCancelButton"),
     deleteProduct: $("#deleteProductButton"),
     passwordDialog: $("#passwordDialog"),
     passwordForm: $("#passwordForm"),
@@ -108,9 +103,6 @@
       elements.mainImageDrop.classList.remove("dragging");
       await addMainImages(event.dataTransfer.files);
     });
-    elements.addVideo.addEventListener("click", openVideoDialog);
-    elements.videoForm.addEventListener("submit", insertVideo);
-    elements.videoCancel.addEventListener("click", closeVideoDialog);
     window.addEventListener("beforeunload", (event) => {
       if (!state.dirty) return;
       event.preventDefault();
@@ -417,7 +409,6 @@
     if (!product) return;
 
     const initialHtml = sanitizeEditorHtml(sectionsToSingleHtml(product.sections));
-    renderDetailPreview(initialHtml);
     if (!window.toastui?.Editor) {
       const fallback = document.createElement("textarea");
       fallback.className = "toast-editor-fallback";
@@ -425,7 +416,6 @@
       fallback.placeholder = "제품 설명을 작성하고 이미지와 영상을 원하는 순서로 넣어 주세요.";
       fallback.addEventListener("input", () => {
         product.sections = singleDetailSection(fallback.value);
-        renderDetailPreview(fallback.value);
         setDirty(true);
       });
       elements.detailEditorMount.append(fallback);
@@ -434,13 +424,18 @@
 
     let ready = false;
     let editor;
+    const previewMedia = window.matchMedia("(min-width: 1100px)");
+    window.toastui.Editor.setLanguage(["ko", "ko-KR"], {
+      Markdown: "분할 편집",
+      WYSIWYG: "블로그 편집",
+    });
     editor = new window.toastui.Editor({
       el: elements.detailEditorMount,
-      height: "640px",
-      minHeight: "420px",
-      initialEditType: "wysiwyg",
-      previewStyle: "vertical",
-      hideModeSwitch: true,
+      height: "760px",
+      minHeight: "520px",
+      initialEditType: "markdown",
+      previewStyle: previewMedia.matches ? "vertical" : "tab",
+      hideModeSwitch: false,
       language: "ko-KR",
       autofocus: false,
       usageStatistics: false,
@@ -450,6 +445,8 @@
         ["hr", "quote"],
         ["ul", "ol"],
         ["link", "image"],
+        [createVideoToolbarItem(() => editor, product)],
+        ["scrollSync"],
       ],
       customHTMLRenderer: videoHtmlRenderer(),
       hooks: {
@@ -462,7 +459,6 @@
         change: () => {
           if (!ready) return;
           product.sections = singleDetailSection(editor.getHTML());
-          renderDetailPreview(editor.getHTML());
           setDirty(true);
         },
       },
@@ -470,6 +466,10 @@
     editor.setHTML(initialHtml, false);
     ready = true;
     toastEditors.set("detail", editor);
+    detailPreviewMedia = previewMedia;
+    detailPreviewMediaHandler = () => editor.changePreviewStyle(previewMedia.matches ? "vertical" : "tab");
+    if (previewMedia.addEventListener) previewMedia.addEventListener("change", detailPreviewMediaHandler);
+    else previewMedia.addListener(detailPreviewMediaHandler);
   }
 
   function sectionsToSingleHtml(sections) {
@@ -508,6 +508,12 @@
   }
 
   function destroyToastEditors() {
+    if (detailPreviewMedia && detailPreviewMediaHandler) {
+      if (detailPreviewMedia.removeEventListener) detailPreviewMedia.removeEventListener("change", detailPreviewMediaHandler);
+      else detailPreviewMedia.removeListener(detailPreviewMediaHandler);
+    }
+    detailPreviewMedia = null;
+    detailPreviewMediaHandler = null;
     toastEditors.forEach((editor) => {
       try { editor.destroy(); } catch (_) {}
     });
@@ -521,43 +527,66 @@
     if (editor) product.sections = singleDetailSection(editor.getHTML());
   }
 
-  function openVideoDialog() {
-    elements.videoForm.reset();
-    elements.videoError.hidden = true;
-    if (!elements.videoDialog.open) elements.videoDialog.showModal();
-    window.setTimeout(() => elements.videoUrl.focus(), 50);
-  }
+  function createVideoToolbarItem(getEditor, product) {
+    const body = create("div", "detail-video-popup-body");
+    body.append(create("strong", "", "영상 주소로 추가"));
+    body.append(create("p", "", "유튜브·비메오 또는 MP4·WebM·Ogg 영상 파일 주소를 붙여 넣으세요."));
 
-  function closeVideoDialog() {
-    elements.videoDialog.close();
-    elements.videoForm.reset();
-  }
+    const form = create("form", "detail-video-popup-form");
+    const input = document.createElement("input");
+    input.type = "url";
+    input.inputMode = "url";
+    input.required = true;
+    input.placeholder = "https://youtu.be/... 또는 https://.../video.mp4";
+    input.setAttribute("aria-label", "영상 주소");
+    const error = create("p", "detail-video-popup-error");
+    error.hidden = true;
 
-  function insertVideo(event) {
-    event.preventDefault();
-    const product = currentProduct();
-    if (!product) return;
-    const markup = videoMarkupFromUrl(elements.videoUrl.value);
-    if (!markup) {
-      elements.videoError.textContent = "지원하는 주소가 아닙니다. 유튜브·비메오 또는 https로 시작하는 영상 파일 주소를 확인해 주세요.";
-      elements.videoError.hidden = false;
-      elements.videoUrl.focus();
-      return;
-    }
+    const actions = create("div", "detail-video-popup-actions");
+    const cancel = create("button", "toastui-editor-close-button", "취소");
+    cancel.type = "button";
+    const submit = create("button", "toastui-editor-ok-button", "영상 넣기");
+    submit.type = "submit";
+    actions.append(cancel, submit);
+    form.append(input, error, actions);
+    body.append(form);
 
-    const editor = toastEditors.get("detail");
-    if (editor) {
-      editor.setHTML(`${editor.getHTML()}${markup}`, false);
+    const closePopup = () => {
+      getEditor()?.eventEmitter.emit("closePopup");
+      form.reset();
+      error.hidden = true;
+    };
+    cancel.addEventListener("click", closePopup);
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const editor = getEditor();
+      const markup = videoMarkupFromUrl(input.value);
+      if (!editor || !markup) {
+        error.textContent = "지원하는 주소가 아닙니다. 주소를 다시 확인해 주세요.";
+        error.hidden = false;
+        input.focus();
+        return;
+      }
+
+      if (editor.isMarkdownMode()) editor.insertText(`\n\n${markup}\n\n`);
+      else editor.setHTML(`${editor.getHTML()}${markup}`, true);
       product.sections = singleDetailSection(editor.getHTML());
-    } else {
-      const fallback = $(".toast-editor-fallback", elements.detailEditorMount);
-      if (fallback) fallback.value += markup;
-      product.sections = singleDetailSection(`${sectionsToSingleHtml(product.sections)}${markup}`);
-    }
-    renderDetailPreview(sectionsToSingleHtml(product.sections));
-    setDirty(true);
-    closeVideoDialog();
-    showToast("상세페이지 아래에 영상을 추가했습니다. 원하는 위치로 옮긴 뒤 저장해 주세요.");
+      setDirty(true);
+      closePopup();
+      showToast("영상을 상세페이지에 추가했습니다. 저장하면 사이트에 반영됩니다.");
+    });
+
+    return {
+      name: "video",
+      tooltip: "영상 삽입",
+      text: "▶",
+      className: "toastui-editor-toolbar-icons detail-video-toolbar-button",
+      style: { backgroundImage: "none" },
+      popup: {
+        body,
+        className: "detail-video-toolbar-popup",
+      },
+    };
   }
 
   async function uploadFiles(fileList, productId) {
@@ -693,16 +722,6 @@
     const source = String(path || "");
     if (/^https?:\/\//i.test(source)) return source;
     return `/${source.replace(/^\.?\//, "")}`;
-  }
-
-  function renderDetailPreview(value) {
-    if (!elements.detailPreview) return;
-    const html = sanitizeEditorHtml(value);
-    elements.detailPreview.innerHTML = html || '<p class="detail-preview-empty">상세 내용을 입력하면 이곳에서 바로 확인할 수 있습니다.</p>';
-    elements.detailPreview.querySelectorAll("a[href]").forEach((link) => {
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-    });
   }
 
   function escapeEditorText(value) {

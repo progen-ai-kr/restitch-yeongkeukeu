@@ -174,21 +174,12 @@
             </section>
 
             <section class="panel detail-panel">
-              <div class="panel-heading detail-heading">
+              <div class="panel-heading">
                 <div><span class="step-number">04</span><h2>상세페이지 구성</h2></div>
-                <button id="addVideoButton" class="upload-button" type="button">영상 추가</button>
+                <p>왼쪽에서 작성하고 오른쪽에서 결과를 바로 확인하세요.</p>
               </div>
-              <p class="helper detail-helper">아래 편집기 한 곳에서 글과 이미지를 자유롭게 배치하세요. 유튜브·비메오·MP4 영상은 ‘영상 추가’로 넣을 수 있습니다.</p>
-              <div class="detail-workspace">
-                <div class="detail-compose">
-                  <p class="workspace-label">내용 편집</p>
-                  <div id="detailEditorMount" class="toast-editor-mount detail-editor-mount"></div>
-                </div>
-                <aside class="detail-preview-shell" aria-label="상세페이지 실시간 미리보기">
-                  <p class="workspace-label"><span>실시간 미리보기</span><small>실제 상세페이지 스타일</small></p>
-                  <div id="detailPreview" class="detail-preview product-rich-text"></div>
-                </aside>
-              </div>
+              <p class="helper detail-helper">글·이미지·링크·영상을 한 편집기 안에서 구성합니다. 화면 아래의 ‘분할 편집’과 ‘블로그 편집’을 필요에 따라 바꿔 사용할 수 있습니다.</p>
+              <div id="detailEditorMount" class="toast-editor-mount detail-editor-mount"></div>
             </section>
 
             <div class="danger-zone">
@@ -200,24 +191,6 @@
       </main>
     </div>
   </div>
-
-  <dialog id="videoDialog" class="password-dialog">
-    <form id="videoForm" class="password-card">
-      <p class="eyebrow">DETAIL VIDEO</p>
-      <h2>상세페이지 영상 추가</h2>
-      <p class="password-lead">유튜브·비메오 주소 또는 직접 재생할 영상 파일 주소를 붙여 넣으세요.</p>
-      <label class="field">
-        <span>영상 주소</span>
-        <input id="videoUrl" type="url" inputmode="url" autocomplete="url" required placeholder="https://youtu.be/... 또는 https://.../video.mp4" />
-        <small>유튜브, 비메오, MP4·WebM·Ogg 파일을 지원합니다.</small>
-      </label>
-      <p id="videoError" class="form-error" role="alert" hidden></p>
-      <div class="dialog-actions">
-        <button id="videoCancelButton" class="ghost-button" type="button">취소</button>
-        <button class="primary-button" type="submit">영상 넣기</button>
-      </div>
-    </form>
-  </dialog>
 
   <dialog id="passwordDialog" class="password-dialog">
     <form id="passwordForm" class="password-card">

@@ -81,8 +81,8 @@ a { color: inherit; }
 .tags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
 .tags span { font-size: 11.5px; border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; color: var(--ink-soft); }
 
-/* ===== 제품 상세페이지 빌더 =====
-   브랜드 담당자가 만든 상세 블록은 아래 공통 클래스에 맞춰 표시됩니다.
+/* ===== 제품 상세페이지 =====
+   브랜드 담당자가 편집기에서 만든 상세 내용은 아래 공통 클래스에 맞춰 표시됩니다.
    학생은 이 영역의 CSS를 바꿔 브랜드에 맞는 제품 상세 UI를 디자인하세요. */
 .product-hero { display: grid; grid-template-columns: 1fr; gap: 28px; }
 .product-hero-gallery { display: grid; grid-template-columns: 1fr; gap: 12px; }
