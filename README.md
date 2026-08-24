@@ -47,5 +47,13 @@
 | `product.html` | 브랜드가 만든 상세 블록을 보여주는 제품 상세 UI |
 | `style.css`의 `제품 상세페이지 빌더` 영역 | 상세 블록 디자인 |
 | `catalog.js` | 제품 데이터 로딩·안전 처리(수정 금지) |
-| `products.json` | 브랜드 담당자가 Pages CMS에서 관리하는 제품 데이터 |
-| `.pages.yml` | 브랜드용 제품 편집 화면 설정(수정 금지) |
+| `products.json` | 브랜드 담당자가 사이트 관리자에서 관리하는 제품 데이터 |
+| `/admin` | 브랜드 담당자용 비밀번호 로그인 제품 편집기 |
+
+## 브랜드 제품 관리
+
+- 접속 주소: https://restitch-yeongkeukeu.progen-web.workers.dev/admin
+- 브랜드 담당자는 GitHub 계정 없이 관리자 비밀번호만으로 로그인합니다.
+- 최초 임시 비밀번호는 `0000`이며, 첫 로그인 직후 8자 이상의 전용 비밀번호로 변경해야 합니다.
+- 제품을 저장하면 `products.json`에 기록되고 자동 배포 후 공개 사이트에 반영됩니다.
+- 학생은 `admin.html`, `admin.css`, `admin.js`, `admin-config.json`, `worker.js`, `products.json`, `wrangler.jsonc`를 수정하지 않습니다.

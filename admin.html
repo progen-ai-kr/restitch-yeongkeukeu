@@ -3,73 +3,233 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>브랜드 제품 관리</title>
+  <title>RE:STITCH 제품 관리</title>
   <meta name="robots" content="noindex, nofollow" />
-  <style>
-    :root {
-      --bg: #f5f4ef;
-      --card: #ffffff;
-      --ink: #171714;
-      --soft: #696961;
-      --line: #deddd5;
-      --accent: #27271f;
-    }
-    * { box-sizing: border-box; }
-    body { margin: 0; min-height: 100vh; font-family: -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; color: var(--ink); background: var(--bg); }
-    a { color: inherit; }
-    .wrap { width: min(calc(100% - 36px), 720px); margin: 0 auto; padding: 44px 0 80px; }
-    .top { display: flex; justify-content: space-between; align-items: center; gap: 18px; margin-bottom: 32px; }
-    .brand { font-size: 14px; font-weight: 800; letter-spacing: 2px; }
-    .site-link { color: var(--soft); font-size: 13px; }
-    .card { background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 30px 24px; box-shadow: 0 18px 60px rgba(30, 30, 24, .06); }
-    .eyebrow { margin: 0 0 10px; color: var(--soft); font-size: 12px; font-weight: 800; letter-spacing: 2px; }
-    h1 { margin: 0; font-size: clamp(28px, 7vw, 44px); line-height: 1.18; letter-spacing: -.03em; }
-    .lead { margin: 18px 0 0; color: var(--soft); line-height: 1.75; }
-    .button { display: block; margin-top: 28px; padding: 15px 22px; border-radius: 999px; background: var(--accent); color: #fff; text-align: center; text-decoration: none; font-weight: 800; }
-    .button:hover { opacity: .88; }
-    .steps { display: grid; gap: 14px; margin-top: 30px; }
-    .step { display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; padding-top: 14px; border-top: 1px solid var(--line); }
-    .num { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--bg); font-size: 12px; font-weight: 800; }
-    .step h2 { margin: 2px 0 4px; font-size: 15px; }
-    .step p { margin: 0; color: var(--soft); font-size: 13px; line-height: 1.65; }
-    .note { margin-top: 18px; color: var(--soft); font-size: 12px; line-height: 1.7; text-align: center; }
-    @media (min-width: 640px) {
-      .wrap { padding-top: 72px; }
-      .card { padding: 46px; }
-    }
-  </style>
+  <link rel="stylesheet" href="vendor/toastui/toastui-editor.min.css" />
+  <link rel="stylesheet" href="admin.css" />
 </head>
 <body>
-  <main class="wrap">
-    <div class="top">
-      <span class="brand">BRAND ADMIN</span>
-      <a class="site-link" href="index.html" target="_blank" rel="noopener">사이트 보기 ↗</a>
-    </div>
+  <div id="loadingView" class="center-view">
+    <span class="spinner" aria-hidden="true"></span>
+    <p>관리 화면을 준비하고 있습니다.</p>
+  </div>
 
-    <section class="card">
-      <p class="eyebrow">PRODUCT CATALOG</p>
-      <h1>제품과 상세페이지를<br />직접 관리하세요.</h1>
-      <p class="lead">제품 등록부터 이미지, 블로그형 본문, 상세 섹션 구성, 외부 구매 링크까지 한 화면에서 관리할 수 있습니다.</p>
+  <main id="loginView" class="login-view" hidden>
+    <section class="login-card">
+      <p class="login-brand">RE:STITCH</p>
+      <p class="eyebrow">BRAND ADMIN</p>
+      <h1>제품 관리</h1>
+      <p class="login-lead">브랜드 담당자에게 전달받은 관리자 비밀번호를 입력하세요.</p>
 
-      <a class="button" href="https://app.pagescms.org/" target="_blank" rel="noopener noreferrer">제품 관리 화면 열기 ↗</a>
-
-      <div class="steps">
-        <div class="step">
-          <span class="num">1</span>
-          <div><h2>제품 선택 또는 새 제품 추가</h2><p>제품 이름, 대표 이미지, 가격과 공개 여부를 입력합니다.</p></div>
+      <form id="loginForm" class="login-form">
+        <label for="password">관리자 비밀번호</label>
+        <div class="password-row">
+          <input id="password" name="password" type="password" autocomplete="current-password" required />
+          <button id="passwordToggle" class="text-button" type="button" aria-label="비밀번호 보기">보기</button>
         </div>
-        <div class="step">
-          <span class="num">2</span>
-          <div><h2>상세페이지 구성</h2><p>글, 큰 이미지, 이미지와 글 2열, 갤러리, 강조 문구 블록을 원하는 순서로 배치합니다.</p></div>
-        </div>
-        <div class="step">
-          <span class="num">3</span>
-          <div><h2>저장 후 자동 반영</h2><p>저장하면 사이트가 자동 배포되며, 보통 1~2분 뒤 제품 목록과 상세페이지에 반영됩니다.</p></div>
-        </div>
-      </div>
+        <p id="loginError" class="form-error" role="alert" hidden></p>
+        <button class="primary-button wide" type="submit">관리 화면 열기</button>
+      </form>
+      <a class="back-link" href="index.html">← 사이트로 돌아가기</a>
     </section>
-
-    <p class="note">운영진에게 초대받은 이메일로 로그인하세요. 별도의 접속키를 입력하거나 보관할 필요가 없습니다.</p>
   </main>
+
+  <div id="adminApp" class="admin-app" hidden>
+    <header class="admin-header">
+      <div>
+        <span class="admin-brand">RE:STITCH</span>
+        <span class="admin-title">제품 관리</span>
+      </div>
+      <div class="header-actions">
+        <span id="saveState" class="save-state">저장됨</span>
+        <a class="ghost-button desktop-only" href="products.html" target="_blank" rel="noopener">사이트 보기 ↗</a>
+        <button id="changePasswordButton" class="ghost-button password-button" type="button"><span class="mobile-password-label">비밀번호</span><span class="desktop-password-label">비밀번호 변경</span></button>
+        <button id="logoutButton" class="ghost-button" type="button">로그아웃</button>
+      </div>
+    </header>
+
+    <div class="admin-layout">
+      <aside id="productSidebar" class="product-sidebar">
+        <div class="sidebar-heading">
+          <div>
+            <p class="eyebrow">PRODUCTS</p>
+            <h2>제품 목록 <span id="productCount">0</span></h2>
+          </div>
+          <button id="newProductButton" class="icon-button dark" type="button" aria-label="새 제품 추가">＋</button>
+        </div>
+        <label class="search-box">
+          <span aria-hidden="true">⌕</span>
+          <input id="productSearch" type="search" placeholder="제품 검색" />
+        </label>
+        <div id="productList" class="product-list"></div>
+      </aside>
+
+      <main class="editor-main">
+        <section id="emptyEditor" class="empty-editor">
+          <div class="empty-icon">＋</div>
+          <h2>관리할 제품을 선택하세요.</h2>
+          <p>왼쪽 목록에서 제품을 선택하거나 새 제품을 추가할 수 있습니다.</p>
+        </section>
+
+        <form id="productForm" class="product-form" hidden>
+          <div class="editor-toolbar">
+            <button id="mobileListButton" class="ghost-button mobile-only" type="button">← 제품 목록</button>
+            <div class="editor-heading">
+              <p class="eyebrow">EDIT PRODUCT</p>
+              <h1 id="editorProductName">제품 편집</h1>
+            </div>
+            <div class="editor-actions">
+              <a id="previewLink" class="ghost-button" href="#" target="_blank" rel="noopener">공개 페이지 ↗</a>
+              <button id="saveButton" class="primary-button" type="submit">변경사항 저장</button>
+            </div>
+          </div>
+
+          <div class="editor-content">
+            <section class="panel publish-panel">
+              <div class="toggle-copy">
+                <strong>사이트 공개</strong>
+                <span>끄면 목록과 상세페이지에서 숨겨집니다.</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" data-field="published" />
+                <span></span>
+              </label>
+              <div class="toggle-copy featured-copy">
+                <strong>홈 대표 제품</strong>
+                <span>홈의 대표 제품 영역에 표시합니다.</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" data-field="featured" />
+                <span></span>
+              </label>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading">
+                <div><span class="step-number">01</span><h2>기본 정보</h2></div>
+                <p>제품 목록과 상세페이지 상단에 표시되는 내용입니다.</p>
+              </div>
+              <div class="field-grid">
+                <label class="field span-2">
+                  <span>제품 이름 <b>*</b></span>
+                  <input type="text" data-field="name" maxlength="160" required placeholder="제품 이름을 입력하세요" />
+                </label>
+                <label class="field">
+                  <span>작은 라벨</span>
+                  <input type="text" data-field="label" maxlength="100" placeholder="예: NEW, 2026 S/S" />
+                </label>
+                <label class="field">
+                  <span>카테고리</span>
+                  <input type="text" data-field="category" maxlength="160" placeholder="예: Collection" />
+                </label>
+                <label class="field span-2">
+                  <span>한 줄 소개</span>
+                  <textarea data-field="summary" rows="3" maxlength="1000" placeholder="목록 카드에 보일 짧은 소개를 입력하세요"></textarea>
+                </label>
+                <label class="field">
+                  <span>표시 가격</span>
+                  <input type="text" data-field="price" maxlength="160" placeholder="예: 129,000원 또는 가격 문의" />
+                </label>
+                <label class="field">
+                  <span>키워드</span>
+                  <input type="text" data-field="keywords" placeholder="쉼표로 구분: 업사이클, 핸드메이드" />
+                </label>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading image-heading">
+                <div><span class="step-number">02</span><h2>대표·갤러리 이미지</h2></div>
+                <label class="upload-button">
+                  이미지 추가
+                  <input id="mainImageInput" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif" multiple hidden />
+                </label>
+              </div>
+              <p class="helper">첫 번째 이미지가 대표 이미지입니다. 화살표로 순서를 바꿀 수 있습니다.</p>
+              <div id="mainImageDrop" class="image-drop">
+                <div id="mainImageGrid" class="image-grid"></div>
+                <div id="mainImageEmpty" class="upload-empty">
+                  <span>＋</span>
+                  <strong>이미지를 올려주세요</strong>
+                  <small>JPG · PNG · WebP / 한 장당 최대 6MB</small>
+                </div>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-heading">
+                <div><span class="step-number">03</span><h2>외부 구매 링크</h2></div>
+                <p>구매 링크를 비워두면 버튼이 표시되지 않습니다.</p>
+              </div>
+              <div class="field-grid">
+                <label class="field">
+                  <span>버튼 문구</span>
+                  <input type="text" data-field="buyLabel" maxlength="100" placeholder="예: 스마트스토어에서 보기" />
+                </label>
+                <label class="field">
+                  <span>상품 주소</span>
+                  <input type="url" data-field="buyLink" maxlength="2000" placeholder="https://smartstore.naver.com/..." />
+                </label>
+              </div>
+            </section>
+
+            <section class="panel detail-panel">
+              <div class="panel-heading">
+                <div><span class="step-number">04</span><h2>상세페이지 구성</h2></div>
+                <p>블록을 추가하고 원하는 순서로 배치하세요.</p>
+              </div>
+              <div id="sectionList" class="section-list"></div>
+              <div class="block-picker">
+                <p>블록 추가</p>
+                <div class="block-buttons">
+                  <button type="button" data-add-block="rich_text"><span>¶</span>글</button>
+                  <button type="button" data-add-block="full_image"><span>▣</span>큰 이미지</button>
+                  <button type="button" data-add-block="image_text"><span>▥</span>이미지+글</button>
+                  <button type="button" data-add-block="gallery"><span>▦</span>갤러리</button>
+                  <button type="button" data-add-block="highlight"><span>“</span>강조 문구</button>
+                </div>
+              </div>
+            </section>
+
+            <div class="danger-zone">
+              <div><strong>이 제품 삭제</strong><p>저장하면 사이트에서 완전히 제거됩니다.</p></div>
+              <button id="deleteProductButton" class="danger-button" type="button">제품 삭제</button>
+            </div>
+          </div>
+        </form>
+      </main>
+    </div>
+  </div>
+
+  <dialog id="passwordDialog" class="password-dialog">
+    <form id="passwordForm" class="password-card">
+      <p class="eyebrow">SECURITY</p>
+      <h2 id="passwordDialogTitle">관리자 비밀번호 변경</h2>
+      <p id="passwordDialogLead" class="password-lead">브랜드 담당자만 알 수 있는 새 비밀번호로 변경하세요.</p>
+      <label class="field">
+        <span>현재 비밀번호</span>
+        <input id="currentPassword" type="password" autocomplete="current-password" required />
+      </label>
+      <label class="field">
+        <span>새 비밀번호</span>
+        <input id="newPassword" type="password" minlength="8" maxlength="128" autocomplete="new-password" required />
+        <small>영문·숫자 등을 조합해 8자 이상 입력하세요.</small>
+      </label>
+      <label class="field">
+        <span>새 비밀번호 확인</span>
+        <input id="confirmPassword" type="password" minlength="8" maxlength="128" autocomplete="new-password" required />
+      </label>
+      <p id="passwordError" class="form-error" role="alert" hidden></p>
+      <div class="dialog-actions">
+        <button id="passwordCancelButton" class="ghost-button" type="button">취소</button>
+        <button id="passwordSubmitButton" class="primary-button" type="submit">비밀번호 변경</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <script src="vendor/toastui/toastui-editor-all.min.js"></script>
+  <script src="vendor/toastui/ko-kr.js"></script>
+  <script src="admin.js" defer></script>
 </body>
 </html>
