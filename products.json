@@ -2,34 +2,22 @@
   "_설명": "브랜드 담당자가 사이트 관리자에서 제품과 상세페이지를 관리합니다. 학생은 이 파일을 직접 수정하지 않습니다.",
   "products": [
     {
-      "id": "32c5f04d-644f-4a0a-b63c-7d3a79ddf3c8",
+      "id": "look-01",
       "published": true,
       "featured": true,
       "label": "LOOK 01",
       "name": "제품 이름",
       "summary": "목록에 보이는 한 줄 소개",
       "category": "Collection",
-      "price": "129,000원",
-      "keywords": [
-        "Keyword",
-        "Keyword",
-        "Keyword"
-      ],
-      "images": [
-        "images/look01-1.jpg",
-        "images/look01-2.jpg"
-      ],
-      "buyLabel": "스마트스토어에서 보기",
-      "buyLink": "https://smartstore.naver.com/",
-      "sections": [
-        {
-          "type": "rich_text",
-          "body": "<h2>제품 이야기</h2><p>브랜드 담당자가 편집기 한 곳에서 <strong>글, 이미지, 링크와 영상</strong>을 블로그 글처럼 작성할 수 있습니다.</p><img src=\"images/look01-2.jpg\" alt=\"제품 디테일\"><h2>디테일을 소개하세요</h2><p>이미지를 넣고 바로 아래에 설명을 이어서 작성하세요. 입력하는 동안 오른쪽 미리보기에서 실제 모습을 확인할 수 있습니다.<img src=\"/images/products/32c5f04d-644f-4a0a-b63c-7d3a79ddf3c8/1787564129453-baf460b4.webp\" alt=\"KakaoTalk_Image_2026-08-24-15-03-10_014.jpeg\"><br></p><blockquote><h2>브랜드가 직접 완성하는 상세페이지</h2><p>학생은 상세페이지의 전체 디자인을 만들고, 브랜드는 이 편집기에서 제품별 콘텐츠를 채웁니다.</p></blockquote>"
-        }
-      ]
+      "price": "",
+      "keywords": ["Keyword", "Keyword", "Keyword"],
+      "images": ["images/look01-1.jpg", "images/look01-2.jpg"],
+      "buyLabel": "구매하기",
+      "buyLink": "",
+      "sections": [{ "type": "rich_text", "body": "" }]
     },
     {
-      "id": "fcf8ba51-8065-4666-93ee-b0cf2acdf87c",
+      "id": "look-02",
       "published": true,
       "featured": true,
       "label": "LOOK 02",
@@ -37,24 +25,14 @@
       "summary": "목록에 보이는 한 줄 소개",
       "category": "Collection",
       "price": "",
-      "keywords": [
-        "Keyword",
-        "Keyword"
-      ],
-      "images": [
-        "images/look02-1.jpg"
-      ],
+      "keywords": ["Keyword", "Keyword"],
+      "images": ["images/look02-1.jpg"],
       "buyLabel": "구매하기",
       "buyLink": "",
-      "sections": [
-        {
-          "type": "rich_text",
-          "body": "<h2>제품 상세</h2><p>사이트 관리자의 상세페이지 편집기에서 글과 이미지를 자유롭게 구성하세요.</p>"
-        }
-      ]
+      "sections": [{ "type": "rich_text", "body": "" }]
     },
     {
-      "id": "adf64d79-dbee-4a33-89a0-e0d9760876d8",
+      "id": "look-03",
       "published": true,
       "featured": true,
       "label": "LOOK 03",
@@ -62,24 +40,14 @@
       "summary": "목록에 보이는 한 줄 소개",
       "category": "Collection",
       "price": "",
-      "keywords": [
-        "Keyword",
-        "Keyword"
-      ],
-      "images": [
-        "images/look03-1.jpg"
-      ],
+      "keywords": ["Keyword", "Keyword"],
+      "images": ["images/look03-1.jpg"],
       "buyLabel": "구매하기",
       "buyLink": "",
-      "sections": [
-        {
-          "type": "rich_text",
-          "body": "<h2>제품 상세</h2><p>한 편집기 안에서 글, 이미지, 링크와 영상을 원하는 순서로 넣을 수 있습니다.</p>"
-        }
-      ]
+      "sections": [{ "type": "rich_text", "body": "" }]
     },
     {
-      "id": "eed5005a-b27c-48e0-a25c-012074712f0e",
+      "id": "look-04",
       "published": true,
       "featured": true,
       "label": "LOOK 04",
@@ -87,21 +55,11 @@
       "summary": "목록에 보이는 한 줄 소개",
       "category": "Collection",
       "price": "",
-      "keywords": [
-        "Keyword",
-        "Keyword"
-      ],
-      "images": [
-        "images/look04-1.jpg"
-      ],
+      "keywords": ["Keyword", "Keyword"],
+      "images": ["images/look04-1.jpg"],
       "buyLabel": "구매하기",
       "buyLink": "",
-      "sections": [
-        {
-          "type": "rich_text",
-          "body": "<h2>제품 상세</h2><p>구매 링크가 비어 있으면 구매 버튼은 자동으로 숨겨집니다.</p>"
-        }
-      ]
+      "sections": [{ "type": "rich_text", "body": "" }]
     }
   ]
 }
