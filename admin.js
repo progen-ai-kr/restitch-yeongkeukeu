@@ -35,6 +35,8 @@
     productForm: $("#productForm"),
     editorProductName: $("#editorProductName"),
     mobileList: $("#mobileListButton"),
+    sidebarToggle: $("#sidebarToggleButton"),
+    sidebarToggleLabel: $("#sidebarToggleLabel"),
     preview: $("#previewLink"),
     save: $("#saveButton"),
     mainImageInput: $("#mainImageInput"),
@@ -83,6 +85,7 @@
     elements.newProduct.addEventListener("click", addProduct);
     elements.productSearch.addEventListener("input", renderProductList);
     elements.mobileList.addEventListener("click", () => document.body.classList.remove("editor-open"));
+    elements.sidebarToggle.addEventListener("click", toggleProductSidebar);
     elements.productForm.addEventListener("submit", saveCatalog);
     elements.productForm.addEventListener("input", handleProductField);
     elements.productForm.addEventListener("change", handleProductField);
@@ -108,6 +111,27 @@
       event.preventDefault();
       event.returnValue = "";
     });
+    restoreProductSidebar();
+  }
+
+  function restoreProductSidebar() {
+    let collapsed = false;
+    try { collapsed = localStorage.getItem("restitchProductSidebarCollapsed") === "true"; } catch (_) {}
+    setProductSidebarCollapsed(collapsed, false);
+  }
+
+  function toggleProductSidebar() {
+    setProductSidebarCollapsed(!document.body.classList.contains("sidebar-collapsed"));
+  }
+
+  function setProductSidebarCollapsed(collapsed, remember = true) {
+    document.body.classList.toggle("sidebar-collapsed", collapsed);
+    elements.sidebarToggle.setAttribute("aria-expanded", String(!collapsed));
+    elements.sidebarToggleLabel.textContent = collapsed ? "목록 열기" : "목록 숨기기";
+    elements.sidebarToggle.querySelector(".sidebar-toggle-icon").textContent = collapsed ? "☰" : "‹";
+    if (remember) {
+      try { localStorage.setItem("restitchProductSidebarCollapsed", String(collapsed)); } catch (_) {}
+    }
   }
 
   async function handleLogin(event) {
@@ -446,7 +470,6 @@
         ["ul", "ol"],
         ["link", "image"],
         [createVideoToolbarItem(() => editor, product)],
-        ["scrollSync"],
       ],
       customHTMLRenderer: videoHtmlRenderer(),
       hooks: {
@@ -579,7 +602,7 @@
     return {
       name: "video",
       tooltip: "영상 삽입",
-      text: "▶",
+      text: "영상",
       className: "toastui-editor-toolbar-icons detail-video-toolbar-button",
       style: { backgroundImage: "none" },
       popup: {
