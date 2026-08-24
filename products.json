@@ -31,7 +31,9 @@
       "category": "",
       "price": "",
       "keywords": [],
-      "images": [],
+      "images": [
+        "images/products/c563e086-87f4-4af9-9eeb-c5e03a690085/1787611270687-954cb315.webp"
+      ],
       "buyLabel": "구매하기",
       "buyLink": "",
       "sections": [
