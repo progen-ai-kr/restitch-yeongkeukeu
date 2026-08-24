@@ -10,6 +10,8 @@
   "vars": {
     "GITHUB_OWNER": "progen-ai-kr",
     "GITHUB_REPO": "restitch-yeongkeukeu",
-    "GITHUB_BRANCH": "main"
+    "GITHUB_REPOS": "restitch-yeongkeukeu",
+    "GITHUB_BRANCH": "main",
+    "ADMIN_ENABLED": "true"
   }
 }
