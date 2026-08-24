@@ -10,8 +10,15 @@
       "summary": "목록에 보이는 한 줄 소개",
       "category": "Collection",
       "price": "129,000원",
-      "keywords": ["Keyword", "Keyword", "Keyword"],
-      "images": ["images/look01-1.jpg", "images/look01-2.jpg"],
+      "keywords": [
+        "Keyword",
+        "Keyword",
+        "Keyword"
+      ],
+      "images": [
+        "images/look01-1.jpg",
+        "images/look01-2.jpg"
+      ],
       "buyLabel": "스마트스토어에서 보기",
       "buyLink": "https://smartstore.naver.com/",
       "sections": [
@@ -24,7 +31,7 @@
           "image": "images/look01-2.jpg",
           "imagePosition": "left",
           "heading": "디테일을 소개하세요",
-          "body": "<p>이미지와 설명을 나란히 배치하는 블록입니다. 브랜드 담당자가 순서와 내용을 직접 정합니다.</p>"
+          "body": "<p>이미지와 설명을 나란히 배치하는 블록입니다. 브랜드 담당자가 순서와 내용을 직접 정합니다.<img src=\"/images/products/32c5f04d-644f-4a0a-b63c-7d3a79ddf3c8/1787564129453-baf460b4.webp\" alt=\"KakaoTalk_Image_2026-08-24-15-03-10_014.jpeg\"><br></p>"
         },
         {
           "type": "highlight",
@@ -42,8 +49,13 @@
       "summary": "목록에 보이는 한 줄 소개",
       "category": "Collection",
       "price": "",
-      "keywords": ["Keyword", "Keyword"],
-      "images": ["images/look02-1.jpg"],
+      "keywords": [
+        "Keyword",
+        "Keyword"
+      ],
+      "images": [
+        "images/look02-1.jpg"
+      ],
       "buyLabel": "구매하기",
       "buyLink": "",
       "sections": [
@@ -62,8 +74,13 @@
       "summary": "목록에 보이는 한 줄 소개",
       "category": "Collection",
       "price": "",
-      "keywords": ["Keyword", "Keyword"],
-      "images": ["images/look03-1.jpg"],
+      "keywords": [
+        "Keyword",
+        "Keyword"
+      ],
+      "images": [
+        "images/look03-1.jpg"
+      ],
       "buyLabel": "구매하기",
       "buyLink": "",
       "sections": [
@@ -82,8 +99,13 @@
       "summary": "목록에 보이는 한 줄 소개",
       "category": "Collection",
       "price": "",
-      "keywords": ["Keyword", "Keyword"],
-      "images": ["images/look04-1.jpg"],
+      "keywords": [
+        "Keyword",
+        "Keyword"
+      ],
+      "images": [
+        "images/look04-1.jpg"
+      ],
       "buyLabel": "구매하기",
       "buyLink": "",
       "sections": [
