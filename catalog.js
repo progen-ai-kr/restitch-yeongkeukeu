@@ -5,7 +5,7 @@
 
   const ALLOWED_RICH_TAGS = new Set([
     "P", "BR", "H2", "H3", "H4", "STRONG", "EM", "S", "UL", "OL", "LI",
-    "BLOCKQUOTE", "A", "IMG", "FIGURE", "FIGCAPTION", "HR"
+    "BLOCKQUOTE", "A", "IMG", "FIGURE", "FIGCAPTION", "HR", "IFRAME", "VIDEO"
   ]);
 
   const escapeHtml = (value) => String(value == null ? "" : value).replace(
@@ -28,6 +28,34 @@
     if (/^(?:\.\/)?images\/[a-z0-9_./%+~-]+$/i.test(source)) return source;
     if (/^\/images\/[a-z0-9_./%+~-]+$/i.test(source)) return source;
     return safeExternalUrl(source);
+  }
+
+  function safeVideoEmbedUrl(value) {
+    try {
+      const url = new URL(String(value || "").trim());
+      if (url.protocol !== "https:") return "";
+      const host = url.hostname.toLowerCase();
+      const youtubeHosts = new Set(["youtube.com", "www.youtube.com", "m.youtube.com", "youtube-nocookie.com", "www.youtube-nocookie.com"]);
+      if (youtubeHosts.has(host)) {
+        const match = url.pathname.match(/^\/(?:embed|shorts)\/([A-Za-z0-9_-]{6,20})/);
+        if (match) return `https://www.youtube-nocookie.com/embed/${match[1]}`;
+      }
+      if (host === "player.vimeo.com") {
+        const match = url.pathname.match(/^\/video\/(\d+)/);
+        if (match) return `https://player.vimeo.com/video/${match[1]}`;
+      }
+    } catch (_) {}
+    return "";
+  }
+
+  function safeVideoFileUrl(value) {
+    try {
+      const url = new URL(String(value || "").trim());
+      if (url.protocol !== "https:") return "";
+      return /\.(?:mp4|webm|ogg)$/i.test(url.pathname) ? url.href : "";
+    } catch (_) {
+      return "";
+    }
   }
 
   function sanitizeRichText(value) {
@@ -75,6 +103,30 @@
           node.setAttribute("loading", "lazy");
         }
 
+        if (node.tagName === "IFRAME") {
+          const source = safeVideoEmbedUrl(sourceValue);
+          if (!source) {
+            node.remove();
+            return;
+          }
+          node.setAttribute("src", source);
+          node.setAttribute("title", "제품 영상");
+          node.setAttribute("loading", "lazy");
+          node.setAttribute("allow", source.includes("vimeo.com") ? "autoplay; fullscreen; picture-in-picture" : "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
+          node.setAttribute("allowfullscreen", "");
+        }
+
+        if (node.tagName === "VIDEO") {
+          const source = safeVideoFileUrl(sourceValue);
+          if (!source) {
+            node.remove();
+            return;
+          }
+          node.setAttribute("src", source);
+          node.setAttribute("controls", "");
+          node.setAttribute("preload", "metadata");
+        }
+
         clean(node);
       });
     }
@@ -101,6 +153,8 @@
     loadVisibleProducts,
     safeExternalUrl,
     safeImageUrl,
+    safeVideoEmbedUrl,
+    safeVideoFileUrl,
     sanitizeRichText,
   };
 })();

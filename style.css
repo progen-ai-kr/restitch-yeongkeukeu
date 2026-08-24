@@ -113,6 +113,12 @@ a { color: inherit; }
 .product-block-copy blockquote { border-left: 3px solid var(--accent); padding-left: 18px; margin: 24px 0; font-size: 18px; }
 .product-rich-text img,
 .product-block-copy img { width: 100%; border-radius: var(--radius); margin: 24px 0; }
+.product-rich-text figure { margin: 24px 0; }
+.product-rich-text figcaption { margin-top: 8px; color: var(--ink-soft); font-size: 12px; text-align: center; }
+.product-rich-text iframe,
+.product-rich-text video { display: block; width: 100%; margin: 30px 0; border: 0; border-radius: var(--radius); background: #111; }
+.product-rich-text iframe { aspect-ratio: 16 / 9; }
+.product-rich-text video { height: auto; }
 .product-full-image { width: min(calc(100% - 24px), 1320px); }
 .product-full-image img { width: 100%; max-height: 900px; object-fit: cover; border-radius: var(--radius); }
 .product-full-image figcaption { color: var(--ink-soft); font-size: 13px; margin-top: 8px; text-align: center; }

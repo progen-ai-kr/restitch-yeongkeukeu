@@ -39,7 +39,14 @@
     mainImageDrop: $("#mainImageDrop"),
     mainImageGrid: $("#mainImageGrid"),
     mainImageEmpty: $("#mainImageEmpty"),
-    sectionList: $("#sectionList"),
+    detailEditorMount: $("#detailEditorMount"),
+    detailPreview: $("#detailPreview"),
+    addVideo: $("#addVideoButton"),
+    videoDialog: $("#videoDialog"),
+    videoForm: $("#videoForm"),
+    videoUrl: $("#videoUrl"),
+    videoError: $("#videoError"),
+    videoCancel: $("#videoCancelButton"),
     deleteProduct: $("#deleteProductButton"),
     passwordDialog: $("#passwordDialog"),
     passwordForm: $("#passwordForm"),
@@ -52,14 +59,6 @@
     passwordCancel: $("#passwordCancelButton"),
     passwordSubmit: $("#passwordSubmitButton"),
     toast: $("#toast"),
-  };
-
-  const blockNames = {
-    rich_text: "글",
-    full_image: "큰 이미지",
-    image_text: "이미지와 글",
-    gallery: "이미지 갤러리",
-    highlight: "강조 문구",
   };
 
   boot();
@@ -109,10 +108,9 @@
       elements.mainImageDrop.classList.remove("dragging");
       await addMainImages(event.dataTransfer.files);
     });
-    elements.sectionList.addEventListener("click", handleSectionClick);
-    elements.sectionList.addEventListener("input", handleSectionField);
-    elements.sectionList.addEventListener("change", handleSectionChange);
-    document.querySelectorAll("[data-add-block]").forEach((button) => button.addEventListener("click", () => addBlock(button.dataset.addBlock)));
+    elements.addVideo.addEventListener("click", openVideoDialog);
+    elements.videoForm.addEventListener("submit", insertVideo);
+    elements.videoCancel.addEventListener("click", closeVideoDialog);
     window.addEventListener("beforeunload", (event) => {
       if (!state.dirty) return;
       event.preventDefault();
@@ -338,7 +336,7 @@
       else input.value = product[field] || "";
     });
     renderMainImages();
-    renderSections();
+    renderDetailEditor();
   }
 
   function handleProductField(event) {
@@ -412,217 +410,101 @@
     renderProductList();
   }
 
-  function renderSections() {
+  function renderDetailEditor() {
     const product = currentProduct();
     destroyToastEditors();
-    elements.sectionList.replaceChildren();
-    (product?.sections || []).forEach((section, index) => elements.sectionList.append(buildSection(section, index)));
-    mountToastEditors();
-  }
-
-  function buildSection(section, index) {
-    const card = create("article", "section-card");
-    card.dataset.sectionIndex = String(index);
-    const header = create("header", "section-card-header");
-    const title = create("strong");
-    title.append(create("span", "", String(index + 1).padStart(2, "0")), document.createTextNode(blockNames[section.type] || section.type));
-    const actions = create("div", "section-actions");
-    if (index > 0) actions.append(sectionAction("↑", "up", index, "위로 이동"));
-    const product = currentProduct();
-    if (index < product.sections.length - 1) actions.append(sectionAction("↓", "down", index, "아래로 이동"));
-    actions.append(sectionAction("×", "remove", index, "블록 삭제"));
-    header.append(title, actions);
-
-    const body = create("div", "section-body");
-    if (section.type === "rich_text") body.append(richEditor(index, "body", section.body, "제품 이야기를 자유롭게 작성하세요."));
-    if (section.type === "full_image") {
-      body.append(sectionImageBox(index, "image", section.image));
-      body.append(sectionTextField(index, "alt", "이미지 설명", section.alt, "사진을 보지 못하는 사람을 위한 설명"));
-      body.append(sectionTextField(index, "caption", "사진 아래 문구", section.caption, "선택 입력"));
-    }
-    if (section.type === "image_text") {
-      const columns = create("div", "section-columns");
-      columns.append(sectionImageBox(index, "image", section.image));
-      const copy = create("div");
-      copy.append(sectionSelect(index, "imagePosition", "이미지 위치", section.imagePosition || "left", [["left", "왼쪽"], ["right", "오른쪽"]]));
-      copy.append(sectionTextField(index, "heading", "제목", section.heading, "섹션 제목"));
-      columns.append(copy);
-      body.append(columns, richEditor(index, "body", section.body, "이미지와 함께 표시할 내용을 작성하세요."));
-    }
-    if (section.type === "gallery") {
-      body.append(sectionSelect(index, "columns", "한 줄 이미지 수", String(section.columns || "2"), [["1", "1장"], ["2", "2장"], ["3", "3장"]]));
-      body.append(galleryEditor(index, section.images || []));
-    }
-    if (section.type === "highlight") {
-      body.append(sectionTextField(index, "heading", "강조 제목", section.heading, "핵심 메시지"));
-      body.append(richEditor(index, "body", section.body, "강조할 내용을 작성하세요."));
-    }
-    card.append(header, body);
-    return card;
-  }
-
-  function sectionAction(label, action, index, title) {
-    const button = create("button", "", label);
-    button.type = "button";
-    button.dataset.sectionAction = action;
-    button.dataset.sectionIndex = String(index);
-    button.title = title;
-    return button;
-  }
-
-  function sectionTextField(index, field, label, value, placeholder) {
-    const wrapper = create("label", "section-field");
-    wrapper.append(create("span", "", label));
-    const input = document.createElement(field === "caption" ? "textarea" : "input");
-    input.value = value || "";
-    input.placeholder = placeholder || "";
-    input.dataset.sectionIndex = String(index);
-    input.dataset.sectionField = field;
-    wrapper.append(input);
-    return wrapper;
-  }
-
-  function sectionSelect(index, field, label, value, options) {
-    const wrapper = create("label", "section-field");
-    wrapper.append(create("span", "", label));
-    const select = document.createElement("select");
-    select.dataset.sectionIndex = String(index);
-    select.dataset.sectionField = field;
-    options.forEach(([optionValue, optionLabel]) => {
-      const option = document.createElement("option");
-      option.value = optionValue;
-      option.textContent = optionLabel;
-      option.selected = optionValue === value;
-      select.append(option);
-    });
-    wrapper.append(select);
-    return wrapper;
-  }
-
-  function sectionImageBox(index, field, path) {
-    const box = create("div", "section-image-box");
-    if (path) {
-      const image = document.createElement("img");
-      image.src = imageUrl(path);
-      image.alt = "상세 이미지";
-      box.append(image);
-      const tools = create("div", "section-image-tools");
-      tools.append(uploadLabel(index, field, "변경"));
-      const remove = create("button", "", "삭제");
-      remove.type = "button";
-      remove.dataset.clearSectionImage = "true";
-      remove.dataset.sectionIndex = String(index);
-      remove.dataset.sectionField = field;
-      tools.append(remove);
-      box.append(tools);
-    } else {
-      const label = create("label", "section-image-empty");
-      label.append(create("span", "", "＋"), create("strong", "", "이미지 추가"));
-      label.append(makeUploadInput(index, field, false));
-      box.append(label);
-    }
-    return box;
-  }
-
-  function uploadLabel(index, field, labelText, multiple = false) {
-    const label = create("label", "", labelText);
-    label.append(makeUploadInput(index, field, multiple));
-    return label;
-  }
-
-  function makeUploadInput(index, field, multiple) {
-    const input = document.createElement("input");
-    input.type = "file";
-    input.accept = "image/jpeg,image/png,image/webp,image/gif,image/avif";
-    input.multiple = multiple;
-    input.hidden = true;
-    input.dataset.sectionUpload = field;
-    input.dataset.sectionIndex = String(index);
-    return input;
-  }
-
-  function galleryEditor(index, images) {
-    const wrapper = create("div");
-    const gallery = create("div", "mini-gallery");
-    images.forEach((path, imageIndex) => {
-      const card = imageCard(path, imageIndex, images.length, "gallery");
-      card.querySelectorAll("[data-image-action]").forEach((button) => button.dataset.sectionIndex = String(index));
-      gallery.append(card);
-    });
-    const add = create("label", "upload-button", "갤러리 이미지 추가");
-    add.style.marginTop = "10px";
-    add.append(makeUploadInput(index, "images", true));
-    wrapper.append(gallery, add);
-    return wrapper;
-  }
-
-  function richEditor(index, field, html, placeholder) {
-    const mount = create("div", "toast-editor-mount");
-    mount.dataset.sectionIndex = String(index);
-    mount.dataset.richField = field;
-    mount.dataset.placeholder = placeholder;
-    return mount;
-  }
-
-  function mountToastEditors() {
-    const product = currentProduct();
+    elements.detailEditorMount.replaceChildren();
     if (!product) return;
 
-    elements.sectionList.querySelectorAll(".toast-editor-mount").forEach((mount) => {
-      const index = Number(mount.dataset.sectionIndex);
-      const field = mount.dataset.richField;
-      const initialHtml = sanitizeEditorHtml(product.sections[index]?.[field] || "");
-
-      if (!window.toastui?.Editor) {
-        const fallback = document.createElement("textarea");
-        fallback.className = "toast-editor-fallback";
-        fallback.value = initialHtml;
-        fallback.dataset.sectionIndex = String(index);
-        fallback.dataset.richFallback = field;
-        fallback.placeholder = mount.dataset.placeholder;
-        mount.append(fallback);
-        return;
-      }
-
-      let ready = false;
-      let editor;
-      editor = new window.toastui.Editor({
-        el: mount,
-        height: "330px",
-        minHeight: "240px",
-        initialEditType: "wysiwyg",
-        previewStyle: "tab",
-        hideModeSwitch: true,
-        language: "ko-KR",
-        autofocus: false,
-        usageStatistics: false,
-        placeholder: mount.dataset.placeholder,
-        toolbarItems: [
-          ["heading", "bold", "italic", "strike"],
-          ["hr", "quote"],
-          ["ul", "ol"],
-          ["link", "image"],
-        ],
-        hooks: {
-          addImageBlobHook: async (blob, callback) => {
-            const paths = await uploadFiles([blob], product.id);
-            if (paths[0]) callback(imageUrl(paths[0]), blob.name || "본문 이미지");
-          },
-        },
-        events: {
-          change: () => {
-            if (!ready) return;
-            const section = product.sections[index];
-            if (!section) return;
-            section[field] = sanitizeEditorHtml(editor.getHTML());
-            setDirty(true);
-          },
-        },
+    const initialHtml = sanitizeEditorHtml(sectionsToSingleHtml(product.sections));
+    renderDetailPreview(initialHtml);
+    if (!window.toastui?.Editor) {
+      const fallback = document.createElement("textarea");
+      fallback.className = "toast-editor-fallback";
+      fallback.value = initialHtml;
+      fallback.placeholder = "제품 설명을 작성하고 이미지와 영상을 원하는 순서로 넣어 주세요.";
+      fallback.addEventListener("input", () => {
+        product.sections = singleDetailSection(fallback.value);
+        renderDetailPreview(fallback.value);
+        setDirty(true);
       });
-      editor.setHTML(initialHtml, false);
-      ready = true;
-      toastEditors.set(`${index}:${field}`, editor);
+      elements.detailEditorMount.append(fallback);
+      return;
+    }
+
+    let ready = false;
+    let editor;
+    editor = new window.toastui.Editor({
+      el: elements.detailEditorMount,
+      height: "640px",
+      minHeight: "420px",
+      initialEditType: "wysiwyg",
+      previewStyle: "vertical",
+      hideModeSwitch: true,
+      language: "ko-KR",
+      autofocus: false,
+      usageStatistics: false,
+      placeholder: "제품 설명을 작성하고 이미지와 영상을 원하는 순서로 넣어 주세요.",
+      toolbarItems: [
+        ["heading", "bold", "italic", "strike"],
+        ["hr", "quote"],
+        ["ul", "ol"],
+        ["link", "image"],
+      ],
+      customHTMLRenderer: videoHtmlRenderer(),
+      hooks: {
+        addImageBlobHook: async (blob, callback) => {
+          const paths = await uploadFiles([blob], product.id);
+          if (paths[0]) callback(imageUrl(paths[0]), blob.name || "본문 이미지");
+        },
+      },
+      events: {
+        change: () => {
+          if (!ready) return;
+          product.sections = singleDetailSection(editor.getHTML());
+          renderDetailPreview(editor.getHTML());
+          setDirty(true);
+        },
+      },
     });
+    editor.setHTML(initialHtml, false);
+    ready = true;
+    toastEditors.set("detail", editor);
+  }
+
+  function sectionsToSingleHtml(sections) {
+    return (Array.isArray(sections) ? sections : []).map((section) => {
+      if (!section || !section.type) return "";
+      if (section.type === "rich_text") return section.body || "";
+      if (section.type === "full_image") {
+        const source = safeEditorImageUrl(section.image);
+        if (!source) return "";
+        const caption = section.caption ? `<figcaption>${escapeEditorText(section.caption)}</figcaption>` : "";
+        return `<figure><img src="${escapeEditorAttribute(source)}" alt="${escapeEditorAttribute(section.alt || "상세 이미지")}">${caption}</figure>`;
+      }
+      if (section.type === "image_text") {
+        const source = safeEditorImageUrl(section.image);
+        const image = source ? `<img src="${escapeEditorAttribute(source)}" alt="${escapeEditorAttribute(section.heading || "상세 이미지")}">` : "";
+        const heading = section.heading ? `<h2>${escapeEditorText(section.heading)}</h2>` : "";
+        return `${image}${heading}${section.body || ""}`;
+      }
+      if (section.type === "gallery") {
+        return (Array.isArray(section.images) ? section.images : []).map((value) => {
+          const source = safeEditorImageUrl(value);
+          return source ? `<img src="${escapeEditorAttribute(source)}" alt="상세 이미지">` : "";
+        }).join("");
+      }
+      if (section.type === "highlight") {
+        const heading = section.heading ? `<h2>${escapeEditorText(section.heading)}</h2>` : "";
+        return `<blockquote>${heading}${section.body || ""}</blockquote>`;
+      }
+      return "";
+    }).join("");
+  }
+
+  function singleDetailSection(html) {
+    const body = sanitizeEditorHtml(html);
+    return body.trim() ? [{ type: "rich_text", body }] : [];
   }
 
   function destroyToastEditors() {
@@ -635,95 +517,47 @@
   function syncToastEditors() {
     const product = currentProduct();
     if (!product) return;
-    toastEditors.forEach((editor, key) => {
-      const [index, field] = key.split(":");
-      if (product.sections[Number(index)]) product.sections[Number(index)][field] = sanitizeEditorHtml(editor.getHTML());
-    });
+    const editor = toastEditors.get("detail");
+    if (editor) product.sections = singleDetailSection(editor.getHTML());
   }
 
-  function handleSectionClick(event) {
-    const sectionButton = event.target.closest("[data-section-action]");
-    const product = currentProduct();
-    if (sectionButton && product) {
-      const index = Number(sectionButton.dataset.sectionIndex);
-      const action = sectionButton.dataset.sectionAction;
-      if (action === "remove" && !window.confirm("이 상세 블록을 삭제할까요?")) return;
-      if (action === "remove") product.sections.splice(index, 1);
-      if (action === "up" && index > 0) [product.sections[index - 1], product.sections[index]] = [product.sections[index], product.sections[index - 1]];
-      if (action === "down" && index < product.sections.length - 1) [product.sections[index + 1], product.sections[index]] = [product.sections[index], product.sections[index + 1]];
-      setDirty(true);
-      renderSections();
-      return;
-    }
-
-    const clearButton = event.target.closest("[data-clear-section-image]");
-    if (clearButton && product) {
-      const section = product.sections[Number(clearButton.dataset.sectionIndex)];
-      section[clearButton.dataset.sectionField] = "";
-      setDirty(true);
-      renderSections();
-      return;
-    }
-
-    const imageButton = event.target.closest("[data-image-action^='gallery-']");
-    if (imageButton && product) {
-      const section = product.sections[Number(imageButton.dataset.sectionIndex)];
-      const images = section.images;
-      const index = Number(imageButton.dataset.imageIndex);
-      const action = imageButton.dataset.imageAction;
-      if (action.endsWith("remove")) images.splice(index, 1);
-      if (action.endsWith("left") && index > 0) [images[index - 1], images[index]] = [images[index], images[index - 1]];
-      if (action.endsWith("right") && index < images.length - 1) [images[index + 1], images[index]] = [images[index], images[index + 1]];
-      setDirty(true);
-      renderSections();
-    }
+  function openVideoDialog() {
+    elements.videoForm.reset();
+    elements.videoError.hidden = true;
+    if (!elements.videoDialog.open) elements.videoDialog.showModal();
+    window.setTimeout(() => elements.videoUrl.focus(), 50);
   }
 
-  function handleSectionField(event) {
+  function closeVideoDialog() {
+    elements.videoDialog.close();
+    elements.videoForm.reset();
+  }
+
+  function insertVideo(event) {
+    event.preventDefault();
     const product = currentProduct();
     if (!product) return;
-    const fallback = event.target.closest("[data-rich-fallback]");
-    if (fallback) {
-      product.sections[Number(fallback.dataset.sectionIndex)][fallback.dataset.richFallback] = sanitizeEditorHtml(fallback.value);
-      setDirty(true);
+    const markup = videoMarkupFromUrl(elements.videoUrl.value);
+    if (!markup) {
+      elements.videoError.textContent = "지원하는 주소가 아닙니다. 유튜브·비메오 또는 https로 시작하는 영상 파일 주소를 확인해 주세요.";
+      elements.videoError.hidden = false;
+      elements.videoUrl.focus();
       return;
     }
-    const field = event.target.closest("[data-section-field]");
-    if (field) {
-      product.sections[Number(field.dataset.sectionIndex)][field.dataset.sectionField] = field.value;
-      setDirty(true);
+
+    const editor = toastEditors.get("detail");
+    if (editor) {
+      editor.setHTML(`${editor.getHTML()}${markup}`, false);
+      product.sections = singleDetailSection(editor.getHTML());
+    } else {
+      const fallback = $(".toast-editor-fallback", elements.detailEditorMount);
+      if (fallback) fallback.value += markup;
+      product.sections = singleDetailSection(`${sectionsToSingleHtml(product.sections)}${markup}`);
     }
-  }
-
-  async function handleSectionChange(event) {
-    const input = event.target.closest("[data-section-upload]");
-    if (!input || !input.files?.length) return;
-    const product = currentProduct();
-    const index = Number(input.dataset.sectionIndex);
-    const field = input.dataset.sectionUpload;
-    const paths = await uploadFiles(input.files, product.id);
-    if (field === "images") product.sections[index].images.push(...paths);
-    else if (paths[0]) product.sections[index][field] = paths[0];
-    if (paths.length) setDirty(true);
-    renderSections();
-  }
-
-  function addBlock(type) {
-    const product = currentProduct();
-    if (!product) return;
-    const defaults = {
-      rich_text: { type, body: "<h2>새 제목</h2><p>제품 이야기를 입력하세요.</p>" },
-      full_image: { type, image: "", alt: "", caption: "" },
-      image_text: { type, image: "", imagePosition: "left", heading: "", body: "<p>이미지와 함께 표시할 내용을 입력하세요.</p>" },
-      gallery: { type, images: [], columns: "2" },
-      highlight: { type, heading: "", body: "<p>강조할 내용을 입력하세요.</p>" },
-    };
-    if (!defaults[type]) return;
-    product.sections.push(defaults[type]);
+    renderDetailPreview(sectionsToSingleHtml(product.sections));
     setDirty(true);
-    renderSections();
-    const last = elements.sectionList.lastElementChild;
-    last?.scrollIntoView({ behavior: "smooth", block: "center" });
+    closeVideoDialog();
+    showToast("상세페이지 아래에 영상을 추가했습니다. 원하는 위치로 옮긴 뒤 저장해 주세요.");
   }
 
   async function uploadFiles(fileList, productId) {
@@ -861,8 +695,129 @@
     return `/${source.replace(/^\.?\//, "")}`;
   }
 
+  function renderDetailPreview(value) {
+    if (!elements.detailPreview) return;
+    const html = sanitizeEditorHtml(value);
+    elements.detailPreview.innerHTML = html || '<p class="detail-preview-empty">상세 내용을 입력하면 이곳에서 바로 확인할 수 있습니다.</p>';
+    elements.detailPreview.querySelectorAll("a[href]").forEach((link) => {
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+    });
+  }
+
+  function escapeEditorText(value) {
+    return String(value == null ? "" : value).replace(
+      /[&<>]/g,
+      (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[character]
+    );
+  }
+
+  function escapeEditorAttribute(value) {
+    return escapeEditorText(value).replace(/"/g, "&quot;");
+  }
+
+  function safeEditorImageUrl(value) {
+    const source = String(value || "").trim();
+    if (/^(?:https?:\/\/|(?:\.\/|\/)?images\/)/i.test(source)) return source;
+    return "";
+  }
+
+  function safeVideoEmbedUrl(value) {
+    try {
+      const url = new URL(String(value || "").trim());
+      if (url.protocol !== "https:") return "";
+      const host = url.hostname.toLowerCase();
+      const youtubeHosts = new Set(["youtube.com", "www.youtube.com", "m.youtube.com", "youtube-nocookie.com", "www.youtube-nocookie.com"]);
+      if (youtubeHosts.has(host)) {
+        const match = url.pathname.match(/^\/(?:embed|shorts)\/([A-Za-z0-9_-]{6,20})/);
+        if (match) return `https://www.youtube-nocookie.com/embed/${match[1]}`;
+      }
+      if (host === "player.vimeo.com") {
+        const match = url.pathname.match(/^\/video\/(\d+)/);
+        if (match) return `https://player.vimeo.com/video/${match[1]}`;
+      }
+    } catch (_) {}
+    return "";
+  }
+
+  function safeVideoFileUrl(value) {
+    try {
+      const url = new URL(String(value || "").trim());
+      if (url.protocol !== "https:") return "";
+      return /\.(?:mp4|webm|ogg)$/i.test(url.pathname) ? url.href : "";
+    } catch (_) {
+      return "";
+    }
+  }
+
+  function videoMarkupFromUrl(value) {
+    try {
+      const url = new URL(String(value || "").trim());
+      const host = url.hostname.toLowerCase();
+      let youtubeId = "";
+      if (host === "youtu.be") youtubeId = url.pathname.split("/").filter(Boolean)[0] || "";
+      if (["youtube.com", "www.youtube.com", "m.youtube.com"].includes(host)) {
+        youtubeId = url.searchParams.get("v") || (url.pathname.match(/^\/(?:shorts|embed)\/([^/]+)/)?.[1] || "");
+      }
+      if (/^[A-Za-z0-9_-]{6,20}$/.test(youtubeId)) {
+        const source = `https://www.youtube-nocookie.com/embed/${youtubeId}`;
+        return `<iframe src="${source}" title="제품 영상" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+      }
+
+      if (["vimeo.com", "www.vimeo.com", "player.vimeo.com"].includes(host)) {
+        const vimeoId = url.pathname.match(/(?:video\/)?(\d+)/)?.[1] || "";
+        if (vimeoId) {
+          const source = `https://player.vimeo.com/video/${vimeoId}`;
+          return `<iframe src="${source}" title="제품 영상" loading="lazy" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>`;
+        }
+      }
+    } catch (_) {}
+
+    const fileSource = safeVideoFileUrl(value);
+    return fileSource ? `<video src="${escapeEditorAttribute(fileSource)}" controls preload="metadata"></video>` : "";
+  }
+
+  function videoHtmlRenderer() {
+    return {
+      htmlBlock: {
+        iframe(node) {
+          const source = safeVideoEmbedUrl(node.attrs?.src);
+          if (!source) return { type: "text", content: "" };
+          return [
+            {
+              type: "openTag",
+              tagName: "iframe",
+              outerNewLine: true,
+              attributes: {
+                src: source,
+                title: "제품 영상",
+                loading: "lazy",
+                allow: source.includes("vimeo.com") ? "autoplay; fullscreen; picture-in-picture" : "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share",
+                allowfullscreen: "true",
+              },
+            },
+            { type: "closeTag", tagName: "iframe", outerNewLine: true },
+          ];
+        },
+        video(node) {
+          const source = safeVideoFileUrl(node.attrs?.src);
+          if (!source) return { type: "text", content: "" };
+          return [
+            {
+              type: "openTag",
+              tagName: "video",
+              outerNewLine: true,
+              attributes: { src: source, controls: "true", preload: "metadata" },
+            },
+            { type: "closeTag", tagName: "video", outerNewLine: true },
+          ];
+        },
+      },
+    };
+  }
+
   function sanitizeEditorHtml(value) {
-    const allowed = new Set(["P", "BR", "H2", "H3", "H4", "STRONG", "B", "EM", "I", "S", "UL", "OL", "LI", "BLOCKQUOTE", "A", "IMG", "HR"]);
+    const allowed = new Set(["P", "BR", "H2", "H3", "H4", "STRONG", "B", "EM", "I", "S", "UL", "OL", "LI", "BLOCKQUOTE", "A", "IMG", "FIGURE", "FIGCAPTION", "HR", "IFRAME", "VIDEO"]);
     const template = document.createElement("template");
     template.innerHTML = String(value || "");
     function clean(parent) {
@@ -880,12 +835,35 @@
         [...node.attributes].forEach((attribute) => node.removeAttribute(attribute.name));
         if (node.tagName === "A" && /^https?:\/\//i.test(href)) node.setAttribute("href", href);
         if (node.tagName === "IMG") {
-          if (!/^(?:https?:\/\/|(?:\.\/|\/)?images\/)/i.test(source)) {
+          const safeSource = safeEditorImageUrl(source);
+          if (!safeSource) {
             node.remove();
             return;
           }
-          node.setAttribute("src", source);
+          node.setAttribute("src", safeSource);
           node.setAttribute("alt", alt);
+        }
+        if (node.tagName === "IFRAME") {
+          const safeSource = safeVideoEmbedUrl(source);
+          if (!safeSource) {
+            node.remove();
+            return;
+          }
+          node.setAttribute("src", safeSource);
+          node.setAttribute("title", "제품 영상");
+          node.setAttribute("loading", "lazy");
+          node.setAttribute("allow", safeSource.includes("vimeo.com") ? "autoplay; fullscreen; picture-in-picture" : "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share");
+          node.setAttribute("allowfullscreen", "");
+        }
+        if (node.tagName === "VIDEO") {
+          const safeSource = safeVideoFileUrl(source);
+          if (!safeSource) {
+            node.remove();
+            return;
+          }
+          node.setAttribute("src", safeSource);
+          node.setAttribute("controls", "");
+          node.setAttribute("preload", "metadata");
         }
         clean(node);
       });
