@@ -8,7 +8,6 @@
     currentId: "",
     dirty: false,
     uploading: 0,
-    forcedPasswordChange: false,
   };
   let toastTimer;
   const toastEditors = new Map();
@@ -69,8 +68,7 @@
     bindEvents();
     try {
       const session = await api("/api/admin/session");
-      if (session.authenticated && session.mustChange) openPasswordDialog(true);
-      else if (session.authenticated) await openAdmin();
+      if (session.authenticated) await openAdmin();
       else showLogin();
     } catch (error) {
       showLogin(error.message);
@@ -84,12 +82,9 @@
       elements.password.type = visible ? "password" : "text";
       elements.passwordToggle.textContent = visible ? "보기" : "숨김";
     });
-    elements.changePassword.addEventListener("click", () => openPasswordDialog(false));
+    elements.changePassword.addEventListener("click", openPasswordDialog);
     elements.passwordForm.addEventListener("submit", handlePasswordChange);
     elements.passwordCancel.addEventListener("click", closePasswordDialog);
-    elements.passwordDialog.addEventListener("cancel", (event) => {
-      if (state.forcedPasswordChange) event.preventDefault();
-    });
     elements.logout.addEventListener("click", handleLogout);
     elements.newProduct.addEventListener("click", addProduct);
     elements.productSearch.addEventListener("input", renderProductList);
@@ -132,14 +127,12 @@
     button.disabled = true;
     button.textContent = "확인 중…";
     try {
-      const enteredPassword = elements.password.value;
-      const result = await api("/api/admin/login", {
+      await api("/api/admin/login", {
         method: "POST",
-        body: JSON.stringify({ password: enteredPassword }),
+        body: JSON.stringify({ password: elements.password.value }),
       });
       elements.password.value = "";
-      if (result.mustChange) openPasswordDialog(true, enteredPassword);
-      else await openAdmin();
+      await openAdmin();
     } catch (error) {
       elements.loginError.textContent = error.message;
       elements.loginError.hidden = false;
@@ -150,27 +143,17 @@
     }
   }
 
-  function openPasswordDialog(forced, currentPassword = "") {
-    state.forcedPasswordChange = forced;
+  function openPasswordDialog() {
     elements.passwordForm.reset();
-    elements.currentPassword.value = currentPassword;
     elements.passwordError.hidden = true;
-    elements.passwordCancel.hidden = forced;
-    elements.passwordDialogTitle.textContent = forced ? "처음 사용할 비밀번호를 정해주세요." : "관리자 비밀번호 변경";
-    elements.passwordDialogLead.textContent = forced
-      ? "초기 비밀번호 0000은 임시 비밀번호입니다. 제품 관리 전에 브랜드 전용 비밀번호로 변경해 주세요."
-      : "변경하면 다른 기기에 남아 있는 기존 로그인은 모두 해제됩니다.";
-    if (forced) {
-      elements.loading.hidden = true;
-      elements.login.hidden = true;
-      elements.app.hidden = true;
-    }
+    elements.passwordCancel.hidden = false;
+    elements.passwordDialogTitle.textContent = "관리자 비밀번호 변경";
+    elements.passwordDialogLead.textContent = "원할 때 새 비밀번호로 변경할 수 있습니다. 변경하면 다른 기기의 기존 로그인은 모두 해제됩니다.";
     if (!elements.passwordDialog.open) elements.passwordDialog.showModal();
-    window.setTimeout(() => (currentPassword ? elements.newPassword : elements.currentPassword).focus(), 50);
+    window.setTimeout(() => elements.currentPassword.focus(), 50);
   }
 
   function closePasswordDialog() {
-    if (state.forcedPasswordChange) return;
     elements.passwordDialog.close();
     elements.passwordForm.reset();
   }
@@ -201,12 +184,9 @@
           newPassword: elements.newPassword.value,
         }),
       });
-      const wasForced = state.forcedPasswordChange;
-      state.forcedPasswordChange = false;
       elements.passwordDialog.close();
       elements.passwordForm.reset();
-      if (wasForced) await openAdmin();
-      else showToast("관리자 비밀번호를 변경했습니다. 다른 기기의 기존 로그인은 해제됩니다.");
+      showToast("관리자 비밀번호를 변경했습니다. 다른 기기의 기존 로그인은 해제됩니다.");
     } catch (error) {
       elements.passwordError.textContent = error.message;
       elements.passwordError.hidden = false;
@@ -222,7 +202,6 @@
     state.catalog = null;
     state.sha = "";
     state.currentId = "";
-    state.forcedPasswordChange = false;
     if (elements.passwordDialog.open) elements.passwordDialog.close();
     setDirty(false);
     showLogin();

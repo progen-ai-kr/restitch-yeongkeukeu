@@ -54,6 +54,6 @@
 
 - 접속 주소: https://restitch-yeongkeukeu.progen-web.workers.dev/admin
 - 브랜드 담당자는 GitHub 계정 없이 관리자 비밀번호만으로 로그인합니다.
-- 최초 임시 비밀번호는 `0000`이며, 첫 로그인 직후 8자 이상의 전용 비밀번호로 변경해야 합니다.
+- 초기 비밀번호는 `0000`입니다. 필요할 때 관리자 상단의 **비밀번호 변경** 버튼에서 바꿀 수 있습니다.
 - 제품을 저장하면 `products.json`에 기록되고 자동 배포 후 공개 사이트에 반영됩니다.
 - 학생은 `admin.html`, `admin.css`, `admin.js`, `admin-config.json`, `worker.js`, `products.json`, `wrangler.jsonc`를 수정하지 않습니다.

@@ -35,7 +35,7 @@ async function handleAdminApi(request, env, url) {
 
   if (path === "/api/admin/session" && request.method === "GET") {
     const session = await getValidSession(request, env);
-    return json({ authenticated: Boolean(session), mustChange: Boolean(session?.config.mustChange) });
+    return json({ authenticated: Boolean(session) });
   }
 
   if (path === "/api/admin/login" && request.method === "POST") {
@@ -55,10 +55,6 @@ async function handleAdminApi(request, env, url) {
 
   if (path === "/api/admin/password" && request.method === "POST") {
     return changePassword(request, env, session.configFile);
-  }
-
-  if (session.config.mustChange) {
-    return json({ error: "처음 사용하기 전에 관리자 비밀번호를 변경해 주세요." }, 428);
   }
 
   if (path === "/api/admin/catalog" && request.method === "GET") {
@@ -124,7 +120,7 @@ async function login(request, env) {
 
   loginAttempts.delete(ip);
   const token = await createSessionToken(env.SESSION_SECRET, configFile.config.sessionVersion);
-  return json({ ok: true, mustChange: configFile.config.mustChange === true }, 200, {
+  return json({ ok: true }, 200, {
     "Set-Cookie": `${SESSION_COOKIE}=${token}; Path=/; HttpOnly; Secure; SameSite=Strict; Max-Age=${SESSION_SECONDS}`,
   });
 }
@@ -154,7 +150,6 @@ async function changePassword(request, env, configFile) {
     salt: credential.salt,
     hash: credential.hash,
     sessionVersion: crypto.randomUUID(),
-    mustChange: false,
     updatedAt: new Date().toISOString(),
   };
   const content = `${JSON.stringify(nextConfig, null, 2)}\n`;
