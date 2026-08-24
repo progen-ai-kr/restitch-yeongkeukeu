@@ -57,16 +57,13 @@
         "Keyword",
         "Keyword"
       ],
-      "images": [
-        "images/look01-1.jpg",
-        "images/look01-2.jpg"
-      ],
+      "images": [],
       "buyLabel": "구매하기",
       "buyLink": "",
       "sections": [
         {
           "type": "rich_text",
-          "body": "<p>dfsfssfdsfsdf</p><p><br></p><p>fasdfasdf!</p><p><br></p><p><a>KakaoTalk_Image_2026-08-24-15-03-09_013.jpeg</a></p>"
+          "body": "<p>dfsfssfdsfsdf</p><p><br></p><p>fasdfasdf!</p><p><br></p><p><img src=\"/images/products/look-01/1787611131581-61ca2bd6.webp\" alt=\"KakaoTalk_Image_2026-08-24-15-03-09_013.jpeg\"></p>"
         }
       ]
     },
@@ -83,9 +80,7 @@
         "Keyword",
         "Keyword"
       ],
-      "images": [
-        "images/look02-1.jpg"
-      ],
+      "images": [],
       "buyLabel": "구매하기",
       "buyLink": "",
       "sections": [
@@ -108,9 +103,7 @@
         "Keyword",
         "Keyword"
       ],
-      "images": [
-        "images/look03-1.jpg"
-      ],
+      "images": [],
       "buyLabel": "구매하기",
       "buyLink": "",
       "sections": [
@@ -133,9 +126,7 @@
         "Keyword",
         "Keyword"
       ],
-      "images": [
-        "images/look04-1.jpg"
-      ],
+      "images": [],
       "buyLabel": "구매하기",
       "buyLink": "",
       "sections": [
