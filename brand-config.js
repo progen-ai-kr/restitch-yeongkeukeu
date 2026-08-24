@@ -3,4 +3,7 @@ window.BRAND_SITE = Object.freeze({
   name: "RE:STITCH",
   adminUrl: "https://restitch-admin.progen-web.workers.dev/admin",
   siteUrl: "https://restitch-yeongkeukeu.progen-web.workers.dev",
+  sites: [
+    { team: "영크크", url: "https://restitch-yeongkeukeu.progen-web.workers.dev" },
+  ],
 });
