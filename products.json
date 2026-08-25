@@ -16,7 +16,7 @@
         "Keyword"
       ],
       "images": [
-        "images/sample-product-bag.jpg"
+        "images/products/look-01/1787648933258-e52b3a58.png"
       ],
       "buyLabel": "구매하기",
       "buyLink": "",
@@ -41,14 +41,14 @@
         "Keyword"
       ],
       "images": [
-        "images/sample-product-bag.jpg"
+        "images/products/look-02/1787648951258-ba712b69.png"
       ],
       "buyLabel": "구매하기",
       "buyLink": "",
       "sections": [
         {
           "type": "rich_text",
-          "body": ""
+          "body": "<p><br></p>"
         }
       ]
     },
