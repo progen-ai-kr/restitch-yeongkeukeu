@@ -142,8 +142,10 @@
     });
     elements.mainImageEmpty.addEventListener("click", () => elements.mainImageInput.click());
     elements.mainImageGrid.addEventListener("click", handleMainImageAction);
-    elements.detailEditorMount.addEventListener("mouseover", handleDetailImageHover);
-    elements.detailEditorMount.addEventListener("click", handleDetailImageHover);
+    // TUI Editor가 미리보기 내부 이벤트 전파를 막더라도 이미지 수정 버튼이 뜨도록
+    // 캡처 단계에서 먼저 감지합니다.
+    elements.detailEditorMount.addEventListener("mouseover", handleDetailImageHover, true);
+    elements.detailEditorMount.addEventListener("click", handleDetailImageHover, true);
     elements.detailEditorMount.addEventListener("scroll", hideDetailImageEditButton, true);
     elements.detailImageEdit.addEventListener("click", () => {
       if (detailImageCandidate) openImageEditor(detailImageCandidate);
