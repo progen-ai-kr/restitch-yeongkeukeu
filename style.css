@@ -112,14 +112,24 @@ a { color: inherit; }
 .product-story { padding: 24px 0 64px; }
 .product-block { width: min(calc(100% - 44px), var(--maxw)); margin: 0 auto 54px; }
 .product-rich-text { max-width: 760px; }
+.product-rich-text h1 { margin: 44px 0 18px; padding-bottom: 9px; border-bottom: 3px double var(--line); font-family: var(--font-display); font-size: clamp(30px, 7vw, 46px); line-height: 1.2; }
 .product-rich-text h2,
 .product-block-copy h2,
 .product-highlight h2 { font-family: var(--font-display); font-size: clamp(23px, 6vw, 36px); line-height: 1.3; margin-bottom: 16px; }
 .product-rich-text h3,
 .product-block-copy h3 { font-size: clamp(18px, 5vw, 25px); margin: 30px 0 10px; }
+.product-rich-text h4 { margin: 26px 0 9px; font-size: 19px; }
+.product-rich-text h5 { margin: 22px 0 8px; font-size: 17px; }
+.product-rich-text h6 { margin: 18px 0 7px; font-size: 15px; }
 .product-rich-text p,
 .product-block-copy p,
 .product-highlight p { margin: 0 0 16px; color: var(--ink-soft); }
+.product-rich-text strong,
+.product-rich-text b { color: var(--ink); font-weight: 800; }
+.product-rich-text em,
+.product-rich-text i { font-style: italic; }
+.product-rich-text s,
+.product-rich-text del { color: var(--ink-soft); text-decoration: line-through; }
 .product-rich-text ul,
 .product-rich-text ol,
 .product-block-copy ul,
@@ -154,11 +164,19 @@ a { color: inherit; }
 .portfolio-content { max-width: 860px; margin: 0 auto; overflow-wrap: anywhere; }
 .portfolio-content > :first-child { margin-top: 0; }
 .portfolio-content > :last-child { margin-bottom: 0; }
-.portfolio-content h2 { margin: 48px 0 18px; font-family: var(--font-display); font-size: clamp(25px, 6vw, 42px); line-height: 1.25; }
-.portfolio-content h3 { margin: 36px 0 13px; font-size: clamp(19px, 4.5vw, 27px); line-height: 1.35; }
-.portfolio-content h4 { margin: 30px 0 10px; font-size: 18px; }
+.portfolio-content h1 { margin: 52px 0 18px; padding-bottom: 10px; border-bottom: 3px double var(--line); font-family: var(--font-display); font-size: clamp(32px, 7vw, 50px); line-height: 1.2; }
+.portfolio-content h2 { margin: 42px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--line); font-family: var(--font-display); font-size: clamp(27px, 6vw, 40px); line-height: 1.25; }
+.portfolio-content h3 { margin: 34px 0 12px; font-size: clamp(21px, 4.5vw, 28px); line-height: 1.35; }
+.portfolio-content h4 { margin: 28px 0 9px; font-size: 19px; }
+.portfolio-content h5 { margin: 24px 0 8px; font-size: 17px; }
+.portfolio-content h6 { margin: 20px 0 7px; font-size: 15px; }
 .portfolio-content p { margin: 0 0 20px; color: var(--ink-soft); }
-.portfolio-content strong { color: var(--ink); }
+.portfolio-content strong,
+.portfolio-content b { color: var(--ink); font-weight: 800; }
+.portfolio-content em,
+.portfolio-content i { font-style: italic; }
+.portfolio-content s,
+.portfolio-content del { color: var(--ink-soft); text-decoration: line-through; }
 .portfolio-content ul,
 .portfolio-content ol { margin: 0 0 24px 24px; color: var(--ink-soft); }
 .portfolio-content li + li { margin-top: 7px; }
@@ -176,6 +194,67 @@ a { color: inherit; }
 .portfolio-content video { height: auto; }
 .portfolio-content.is-empty { min-height: 220px; display: grid; place-items: center; text-align: center; }
 .portfolio-status { color: var(--ink-soft); font-size: 14px; }
+
+/* 관리자 편집기에서 지정한 서식을 공개 제품·포트폴리오에 그대로 전달합니다. */
+.portfolio-content [data-align="left"],
+.product-rich-text [data-align="left"] { text-align: left; }
+.portfolio-content [data-align="center"],
+.product-rich-text [data-align="center"] { text-align: center; }
+.portfolio-content [data-align="right"],
+.product-rich-text [data-align="right"] { text-align: right; }
+.portfolio-content span[data-brand-font="sans"],
+.product-rich-text span[data-brand-font="sans"] { font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif; }
+.portfolio-content span[data-brand-font="serif"],
+.product-rich-text span[data-brand-font="serif"] { font-family: Georgia, "Times New Roman", "Noto Serif KR", "Batang", serif; }
+.portfolio-content span[data-brand-font="mono"],
+.product-rich-text span[data-brand-font="mono"] { font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace; }
+.portfolio-content big[data-brand-size],
+.product-rich-text big[data-brand-size] { line-height: 1.45; }
+.portfolio-content big[data-brand-size="14"],
+.product-rich-text big[data-brand-size="14"] { font-size: 14px; }
+.portfolio-content big[data-brand-size="16"],
+.product-rich-text big[data-brand-size="16"] { font-size: 16px; }
+.portfolio-content big[data-brand-size="18"],
+.product-rich-text big[data-brand-size="18"] { font-size: 18px; }
+.portfolio-content big[data-brand-size="24"],
+.product-rich-text big[data-brand-size="24"] { font-size: 24px; }
+.portfolio-content big[data-brand-size="32"],
+.product-rich-text big[data-brand-size="32"] { font-size: 32px; }
+.portfolio-content big[data-brand-size="42"],
+.product-rich-text big[data-brand-size="42"] { font-size: 42px; }
+.portfolio-content section[data-brand-gallery],
+.product-rich-text section[data-brand-gallery] { display: grid; gap: clamp(6px, 1.3vw, 14px); width: 100%; margin: 34px 0; }
+.portfolio-content section[data-brand-gallery="2"],
+.product-rich-text section[data-brand-gallery="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.portfolio-content section[data-brand-gallery="3"],
+.product-rich-text section[data-brand-gallery="3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.portfolio-content section[data-brand-gallery] img,
+.product-rich-text section[data-brand-gallery] img { width: 100%; height: auto; margin: 0; border-radius: var(--radius); }
+.portfolio-content table,
+.product-rich-text table { display: block; overflow-x: auto; width: 100%; margin: 28px 0; border-collapse: collapse; }
+.portfolio-content th,
+.portfolio-content td,
+.product-rich-text th,
+.product-rich-text td { min-width: 110px; padding: 10px 12px; border: 1px solid var(--line); }
+.portfolio-content th,
+.product-rich-text th { background: var(--surface); color: var(--ink); font-weight: 800; }
+.portfolio-content pre,
+.product-rich-text pre { overflow-x: auto; margin: 26px 0; padding: 18px; border-radius: var(--radius); background: #242522; color: #f6f5ef; }
+.portfolio-content code,
+.product-rich-text code { padding: 2px 4px; border-radius: 4px; background: var(--surface); font-family: "SFMono-Regular", Consolas, monospace; font-size: .9em; }
+.portfolio-content pre code,
+.product-rich-text pre code { padding: 0; background: transparent; color: inherit; }
+.portfolio-content li[data-task],
+.product-rich-text li[data-task] { list-style: none; position: relative; }
+.portfolio-content li[data-task] > input,
+.product-rich-text li[data-task] > input { margin-right: 8px; }
+
+@media (max-width: 599px) {
+  .portfolio-content section[data-brand-gallery="3"],
+  .product-rich-text section[data-brand-gallery="3"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .portfolio-content section[data-brand-gallery="3"] > img:last-child:nth-child(odd),
+  .product-rich-text section[data-brand-gallery="3"] > img:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
 
 /* 기존 사례형 UI를 사용하고 싶은 학생 팀을 위한 선택 스타일 */
 .case { border-top: 1px solid var(--line); padding: 28px 0; }
