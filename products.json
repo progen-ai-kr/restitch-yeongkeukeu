@@ -20,10 +20,11 @@
       ],
       "buyLabel": "구매하기",
       "buyLink": "",
+      "buyNotice": "안녕",
       "sections": [
         {
           "type": "rich_text",
-          "body": "<p><img src=\"images/products/look-01/1787721861860-fcbca1cc.jpg\" alt=\"다이널 부클 자수 니트 가디건 스타일 이미지\"></p><p><img src=\"images/products/look-01/1787721864645-dfa7a337.jpg\" alt=\"다이널 부클 자수 니트 가디건 컬러와 상품 설명\"></p><p><img src=\"images/products/look-01/1787721867694-3d3d0607.jpg\" alt=\"다이널 부클 자수 니트 가디건 디테일 포인트\"></p><p><img src=\"images/products/look-01/1787721870841-2a9b9f75.jpg\" alt=\"다이널 부클 자수 니트 가디건 상품 디테일\"></p><p><img src=\"images/products/look-01/1787721874055-2a708341.jpg\" alt=\"다이널 부클 자수 니트 가디건 사이즈와 소재 정보\"></p>"
+          "body": "<p><img src=\"images/products/look-01/1787721861860-fcbca1cc.jpg\" alt=\"다이널 부클 자수 니트 가디건 스타일 이미지\"><br></p><p><img src=\"images/products/look-01/1787721864645-dfa7a337.jpg\" alt=\"다이널 부클 자수 니트 가디건 컬러와 상품 설명\"><br></p><p><img src=\"images/products/look-01/1787721867694-3d3d0607.jpg\" alt=\"다이널 부클 자수 니트 가디건 디테일 포인트\"><br></p><p><img src=\"images/products/look-01/1787721870841-2a9b9f75.jpg\" alt=\"다이널 부클 자수 니트 가디건 상품 디테일\"><br></p><p><img src=\"images/products/look-01/1787721874055-2a708341.jpg\" alt=\"다이널 부클 자수 니트 가디건 사이즈와 소재 정보\"><br></p>"
         }
       ]
     },
@@ -46,6 +47,7 @@
       ],
       "buyLabel": "구매하기",
       "buyLink": "",
+      "buyNotice": "",
       "sections": [
         {
           "type": "rich_text",
@@ -72,6 +74,7 @@
       ],
       "buyLabel": "구매하기",
       "buyLink": "",
+      "buyNotice": "",
       "sections": [
         {
           "type": "rich_text",
