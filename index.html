@@ -9,24 +9,23 @@
   <!-- [작성서 02] 한 줄 소개 → 검색·공유 미리보기에 나오는 설명 -->
   <meta name="description" content="브랜드 한 줄 소개를 여기에 적으세요." />
 
-  <!-- 카톡/인스타 공유 미리보기 (OG 태그) — 브랜드명·소개·대표이미지로 바꾸세요 -->
+  <!-- 카톡/인스타 공유 미리보기 (OG 태그) -->
   <meta property="og:title" content="브랜드 이름" />
   <meta property="og:description" content="브랜드 한 줄 소개" />
-  <meta property="og:image" content="images/og.jpg" />
   <meta property="og:type" content="website" />
 
-  <!-- 탭 아이콘 (images/favicon.png 넣으면 표시됨) -->
-  <link rel="icon" href="images/favicon.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <!-- ===== 상단 메뉴 (5페이지 공통 — 수정하면 모든 페이지에 똑같이 반영하세요) ===== -->
   <header class="nav">
+    <a href="index.html" class="nav-showcase" aria-label="RE:STITCH 홈">
+      <span class="nav-brand" aria-hidden="true">RE:STITCH</span>
+    </a>
     <div class="nav-inner">
-      <a href="index.html" class="logo">BRAND</a>
-      <button class="nav-toggle" aria-label="메뉴 열기">☰</button>
-      <nav class="nav-menu">
+      <button class="nav-toggle" type="button" aria-label="메뉴 열기" aria-controls="site-menu" aria-expanded="false">☰</button>
+      <nav class="nav-menu" id="site-menu">
         <a href="index.html" class="active">홈</a>
         <a href="about.html">브랜드 소개</a>
         <a href="products.html">제품</a>
@@ -36,47 +35,37 @@
     </div>
   </header>
 
-  <!-- ===== 히어로 [작성서 04 홈: 메인 카피·서브 카피] ===== -->
+  <!-- ===== 홈 첫 화면 — 공개 제품 사진 4장을 여백 없이 보여줍니다 ===== -->
   <section class="hero">
-    <p class="eyebrow">BRAND KEYWORD · KEYWORD</p>
-    <h1>메인 카피 (20자 내)</h1>
-    <p>서브 카피 (40자 내) — 브랜드를 소개하는 짧은 문장을 적으세요.</p>
-    <a href="products.html" class="btn">컬렉션 보기</a>
+    <div class="home-image-strip" id="home-image-strip" role="group" aria-label="대표 제품 이미지"></div>
   </section>
 
-  <!-- ===== 강점 3가지 [작성서 04 홈: 강점3가지] ===== -->
-  <section class="section">
-    <p class="eyebrow">WHY US</p>
-    <h2>우리 브랜드의 강점</h2>
-    <div class="features">
-      <div class="feature">
-        <p class="num">01</p>
-        <h3>강점 제목</h3>
-        <p>강점 설명을 적으세요.</p>
-      </div>
-      <div class="feature">
-        <p class="num">02</p>
-        <h3>강점 제목</h3>
-        <p>강점 설명을 적으세요.</p>
-      </div>
-      <div class="feature">
-        <p class="num">03</p>
-        <h3>강점 제목</h3>
-        <p>강점 설명을 적으세요.</p>
-      </div>
+  <!-- ===== 제품 이미지 갤러리 — 글자 없이 가로로 넘겨 볼 수 있습니다 ===== -->
+  <section class="home-gallery" aria-label="제품 이미지 갤러리">
+    <div class="home-gallery-intro">
+      <strong>HERITAGE / REIMAGINED</strong>
+      <span class="home-gallery-rule" aria-hidden="true"></span>
+      <p>Bespoke craftsmanship, reimagined for modern women</p>
     </div>
-  </section>
-
-  <!-- ===== 대표 제품 미리보기 — products.json에서 자동으로 채워짐 ===== -->
-  <section class="section">
-    <p class="eyebrow">COLLECTION</p>
-    <h2>대표 룩</h2>
-    <div class="grid" id="home-looks"></div>
+    <h2 class="home-best-title">BRAND BEST</h2>
+    <div class="home-product-scroll" id="home-product-scroll"></div>
+    <div class="home-next-plan">
+      <h2>NEXT PLAN</h2>
+      <div class="home-next-plan-grid" id="home-next-plan" role="group" aria-label="브랜드의 다음 계획 이미지"></div>
+    </div>
   </section>
 
   <!-- ===== 푸터 (5페이지 공통) [작성서 01: 푸터 표기 정보] ===== -->
   <footer class="footer">
-    <p class="logo">BRAND</p>
+    <p class="logo footer-brand">RE:STITCH</p>
+    <p class="footer-newsletter-copy">최신 정보와 이벤트 혜택을 이메일로 받아보세요.</p>
+    <form class="footer-newsletter" action="mailto:hello@brand.com" method="post" enctype="text/plain">
+      <label>
+        <span class="visually-hidden">이메일 주소</span>
+        <input type="email" name="email" placeholder="Email address" autocomplete="email" required />
+      </label>
+      <button type="submit">SUBSCRIBE</button>
+    </form>
     <p class="biz">
       상호: ○○○ · 대표자: ○○○<br />
       사업자등록번호: 000-00-00000 · 주소: ○○○
@@ -87,25 +76,103 @@
   <script src="script.js"></script>
   <script src="catalog.js"></script>
   <script>
-    // 공개 제품 중 '홈 대표 제품'을 최대 4개 보여줍니다.
+    // 공개 제품 이미지만 사용해 첫 화면 4컷과 가로 스크롤 갤러리를 만듭니다.
     ProductCatalog.loadVisibleProducts()
       .then((products) => {
         const featured = products.filter((product) => product.featured);
-        const homeProducts = (featured.length ? featured : products).slice(0, 4);
-        document.getElementById("home-looks").innerHTML = homeProducts
-          .map((p) => {
-            const image = ProductCatalog.safeImageUrl(p.images && p.images[0]);
-            const img = image
-              ? '<img src="' + ProductCatalog.escapeHtml(image) + '" alt="' + ProductCatalog.escapeHtml(p.name) + '" onerror="this.remove()" />'
-              : "";
+        const imageProducts = (featured.length ? featured : products).filter((product) =>
+          ProductCatalog.safeImageUrl(product.images && product.images[0])
+        );
+
+        if (!imageProducts.length) return;
+
+        // 사진이 4장보다 적으면 앞의 사진을 반복해 항상 4칸을 채웁니다.
+        const stripProducts = [];
+        while (stripProducts.length < 4) {
+          stripProducts.push(imageProducts[stripProducts.length % imageProducts.length]);
+        }
+
+        const imageLink = (product, className, showInfo = false) => {
+          const image = ProductCatalog.safeImageUrl(product.images && product.images[0]);
+          const label = ProductCatalog.escapeHtml(product.label || product.category || "");
+          const name = ProductCatalog.escapeHtml(product.name || "제품");
+          const price = product.price
+            ? '<p class="home-card-price">' + ProductCatalog.escapeHtml(product.price) + '</p>'
+            : "";
+          const info = showInfo
+            ? '<div class="home-card-info"><p class="home-card-label">' + label + '</p>' +
+              '<h3>' + name + '</h3>' + price + '</div>'
+            : "";
+          return (
+            '<a class="' + className + '" href="product.html?id=' + encodeURIComponent(product.id) +
+            '" aria-label="' + name + ' 상세 보기">' +
+            '<img src="' + ProductCatalog.escapeHtml(image) + '" alt="" draggable="false" onerror="this.closest(\'a\').remove()" />' +
+            info +
+            '</a>'
+          );
+        };
+
+        document.getElementById("home-image-strip").innerHTML = stripProducts
+          .map((product) => imageLink(product, "home-strip-image"))
+          .join("");
+
+        document.getElementById("home-next-plan").innerHTML = stripProducts
+          .map((product) => {
+            const image = ProductCatalog.safeImageUrl(product.images && product.images[0]);
             return (
-              '<a class="card" href="product.html?id=' + encodeURIComponent(p.id) + '">' +
-              '<div class="card-img">' + img + "</div>" +
-              '<p class="k">' + ProductCatalog.escapeHtml(p.label || p.category || "") + "</p>" +
-              "<h3>" + ProductCatalog.escapeHtml(p.name) + "</h3></a>"
+              '<figure class="home-next-plan-frame">' +
+              '<img src="' + ProductCatalog.escapeHtml(image) + '" alt="" loading="lazy" draggable="false" ' +
+              'onerror="this.closest(\'figure\').remove()" />' +
+              '</figure>'
             );
           })
           .join("");
+
+        const productScroll = document.getElementById("home-product-scroll");
+        productScroll.innerHTML = imageProducts
+          .map((product) => imageLink(product, "home-scroll-image", true))
+          .join("");
+
+        // PC에서도 제품 사진을 마우스로 잡아 옆으로 넘길 수 있습니다.
+        let isDragging = false;
+        let dragMoved = false;
+        let dragStartX = 0;
+        let dragStartScroll = 0;
+
+        productScroll.addEventListener("pointerdown", (event) => {
+          if (event.pointerType !== "mouse" || event.button !== 0) return;
+          isDragging = true;
+          dragMoved = false;
+          dragStartX = event.clientX;
+          dragStartScroll = productScroll.scrollLeft;
+          productScroll.classList.add("dragging");
+          productScroll.setPointerCapture(event.pointerId);
+        });
+
+        productScroll.addEventListener("pointermove", (event) => {
+          if (!isDragging) return;
+          const distance = dragStartX - event.clientX;
+          if (Math.abs(distance) > 4) dragMoved = true;
+          productScroll.scrollLeft = dragStartScroll + distance;
+        });
+
+        const endDrag = (event) => {
+          if (!isDragging) return;
+          isDragging = false;
+          productScroll.classList.remove("dragging");
+          if (productScroll.hasPointerCapture(event.pointerId)) {
+            productScroll.releasePointerCapture(event.pointerId);
+          }
+          setTimeout(() => { dragMoved = false; }, 0);
+        };
+
+        productScroll.addEventListener("pointerup", endDrag);
+        productScroll.addEventListener("pointercancel", endDrag);
+        productScroll.addEventListener("click", (event) => {
+          if (!dragMoved) return;
+          event.preventDefault();
+          event.stopPropagation();
+        }, true);
       })
       .catch(() => {});
   </script>

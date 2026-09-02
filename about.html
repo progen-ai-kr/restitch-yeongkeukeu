@@ -5,16 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>브랜드 소개 — 브랜드 이름</title>
   <meta name="description" content="브랜드 스토리와 철학을 소개합니다." />
-  <link rel="icon" href="images/favicon.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
   <header class="nav">
+    <a href="index.html" class="nav-showcase" aria-label="RE:STITCH 홈">
+      <span class="nav-brand" aria-hidden="true">RE:STITCH</span>
+    </a>
     <div class="nav-inner">
-      <a href="index.html" class="logo">BRAND</a>
-      <button class="nav-toggle" aria-label="메뉴 열기">☰</button>
-      <nav class="nav-menu">
+      <button class="nav-toggle" type="button" aria-label="메뉴 열기" aria-controls="site-menu" aria-expanded="false">☰</button>
+      <nav class="nav-menu" id="site-menu">
         <a href="index.html">홈</a>
         <a href="about.html" class="active">브랜드 소개</a>
         <a href="products.html">제품</a>
@@ -70,7 +71,15 @@
   </section>
 
   <footer class="footer">
-    <p class="logo">BRAND</p>
+    <p class="logo footer-brand">RE:STITCH</p>
+    <p class="footer-newsletter-copy">최신 정보와 이벤트 혜택을 이메일로 받아보세요.</p>
+    <form class="footer-newsletter" action="mailto:hello@brand.com" method="post" enctype="text/plain">
+      <label>
+        <span class="visually-hidden">이메일 주소</span>
+        <input type="email" name="email" placeholder="Email address" autocomplete="email" required />
+      </label>
+      <button type="submit">SUBSCRIBE</button>
+    </form>
     <p class="biz">
       상호: ○○○ · 대표자: ○○○<br />
       사업자등록번호: 000-00-00000 · 주소: ○○○
