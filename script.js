@@ -3,13 +3,18 @@ const toggle = document.querySelector(".nav-toggle");
 const menu = document.querySelector(".nav-menu");
 
 if (toggle && menu) {
-  toggle.addEventListener("click", () => menu.classList.toggle("open"));
-  // 메뉴 항목을 누르면 자동으로 닫히게
+  toggle.addEventListener("click", () => {
+    const isOpen = menu.classList.toggle("open");
+    toggle.setAttribute("aria-expanded", String(isOpen));
+    toggle.setAttribute("aria-label", isOpen ? "메뉴 닫기" : "메뉴 열기");
+  });
   menu.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => menu.classList.remove("open"));
+    link.addEventListener("click", () => {
+      menu.classList.remove("open");
+      toggle.setAttribute("aria-expanded", "false");
+    });
   });
 }
-
 const wishlistStorageKey = "restitch-wishlist";
 
 function readWishlist() {
