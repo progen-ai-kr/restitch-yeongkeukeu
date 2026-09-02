@@ -761,7 +761,7 @@ a { color: inherit; }
   position: relative;
   overflow: hidden;
   padding: clamp(70px, 12vw, 130px) 22px clamp(62px, 10vw, 105px);
-  background: linear-gradient(135deg, var(--accent), color-mix(in srgb, var(--accent) 70%, var(--teal)));
+  background: linear-gradient(135deg, var(--brown), color-mix(in srgb, var(--brown) 76%, var(--banner-bg)));
   color: var(--pure-white);
 }
 .service-page-head + .site-search-band,
@@ -769,7 +769,7 @@ a { color: inherit; }
 .service-page-head::before,
 .service-page-head::after {
   position: absolute;
-  border: 1px solid color-mix(in srgb, var(--pure-white) 28%, transparent);
+  border: 1px solid color-mix(in srgb, var(--banner-glow) 34%, transparent);
   border-radius: 50%;
   content: "";
 }
@@ -816,14 +816,14 @@ a { color: inherit; }
   display: grid;
   overflow: hidden;
   border-radius: 26px;
-  background: var(--accent);
+  background: color-mix(in srgb, var(--brown) 88%, var(--pure-black));
   color: var(--pure-white);
-  box-shadow: 0 24px 60px color-mix(in srgb, var(--accent) 22%, transparent);
+  box-shadow: 0 24px 60px color-mix(in srgb, var(--brown) 22%, transparent);
 }
-.faq-spotlight-visual { position: relative; min-height: 230px; overflow: hidden; background: color-mix(in srgb, var(--teal) 68%, var(--accent)); }
-.faq-mark { position: absolute; display: grid; border: 1px solid color-mix(in srgb, var(--pure-white) 44%, transparent); border-radius: 50%; font-family: var(--font-brand); place-items: center; }
-.faq-mark-q { top: 24px; left: 10%; width: 150px; height: 150px; background: var(--pure-white); color: var(--accent); font-size: 86px; transform: rotate(-8deg); }
-.faq-mark-a { right: 8%; bottom: 16px; width: 112px; height: 112px; background: color-mix(in srgb, var(--accent) 85%, transparent); color: var(--pure-white); font-size: 58px; transform: rotate(10deg); }
+.faq-spotlight-visual { position: relative; min-height: 230px; overflow: hidden; background: linear-gradient(145deg, var(--banner-glow), var(--banner-bg)); }
+.faq-mark { position: absolute; display: grid; border: 1px solid color-mix(in srgb, var(--brown) 42%, transparent); border-radius: 50%; font-family: var(--font-brand); place-items: center; }
+.faq-mark-q { top: 24px; left: 10%; width: 150px; height: 150px; background: var(--brown); color: var(--bg); font-size: 86px; transform: rotate(-8deg); }
+.faq-mark-a { right: 8%; bottom: 16px; width: 112px; height: 112px; background: var(--teal); color: var(--pure-white); font-size: 58px; transform: rotate(10deg); }
 .faq-spotlight-copy { padding: 38px 26px 40px; }
 .faq-spotlight-copy .eyebrow { color: color-mix(in srgb, var(--pure-white) 70%, transparent); font-size: 11px; letter-spacing: .22em; }
 .faq-spotlight-copy h2 { margin-top: 10px; font-family: var(--font-display); font-size: clamp(30px, 7vw, 50px); line-height: 1.18; }
@@ -832,7 +832,7 @@ a { color: inherit; }
 .faq-topic-list a { padding: 8px 13px; border: 1px solid color-mix(in srgb, var(--pure-white) 30%, transparent); border-radius: 999px; color: var(--pure-white); font-size: 12px; text-decoration: none; }
 .faq-topic-list a:hover,
 .faq-topic-list a:focus-visible { background: var(--pure-white); color: var(--accent); outline: none; }
-.faq-spotlight-link { width: fit-content; min-height: 50px; margin-top: 30px; padding: 13px 20px; display: inline-flex; align-items: center; gap: 16px; border-radius: 999px; background: var(--pure-white); color: var(--accent); font-size: 14px; font-weight: 800; text-decoration: none; }
+.faq-spotlight-link { width: fit-content; min-height: 50px; margin-top: 30px; padding: 13px 20px; display: inline-flex; align-items: center; gap: 16px; border-radius: 999px; background: var(--banner-glow); color: var(--brown); font-size: 14px; font-weight: 800; text-decoration: none; }
 .faq-spotlight-link:hover,
 .faq-spotlight-link:focus-visible { gap: 24px; transform: translateY(-2px); outline: none; }
 
