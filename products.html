@@ -14,28 +14,98 @@
       <span class="nav-brand" aria-hidden="true">RE:STITCH</span>
     </a>
     <div class="nav-inner">
+      <a href="index.html" class="logo" aria-label="RE:STITCH 홈">Re:Stitch</a>
       <button class="nav-toggle" type="button" aria-label="메뉴 열기" aria-controls="site-menu" aria-expanded="false">☰</button>
       <nav class="nav-menu" id="site-menu">
         <a href="index.html">홈</a>
         <a href="about.html">브랜드 소개</a>
         <a href="products.html" class="active">제품</a>
         <a href="portfolio.html">포트폴리오</a>
-        <a href="contact.html">문의</a>
+        <a href="reviews.html">리뷰</a>
+        <a href="contact.html">서비스</a>
       </nav>
+      <div class="nav-actions" aria-label="빠른 메뉴">
+        <button type="button" data-quick-action="search" aria-label="검색" title="검색"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg><span>검색</span></button>
+        <button type="button" data-quick-action="wishlist" aria-label="관심상품" title="관심상품"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.8 5.8a5.5 5.5 0 0 0-7.8 0L12 6.9l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 22l8.8-8.4a5.5 5.5 0 0 0 0-7.8Z"/></svg><span>관심상품</span></button>
+        <button type="button" data-quick-action="login" aria-label="로그인" title="로그인"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></svg><span>로그인</span></button>
+        <button type="button" data-quick-action="cart" aria-label="장바구니" title="장바구니"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 8h14l-1 13H6L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg><span>장바구니</span></button>
+      </div>
     </div>
   </header>
 
   <!-- [작성서 05: 취급 품목] -->
-  <section class="page-head">
-    <h1>제품</h1>
-    <p>취급 품목을 여기에 적으세요. (예: Dress / Jacket / Shirt / Skirt)</p>
+  <section class="page-head product-brand-banner">
+    <h1 class="product-brand-title" aria-label="RE:STITCH">Re:Stitch</h1>
+    <nav class="product-category-links" aria-label="제품군 바로가기">
+      <a href="products.html#products" data-category="all">ALL</a>
+      <a href="products.html?category=dresses#products" data-category="dresses">DRESSES</a>
+      <a href="products.html?category=tops#products" data-category="tops">TOPS</a>
+      <a href="products.html?category=bottoms#products" data-category="bottoms">BOTTOMS</a>
+      <a href="products.html?category=outerwear#products" data-category="outerwear">OUTERWEAR</a>
+    </nav>
+  </section>
+
+  <section class="catalog-search-band" id="catalog-search" aria-label="제품 검색">
+    <form class="catalog-page-search" id="catalog-page-search" role="search">
+      <label class="sr-only" for="catalog-search-input">제품 검색어</label>
+      <input id="catalog-search-input" name="query" type="search" placeholder="제품명, 종류 또는 키워드를 검색하세요" />
+      <button type="submit" aria-label="검색">검색</button>
+    </form>
   </section>
 
   <!-- ===== 제품 목록 =====
        ★ 제품은 여기 HTML이 아니라 products.json 파일에서 관리합니다.
        products.json에 제품을 추가하면 이 목록과 상세 페이지에 자동으로 나타납니다. -->
-  <section class="section">
-    <div class="grid" id="product-list">
+  <section class="section product-showcase" id="products">
+    <div class="product-showcase-head">
+      <p class="eyebrow">ALL PRODUCTS</p>
+      <a class="review-cta" href="reviews.html">착용 리뷰 남기기 <span aria-hidden="true">→</span></a>
+      <p class="product-count" id="product-count" aria-live="polite">제품을 불러오는 중입니다</p>
+    </div>
+    <div class="catalog-toolbar">
+      <button class="catalog-control" id="filter-toggle" type="button" aria-expanded="false" aria-controls="filter-menu">
+        필터하기 <span aria-hidden="true">＋</span>
+      </button>
+      <button class="catalog-control" id="sort-toggle" type="button" aria-expanded="false" aria-controls="sort-menu">
+        정렬하기 <span aria-hidden="true">＋</span>
+      </button>
+
+      <form class="catalog-menu filter-menu" id="filter-menu" hidden>
+        <fieldset>
+          <legend>제품 구분</legend>
+          <label><input type="radio" name="productType" value="all" checked /> 전체</label>
+          <label><input type="radio" name="productType" value="dresses" /> 드레스</label>
+          <label><input type="radio" name="productType" value="tops" /> 상의</label>
+          <label><input type="radio" name="productType" value="bottoms" /> 하의</label>
+          <label><input type="radio" name="productType" value="outerwear" /> 아우터</label>
+        </fieldset>
+        <fieldset class="price-filter">
+          <legend>가격대</legend>
+          <div class="price-values">
+            <output id="min-price-output" for="min-price">50,000원</output>
+            <span aria-hidden="true">—</span>
+            <output id="max-price-output" for="max-price">500,000원</output>
+          </div>
+          <label for="min-price">최소 가격</label>
+          <input id="min-price" type="range" min="50000" max="500000" step="10000" value="50000" />
+          <label for="max-price">최대 가격</label>
+          <input id="max-price" type="range" min="50000" max="500000" step="10000" value="500000" />
+        </fieldset>
+        <div class="filter-actions">
+          <button class="catalog-reset" id="filter-reset" type="button">초기화</button>
+          <button class="catalog-apply" type="submit">제품 보기</button>
+        </div>
+      </form>
+
+      <div class="catalog-menu sort-menu" id="sort-menu" role="menu" hidden>
+        <button type="button" role="menuitemradio" aria-checked="true" data-sort="default">기본순</button>
+        <button type="button" role="menuitemradio" aria-checked="false" data-sort="popular">인기순</button>
+        <button type="button" role="menuitemradio" aria-checked="false" data-sort="price-low">낮은 가격순</button>
+        <button type="button" role="menuitemradio" aria-checked="false" data-sort="price-high">높은 가격순</button>
+        <button type="button" role="menuitemradio" aria-checked="false" data-sort="latest">최신순</button>
+      </div>
+    </div>
+    <div class="grid product-grid" id="product-list">
       <!-- products.json 내용이 자동으로 채워집니다 -->
     </div>
   </section>
@@ -51,7 +121,7 @@
       <button type="submit">SUBSCRIBE</button>
     </form>
     <p class="biz">
-      상호: ○○○ · 대표자: ○○○<br />
+      상호: RE:STITCH · 대표자: 이지언<br />
       사업자등록번호: 000-00-00000 · 주소: ○○○
     </p>
     <p>© 브랜드 이름. All rights reserved.</p>
@@ -60,30 +130,202 @@
   <script src="script.js"></script>
   <script src="catalog.js?v=20260826-rich-editor-1"></script>
   <script>
-    // 공개된 products.json 제품을 카드로 그립니다. 학생은 CSS로 자유롭게 디자인할 수 있습니다.
+    // 필터와 정렬은 products.json 원본을 바꾸지 않고 현재 화면에만 적용됩니다.
+    const productBox = document.getElementById("product-list");
+    const productCount = document.getElementById("product-count");
+    const filterToggle = document.getElementById("filter-toggle");
+    const sortToggle = document.getElementById("sort-toggle");
+    const filterMenu = document.getElementById("filter-menu");
+    const sortMenu = document.getElementById("sort-menu");
+    const minPrice = document.getElementById("min-price");
+    const maxPrice = document.getElementById("max-price");
+    const minPriceOutput = document.getElementById("min-price-output");
+    const maxPriceOutput = document.getElementById("max-price-output");
+    const catalogSearchForm = document.getElementById("catalog-page-search");
+    const catalogSearchInput = document.getElementById("catalog-search-input");
+    const categoryParam = new URLSearchParams(window.location.search).get("category");
+    const allowedCategories = ["dresses", "tops", "bottoms", "outerwear"];
+    const initialProductType = allowedCategories.includes(categoryParam) ? categoryParam : "all";
+    let allProducts = [];
+    let selectedSort = "default";
+    let activeFilters = { productType: initialProductType, min: 50000, max: 500000 };
+    const queryParam = new URLSearchParams(window.location.search).get("query") || "";
+    let searchQuery = queryParam.trim().toLowerCase();
+    if (queryParam) catalogSearchInput.value = queryParam;
+
+    // 상단 제품군 링크로 들어오면 해당 필터를 바로 선택해 제품 목록에 적용합니다.
+    filterMenu.elements.productType.value = initialProductType;
+    const activeCategoryLink = document.querySelector('[data-category="' + initialProductType + '"]');
+    if (activeCategoryLink) activeCategoryLink.setAttribute("aria-current", "page");
+
+    function parsePrice(value) {
+      const number = Number(String(value || "").replace(/[^0-9]/g, ""));
+      return Number.isFinite(number) && number > 0 ? number : null;
+    }
+
+    function getProductType(product) {
+      const words = [product.name, product.label, product.category]
+        .concat(Array.isArray(product.keywords) ? product.keywords : [])
+        .join(" ")
+        .toLowerCase();
+      // 제품명·라벨·카테고리의 한글과 영문을 함께 확인해 제품군을 자동 분류합니다.
+      if (/아우터|재킷|자켓|코트|가디건|점퍼|블레이저|패딩|트렌치|(^|[^a-z])(outerwear|jacket|coat|cardigan|jumper|blazer|padding|trench)([^a-z]|$)/.test(words)) return "outerwear";
+      if (/드레스|원피스|(^|[^a-z])(dress|dresses|gown|onepiece)([^a-z]|$)/.test(words)) return "dresses";
+      if (/하의|바지|청바지|데님|스커트|치마|반바지|(^|[^a-z])(bottoms|pants|trousers|jeans|denim|skirt|shorts)([^a-z]|$)/.test(words)) return "bottoms";
+      if (/상의|티셔츠|셔츠|블라우스|니트|스웨터|후디|후드|맨투맨|(^|[^a-z])(tops|top|t-shirt|shirt|blouse|knit|sweater|hoodie|sweatshirt)([^a-z]|$)/.test(words)) return "tops";
+      return "all";
+    }
+
+    function renderProducts() {
+      const priceFilterActive = activeFilters.min > 50000 || activeFilters.max < 500000;
+      const products = allProducts
+        .map((product, index) => ({ product, index, priceNumber: parsePrice(product.price) }))
+        .filter((item) => {
+          const productTypeMatches = activeFilters.productType === "all" || getProductType(item.product) === activeFilters.productType;
+          const priceMatches = !priceFilterActive || (item.priceNumber !== null && item.priceNumber >= activeFilters.min && item.priceNumber <= activeFilters.max);
+          const searchWords = [item.product.name, item.product.label, item.product.category]
+            .concat(Array.isArray(item.product.keywords) ? item.product.keywords : [])
+            .join(" ")
+            .toLowerCase();
+          const searchMatches = !searchQuery || searchWords.includes(searchQuery);
+          return productTypeMatches && priceMatches && searchMatches;
+        });
+
+      if (selectedSort === "popular") {
+        products.sort((a, b) => Number(Boolean(b.product.featured)) - Number(Boolean(a.product.featured)) || a.index - b.index);
+      } else if (selectedSort === "price-low") {
+        products.sort((a, b) => (a.priceNumber ?? Infinity) - (b.priceNumber ?? Infinity) || a.index - b.index);
+      } else if (selectedSort === "price-high") {
+        products.sort((a, b) => (b.priceNumber ?? -1) - (a.priceNumber ?? -1) || a.index - b.index);
+      } else if (selectedSort === "latest") {
+        products.sort((a, b) => b.index - a.index);
+      }
+
+      productCount.textContent = "총 " + products.length + "개 제품";
+      if (!products.length) {
+        productBox.innerHTML = '<p class="product-empty">조건에 맞는 제품이 없습니다.</p>';
+        return;
+      }
+
+      productBox.innerHTML = products
+        .map(({ product: p }) => {
+          const image = ProductCatalog.safeImageUrl(p.images && p.images[0]);
+          const img = image
+            ? '<img src="' + ProductCatalog.escapeHtml(image) + '" alt="' + ProductCatalog.escapeHtml(p.name) + '" loading="lazy" decoding="async" onerror="this.remove()" />'
+            : "";
+          const price = p.price ? '<p class="price">' + ProductCatalog.escapeHtml(p.price) + "</p>" : "";
+          return (
+            '<article class="product-card-wrap">' +
+              '<a class="card" href="product.html?id=' + encodeURIComponent(p.id) + '">' +
+                '<div class="card-img">' + img + "</div>" +
+                '<p class="k">' + ProductCatalog.escapeHtml(p.label || p.category || "") + "</p>" +
+                "<h3>" + ProductCatalog.escapeHtml(p.name) + "</h3>" +
+                "<p>" + ProductCatalog.escapeHtml(p.summary || "") + "</p>" + price +
+              "</a>" +
+              '<button class="card-wishlist" type="button" data-wishlist-toggle data-product-id="' + ProductCatalog.escapeHtml(p.id) +
+                '" data-product-name="' + ProductCatalog.escapeHtml(p.name) + '" aria-pressed="false" aria-label="좋아요 표시">' +
+                '<span data-wishlist-icon aria-hidden="true">♡</span>' +
+              "</button>" +
+            "</article>"
+          );
+        })
+        .join("");
+      if (typeof syncWishlistButtons === "function") syncWishlistButtons();
+    }
+
+    function setMenu(button, menu, open) {
+      button.setAttribute("aria-expanded", String(open));
+      button.querySelector("span").textContent = open ? "−" : "＋";
+      menu.hidden = !open;
+    }
+
+    function formatPrice(value) {
+      return Number(value).toLocaleString("ko-KR") + "원";
+    }
+
+    function updatePriceOutputs(changedInput) {
+      if (Number(minPrice.value) > Number(maxPrice.value)) {
+        if (changedInput === minPrice) maxPrice.value = minPrice.value;
+        else minPrice.value = maxPrice.value;
+      }
+      minPriceOutput.textContent = formatPrice(minPrice.value);
+      maxPriceOutput.textContent = formatPrice(maxPrice.value);
+    }
+
+    filterToggle.addEventListener("click", () => {
+      const willOpen = filterMenu.hidden;
+      setMenu(sortToggle, sortMenu, false);
+      setMenu(filterToggle, filterMenu, willOpen);
+    });
+
+    sortToggle.addEventListener("click", () => {
+      const willOpen = sortMenu.hidden;
+      setMenu(filterToggle, filterMenu, false);
+      setMenu(sortToggle, sortMenu, willOpen);
+    });
+
+    minPrice.addEventListener("input", () => updatePriceOutputs(minPrice));
+    maxPrice.addEventListener("input", () => updatePriceOutputs(maxPrice));
+
+    catalogSearchForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      searchQuery = catalogSearchInput.value.trim().toLowerCase();
+      renderProducts();
+    });
+
+    catalogSearchInput.addEventListener("input", () => {
+      if (catalogSearchInput.value) return;
+      searchQuery = "";
+      renderProducts();
+    });
+
+    filterMenu.addEventListener("submit", (event) => {
+      event.preventDefault();
+      activeFilters = {
+        productType: filterMenu.elements.productType.value,
+        min: Number(minPrice.value),
+        max: Number(maxPrice.value)
+      };
+      renderProducts();
+      setMenu(filterToggle, filterMenu, false);
+    });
+
+    document.getElementById("filter-reset").addEventListener("click", () => {
+      filterMenu.reset();
+      minPrice.value = "50000";
+      maxPrice.value = "500000";
+      activeFilters = { productType: "all", min: 50000, max: 500000 };
+      updatePriceOutputs();
+      renderProducts();
+    });
+
+    sortMenu.addEventListener("click", (event) => {
+      const option = event.target.closest("[data-sort]");
+      if (!option) return;
+      selectedSort = option.dataset.sort;
+      sortMenu.querySelectorAll("[data-sort]").forEach((button) => {
+        button.setAttribute("aria-checked", String(button === option));
+      });
+      sortToggle.firstChild.textContent = option.textContent + " ";
+      renderProducts();
+      setMenu(sortToggle, sortMenu, false);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      setMenu(filterToggle, filterMenu, false);
+      setMenu(sortToggle, sortMenu, false);
+    });
+
+    // 공개된 products.json 제품을 카드로 그립니다.
     ProductCatalog.loadVisibleProducts()
       .then((products) => {
-        const box = document.getElementById("product-list");
-        box.innerHTML = products
-          .map((p) => {
-            const image = ProductCatalog.safeImageUrl(p.images && p.images[0]);
-            const img = image
-              ? '<img src="' + ProductCatalog.escapeHtml(image) + '" alt="' + ProductCatalog.escapeHtml(p.name) + '" onerror="this.remove()" />'
-              : "";
-            const price = p.price ? '<p class="price">' + ProductCatalog.escapeHtml(p.price) + "</p>" : "";
-            return (
-              '<a class="card" href="product.html?id=' + encodeURIComponent(p.id) + '">' +
-              '<div class="card-img">' + img + "</div>" +
-              '<p class="k">' + ProductCatalog.escapeHtml(p.label || p.category || "") + "</p>" +
-              "<h3>" + ProductCatalog.escapeHtml(p.name) + "</h3>" +
-              "<p>" + ProductCatalog.escapeHtml(p.summary || "") + "</p>" + price +
-              "</a>"
-            );
-          })
-          .join("");
+        allProducts = products;
+        renderProducts();
       })
       .catch(() => {
-        document.getElementById("product-list").innerHTML =
+        productCount.textContent = "제품을 불러오지 못했습니다";
+        productBox.innerHTML =
           "<p>제품을 불러오지 못했습니다. 로컬에서는 npx serve 로 미리보기 하세요.</p>";
       });
   </script>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>착용 리뷰 | Re:Stitch</title><link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo" aria-label="RE:STITCH 홈">Re:Stitch</a>
+      <button class="nav-toggle" aria-label="메뉴 열기">☰</button>
+      <nav class="nav-menu"><a href="index.html">홈</a><a href="about.html">브랜드 소개</a><a href="products.html">제품</a><a href="portfolio.html">포트폴리오</a><a href="reviews.html" class="active">리뷰</a><a href="contact.html">서비스</a></nav>
+      <div class="nav-actions" aria-label="빠른 메뉴">
+        <button type="button" data-quick-action="search" aria-label="검색" title="검색"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg><span>검색</span></button>
+        <button type="button" data-quick-action="wishlist" aria-label="관심상품" title="관심상품"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.8 5.8a5.5 5.5 0 0 0-7.8 0L12 6.9l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 22l8.8-8.4a5.5 5.5 0 0 0 0-7.8Z"/></svg><span>관심상품</span></button>
+        <button type="button" data-quick-action="login" aria-label="로그인" title="로그인"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></svg><span>로그인</span></button>
+        <button type="button" data-quick-action="cart" aria-label="장바구니" title="장바구니"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 8h14l-1 13H6L5 8Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg><span>장바구니</span></button>
+      </div>
+    </div>
+  </header>
+  <main class="review-page">
+    <header class="review-page-head brand-banner"><p class="eyebrow">SNAP REVIEW</p><h1>착용 리뷰</h1><p>내 사이즈에 맞는 Re:Stitch 스타일을 공유해 주세요.</p></header>
+    <section class="review-layout"><div class="review-snap-gallery"><div class="review-snap-placeholder">SNAP<br><span>YOUR STYLE</span></div><div class="review-snap-placeholder">RE:STITCH<br><span>ON YOU</span></div><div class="review-snap-placeholder">SHARE<br><span>THE FIT</span></div></div>
+      <form class="review-form" id="reviewForm"><div class="review-product-label">리뷰 제품<strong id="reviewProductName">제품을 선택해 주세요</strong></div><label>스냅 사진<input type="file" accept="image/*"><span class="review-file-help">JPG, PNG · 최대 10MB</span></label><div class="review-fields"><label>키 (cm)<input type="number" placeholder="예: 172"></label><label>몸무게 (kg)<input type="number" placeholder="예: 60"></label></div><div class="review-fields"><label>구매 사이즈<select><option>선택</option><option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>FREE</option></select></label><label>평점<select><option>선택</option><option>★★★★★</option><option>★★★★☆</option><option>★★★☆☆</option></select></label></div><label>한 줄 후기<textarea rows="4" maxlength="300" placeholder="핏과 사이즈감을 자유롭게 남겨주세요."></textarea><label class="review-check"><input type="checkbox" required> 다른 고객에게 공개되는 리뷰임을 확인했습니다.</label><button class="btn review-submit" type="submit">리뷰 등록하기</button><p id="reviewStatus" class="review-status" aria-live="polite"></p></form>
+    </section>
+  </main>
+  <footer class="footer"><p class="logo">RE:STITCH</p><p class="biz">상호: RE:STITCH · 대표자: 이지언</p><p>© RE:STITCH. All rights reserved.</p></footer>
+  <script src="script.js"></script><script>
+    const id=new URLSearchParams(location.search).get("product"); if(id) fetch("products.json").then(r=>r.json()).then(items=>{const p=items.find(x=>String(x.id)===id);if(p)document.getElementById("reviewProductName").textContent=p.name;}).catch(()=>{});
+    document.getElementById("reviewForm").addEventListener("submit",e=>{e.preventDefault();document.getElementById("reviewStatus").textContent="리뷰가 등록되었습니다. 검토 후 공개됩니다.";e.currentTarget.reset();});
+  </script>
+</body></html>
