@@ -235,8 +235,8 @@ if (new URLSearchParams(window.location.search).get("dialog") === "search" &&
   requestAnimationFrame(() => window.openRestitchQuickDialog("search"));
 }
 
-// 각 주요 페이지의 배너 아래에도 제품 검색창을 배치합니다.
-const siteSearchBanner = document.querySelector(".hero, .page-head");
+// 홈을 제외한 주요 페이지의 배너 아래에 제품 검색창을 배치합니다.
+const siteSearchBanner = document.querySelector(".hero:not(.home-hero), .page-head");
 if (siteSearchBanner && !document.getElementById("catalog-search")) {
   const siteSearchBand = document.createElement("section");
   siteSearchBand.className = "catalog-search-band site-search-band";

@@ -15,7 +15,7 @@
   <meta property="og:image" content="images/og.jpg" />
   <meta property="og:type" content="website" />
 
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20260904-logo-font-1" />
 </head>
 <body>
 
@@ -25,7 +25,7 @@
       <span class="nav-brand" aria-hidden="true">RE:STITCH</span>
     </a>
     <div class="nav-inner">
-      <a href="index.html" class="logo" aria-label="RE:STITCH 홈">Re:Stitch</a>
+      <a href="index.html" class="logo" aria-label="RE:STITCH 홈">RE:STITCH</a>
       <button class="nav-toggle" type="button" aria-label="메뉴 열기" aria-controls="site-menu" aria-expanded="false">☰</button>
       <nav class="nav-menu" id="site-menu">
         <a href="index.html" class="active">홈</a>
@@ -44,18 +44,14 @@
     </div>
   </header>
 
-  <!-- ===== 히어로 [작성서 04] 카피와 공개 제품 사진을 함께 보여줍니다 ===== -->
+  <!-- ===== 히어로 [작성서 04] 지정 대표 사진과 컬렉션 이동 버튼을 보여줍니다 ===== -->
   <section class="hero home-hero">
-    <div class="home-image-strip" id="home-image-strip" role="group" aria-label="대표 제품 이미지"></div>
     <div class="home-hero-copy">
-      <p class="eyebrow">HERITAGE · REIMAGINED</p>
-      <h1 class="brand-heading"><span class="brand-script">Welcome to Re:Stitch</span></h1>
-      <p class="brand-tagline">시간의 아름다움을 오늘의 옷으로 다시 잇습니다.</p>
       <a href="products.html" class="btn">컬렉션 보기 <span aria-hidden="true">→</span></a>
     </div>
   </section>
 
-  <!-- ===== 제품 이미지 갤러리 — 글자 없이 가로로 넘겨 볼 수 있습니다 ===== -->
+  <!-- ===== 제품 이미지 갤러리 — 큰 사진을 좌우 지그재그로 보여줍니다 ===== -->
   <section class="home-gallery" aria-label="제품 이미지 갤러리">
     <div class="home-gallery-intro">
       <strong>HERITAGE / REIMAGINED</strong>
@@ -127,10 +123,6 @@
           );
         };
 
-        document.getElementById("home-image-strip").innerHTML = stripProducts
-          .map((product) => imageLink(product, "home-strip-image"))
-          .join("");
-
         document.getElementById("home-next-plan").innerHTML = stripProducts
           .map((product) => {
             const image = ProductCatalog.safeImageUrl(product.images && product.images[0]);
@@ -147,47 +139,6 @@
         productScroll.innerHTML = imageProducts
           .map((product) => imageLink(product, "home-scroll-image", true))
           .join("");
-
-        // PC에서도 제품 사진을 마우스로 잡아 옆으로 넘길 수 있습니다.
-        let isDragging = false;
-        let dragMoved = false;
-        let dragStartX = 0;
-        let dragStartScroll = 0;
-
-        productScroll.addEventListener("pointerdown", (event) => {
-          if (event.pointerType !== "mouse" || event.button !== 0) return;
-          isDragging = true;
-          dragMoved = false;
-          dragStartX = event.clientX;
-          dragStartScroll = productScroll.scrollLeft;
-          productScroll.classList.add("dragging");
-          productScroll.setPointerCapture(event.pointerId);
-        });
-
-        productScroll.addEventListener("pointermove", (event) => {
-          if (!isDragging) return;
-          const distance = dragStartX - event.clientX;
-          if (Math.abs(distance) > 4) dragMoved = true;
-          productScroll.scrollLeft = dragStartScroll + distance;
-        });
-
-        const endDrag = (event) => {
-          if (!isDragging) return;
-          isDragging = false;
-          productScroll.classList.remove("dragging");
-          if (productScroll.hasPointerCapture(event.pointerId)) {
-            productScroll.releasePointerCapture(event.pointerId);
-          }
-          setTimeout(() => { dragMoved = false; }, 0);
-        };
-
-        productScroll.addEventListener("pointerup", endDrag);
-        productScroll.addEventListener("pointercancel", endDrag);
-        productScroll.addEventListener("click", (event) => {
-          if (!dragMoved) return;
-          event.preventDefault();
-          event.stopPropagation();
-        }, true);
       })
       .catch(() => {});
   </script>
