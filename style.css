@@ -3,8 +3,8 @@
    (예: RE:STITCH → --bg:#F7F4EE; --ink:#111; --accent:#0E5A5A;)
    ========================================================== */
 :root {
-  --bg: #f7f3e8;        /* 아이보리 페이지 배경 */
-  --surface: #eee8dc;   /* 따뜻한 아이보리 카드 배경 */
+  --bg: #ffffff;        /* 모든 공개 화면의 흰색 기본 배경 */
+  --surface: #ffffff;   /* 카드·패널도 흰색 베이스로 통일 */
   --ink: #111111;       /* 기본 글자색 */
   --ink-soft: #394354;  /* 보조 글자색 */
   --accent: #0b1f3a;    /* 딥 네이비 버튼·포인트 */
@@ -13,8 +13,8 @@
   --line: #d8d0c1;      /* 테두리 선 */
   --pure-white: #ffffff;
   --pure-black: #050505;
-  --banner-bg: #d9c8ad; /* 에나멜 다이얼을 닮은 따뜻한 베이지 */
-  --banner-glow: #f3ecdf;
+  --banner-bg: #ffffff; /* 페이지 상단 배너도 흰색 베이스로 통일 */
+  --banner-glow: #ffffff;
   --faq-accent: #b52d3f; /* FAQ 선택 항목 밑줄 */
 
   --font-main: -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
@@ -38,7 +38,7 @@ a { color: inherit; }
 /* ===== 상단 메뉴 (모바일: 햄버거) ===== */
 .nav { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--bg) 92%, white); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
 .nav-inner { max-width: var(--maxw); min-height: 62px; margin: 0 auto; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; position: relative; }
-.logo { font-family: var(--font-display); font-weight: 800; letter-spacing: 2px; text-decoration: none; font-size: 19px; }
+.logo { font-family: var(--font-brand); font-weight: 500; letter-spacing: .08em; text-decoration: none; font-size: 19px; }
 .nav .logo { position: absolute; left: 56px; font-family: var(--font-script); font-size: 25px; font-weight: 400; line-height: 1; letter-spacing: .01em; white-space: nowrap; }
 .nav-toggle { background: none; border: 0; font-size: 26px; line-height: 1; cursor: pointer; color: var(--ink); padding: 4px 8px; }
 .nav-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; background: var(--bg); border-bottom: 1px solid var(--line); padding: 8px 20px 16px; }
@@ -105,7 +105,7 @@ a { color: inherit; }
 .quick-wishlist { display: grid; gap: 8px; }
 
 /* 상단 전용 검색 창 */
-.quick-dialog[data-view="search"] { width: min(calc(100% - 28px), 620px); border-radius: 2px; background: #fbfaf7; }
+.quick-dialog[data-view="search"] { width: min(calc(100% - 28px), 620px); border-radius: 2px; background: var(--bg); }
 .quick-dialog[data-view="search"] .quick-dialog-card { padding: clamp(26px, 5vw, 44px); }
 .quick-dialog[data-view="search"] .quick-dialog-eyebrow { letter-spacing: .28em; }
 .quick-dialog[data-view="search"] .quick-dialog-header h2 { margin-top: 8px; font-family: var(--font-elegant-ko); font-size: clamp(27px, 5vw, 36px); font-weight: 400; }
@@ -215,12 +215,12 @@ a { color: inherit; }
 .hero p { color: var(--ink-soft); max-width: 560px; }
 
 /* ===== 상단 브랜드 비주얼과 호버 메뉴 ===== */
-.nav { position: relative; z-index: 20; background: var(--pure-black); }
-.nav-showcase { position: relative; display: block; height: clamp(240px, 42vw, 520px); overflow: hidden; background: var(--pure-black); text-decoration: none; }
+.nav { position: relative; z-index: 20; background: var(--bg); }
+.nav-showcase { position: relative; display: block; height: clamp(240px, 42vw, 520px); overflow: hidden; background: var(--bg); text-decoration: none; }
 .nav-showcase::before { position: absolute; inset: 0 auto 0 50%; width: min(100%, clamp(240px, 42vw, 520px)); background: url("images/restitch-hero.jpg") center / cover no-repeat; content: ""; transform: translateX(-50%); -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 24%, #000 76%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0%, #000 24%, #000 76%, transparent 100%); }
 .nav-brand { position: absolute; z-index: 2; top: clamp(20px, 3vw, 38px); left: 50%; color: var(--pure-white); font-family: var(--font-brand); font-size: clamp(23px, 3.4vw, 40px); font-weight: 500; letter-spacing: .08em; line-height: 1; text-shadow: 0 2px 18px rgba(0,0,0,.72); transform: translateX(-50%); white-space: nowrap; }
 .nav-inner { position: absolute; inset: 0; display: flex; align-items: flex-start; justify-content: flex-end; pointer-events: none; }
-.logo { font-family: var(--font-display); font-weight: 800; letter-spacing: 2px; text-decoration: none; font-size: 19px; }
+.logo { font-family: var(--font-brand); font-weight: 500; letter-spacing: .08em; text-decoration: none; font-size: 19px; }
 .nav-toggle { position: relative; z-index: 5; min-width: 48px; min-height: 48px; margin: 14px auto 0 14px; padding: 0 8px 7px; background: rgba(5,5,5,.66); border: 0; color: var(--pure-white); font-family: Arial, sans-serif; font-size: 32px; font-weight: 300; line-height: 1; cursor: pointer; pointer-events: auto; backdrop-filter: blur(8px); }
 .nav-menu { position: absolute; z-index: 4; top: 0; left: 0; display: flex; overflow-y: auto; width: min(82vw, 320px); height: min(100dvh, 390px); min-height: 100%; flex-direction: column; justify-content: flex-start; padding: 74px 28px 24px; background: rgba(5,5,5,.84); border-right: 1px solid rgba(255,255,255,.2); opacity: 0; visibility: hidden; transform: translateX(-100%); transition: opacity .25s ease, transform .3s ease, visibility .3s; pointer-events: none; backdrop-filter: blur(14px); }
 .nav-menu.open,
@@ -231,30 +231,22 @@ a { color: inherit; }
 .nav-menu a { text-decoration: none; color: rgba(255,255,255,.78); font-size: 16px; padding: 11px 0; border-top: 1px solid rgba(255,255,255,.18); }
 .nav-menu a.active, .nav-menu a:hover { color: var(--pure-white); }
 
-/* ===== 홈 4컷 이미지와 가로 스크롤 갤러리 ===== */
-.hero { overflow: hidden; background: var(--pure-black); }
-.home-image-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.home-strip-image { display: block; min-width: 0; aspect-ratio: 3 / 4; overflow: hidden; }
-.home-strip-image img,
+/* ===== 홈 제품 이미지 갤러리 ===== */
+.hero { overflow: hidden; background: var(--bg); }
 .home-scroll-image img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s ease; }
-.home-strip-image:hover img,
 .home-scroll-image:hover img { transform: scale(1.025); }
 .home-gallery { overflow: hidden; background: var(--pure-white); padding: clamp(84px, 11.5vw, 150px) 0 clamp(84px, 11vw, 140px); }
 .home-gallery-intro { display: grid; width: min(calc(100% - 44px), var(--maxw)); margin: 0 auto clamp(80px, 10vw, 128px); align-items: center; justify-items: center; gap: 24px; color: var(--pure-black); text-align: center; }
 .home-gallery-intro strong { font-family: var(--font-brand); font-size: clamp(18px, 3.2vw, 32px); font-weight: 600; letter-spacing: .06em; white-space: nowrap; }
 .home-gallery-intro p { font-family: var(--font-brand); font-size: clamp(17px, 2.4vw, 25px); line-height: 1.35; }
 .home-gallery-rule { width: min(80vw, 740px); height: 3px; background: radial-gradient(circle, var(--pure-black) 1px, transparent 1.3px) 0 50% / 9px 3px repeat-x; }
-.home-best-title { width: min(calc(100% - 44px), var(--maxw)); margin: 0 auto 32px; color: var(--brown); font-family: var(--font-brand); font-size: clamp(38px, 7vw, 76px); font-weight: 600; letter-spacing: .04em; line-height: 1; text-align: left; }
-.home-best-title::after { display: block; width: 100%; height: 1px; margin-top: 20px; background: var(--teal); content: ""; }
-.home-product-scroll { display: flex; overflow-x: auto; cursor: grab; scroll-snap-type: x mandatory; overscroll-behavior-inline: contain; scrollbar-width: none; touch-action: pan-x pan-y; user-select: none; -webkit-overflow-scrolling: touch; }
-.home-product-scroll::-webkit-scrollbar { display: none; }
-.home-product-scroll.dragging { cursor: grabbing; scroll-snap-type: none; }
-.home-scroll-image { position: relative; flex: 0 0 78vw; max-width: 520px; aspect-ratio: 3 / 4; overflow: hidden; scroll-snap-align: start; }
-.home-scroll-image img { -webkit-user-drag: none; }
-.home-card-info { position: absolute; right: 0; bottom: 0; left: 0; padding: 20px 22px 22px; background: rgba(247,243,232,.94); color: var(--pure-black); opacity: 0; transform: translateY(102%); transition: opacity .24s ease, transform .28s ease; pointer-events: none; backdrop-filter: blur(10px); }
-.home-scroll-image:hover .home-card-info,
-.home-scroll-image:focus-visible .home-card-info { opacity: 1; transform: translateY(0); }
-.home-scroll-image:focus-visible { outline: 3px solid var(--teal); outline-offset: -3px; }
+.home-best-title { width: min(calc(100% - 44px), var(--maxw)); margin: 0 auto clamp(42px, 8vw, 84px); color: var(--brown); font-family: var(--font-brand); font-size: clamp(38px, 7vw, 76px); font-weight: 600; letter-spacing: .04em; line-height: 1; text-align: center; }
+.home-product-scroll { display: grid; width: 100%; gap: clamp(68px, 18vw, 110px); padding: 0 16px; }
+.home-scroll-image { position: relative; display: grid; width: min(88vw, 520px); max-width: 100%; color: var(--ink); text-decoration: none; justify-self: start; }
+.home-scroll-image:nth-child(even) { justify-self: end; }
+.home-scroll-image > img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; -webkit-user-drag: none; }
+.home-card-info { padding: 18px 2px 0; background: transparent; color: var(--pure-black); opacity: 1; transform: none; transition: opacity .28s ease, transform .28s ease; }
+.home-scroll-image:focus-visible { outline: 3px solid var(--teal); outline-offset: 5px; }
 .home-card-label { color: var(--teal); font-size: 11px; letter-spacing: .14em; }
 .home-card-info h3 { margin-top: 4px; font-size: clamp(17px, 2vw, 22px); line-height: 1.35; }
 .home-card-price { margin-top: 5px; font-size: 14px; font-weight: 700; }
@@ -538,7 +530,7 @@ a { color: inherit; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; margin: -1px; padding: 0; border: 0; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* ===== 로그인 · 계정 생성 ===== */
-.auth-page { min-height: calc(100vh - 62px); padding: 0 18px 80px; background: #f8f8f8; }
+.auth-page { min-height: calc(100vh - 62px); padding: 0 18px 80px; background: var(--bg); }
 .auth-switch { min-height: 84px; margin-inline: -18px; display: flex; align-items: center; justify-content: center; gap: clamp(28px, 6vw, 64px); border-bottom: 1px solid var(--line); background: var(--bg); }
 .auth-switch a { display: inline-flex; align-items: center; padding: 5px 0; border-bottom: 1px solid transparent; color: var(--ink-soft); font-family: "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; font-size: clamp(13px, 2vw, 16px); font-weight: 400; line-height: 1.4; letter-spacing: -.025em; text-decoration: none; }
 .auth-switch a:hover, .auth-switch a:focus-visible { color: var(--ink); border-bottom-color: var(--ink); outline: 0; }
@@ -585,7 +577,14 @@ a { color: inherit; }
   .floating-search { right: 28px; bottom: 28px; }
   .floating-quick-menu { right: 28px; bottom: 96px; }
   .product-category-links { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-  .home-scroll-image { flex-basis: 36vw; max-width: 600px; }
+  .home-product-scroll { width: min(calc(100% - 64px), 1180px); gap: clamp(100px, 13vw, 170px); padding: 0; margin: 0 auto; }
+  .home-scroll-image { width: 100%; max-width: none; grid-template-columns: minmax(0, 1.9fr) minmax(220px, .85fr); align-items: center; gap: clamp(36px, 6vw, 84px); }
+  .home-scroll-image:nth-child(even) { grid-template-columns: minmax(220px, .85fr) minmax(0, 1.9fr); }
+  .home-scroll-image:nth-child(even) > img { order: 2; }
+  .home-scroll-image:nth-child(even) .home-card-info { order: 1; text-align: right; transform: translateX(18px); }
+  .home-card-info { padding: 28px 0; opacity: 0; transform: translateX(-18px); }
+  .home-scroll-image:hover .home-card-info,
+  .home-scroll-image:focus-visible .home-card-info { opacity: 1; transform: translateX(0); }
   .home-next-plan-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 28px); }
   .section { padding: 80px 24px; }
   .grid { grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 22px; }
@@ -663,8 +662,8 @@ a { color: inherit; }
   color: var(--ink);
   font-family: var(--font-brand);
   font-size: 21px;
-  font-weight: 600;
-  letter-spacing: .02em;
+  font-weight: 500;
+  letter-spacing: .08em;
   transform: none;
 }
 .nav-toggle {
@@ -732,7 +731,7 @@ a { color: inherit; }
   min-height: clamp(580px, 82vh, 820px);
   padding: 0;
   overflow: hidden;
-  background: var(--pure-black) url("images/restitch-hero.jpg") center / cover no-repeat;
+  background: var(--pure-black) url("images/restitch-home-hero.jpg") center / cover no-repeat;
 }
 .home-hero::after {
   position: absolute;
@@ -741,20 +740,18 @@ a { color: inherit; }
   background: linear-gradient(180deg, color-mix(in srgb, var(--pure-black) 12%, transparent), color-mix(in srgb, var(--pure-black) 72%, transparent));
   content: "";
 }
-.home-hero .home-image-strip { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; }
-.home-hero .home-strip-image { aspect-ratio: auto; height: 100%; }
 .home-hero-copy {
-  width: min(calc(100% - 40px), 760px);
-  margin: auto auto 9vh;
-  padding: 28px 22px;
+  position: absolute;
+  right: clamp(18px, 5vw, 72px);
+  bottom: clamp(22px, 6vw, 68px);
+  z-index: 1;
+  width: auto;
+  margin: 0;
+  padding: 0;
   color: var(--pure-white);
-  text-align: center;
+  text-align: right;
 }
-.home-hero .home-hero-copy .eyebrow,
-.home-hero .home-hero-copy p { color: var(--pure-white); }
-.home-hero .brand-heading { font-size: clamp(40px, 10vw, 82px); text-shadow: 0 4px 24px color-mix(in srgb, var(--pure-black) 48%, transparent); }
-.home-hero .brand-tagline { margin: 0 auto; font-size: clamp(15px, 3vw, 20px); word-break: keep-all; }
-.home-hero .btn { margin-top: 12px; background: var(--pure-white); color: var(--accent); font-weight: 800; }
+.home-hero .btn { margin: 0; background: var(--pure-white); color: var(--accent); font-weight: 800; }
 
 /* 서비스 페이지 */
 .page-head.service-page-head {
@@ -847,7 +844,7 @@ a { color: inherit; }
 
 @media (min-width: 720px) {
   .nav-inner { padding-inline: 24px; }
-  .nav .logo { left: 50%; font-size: 27px; transform: translateX(-50%); }
+  .nav .logo { left: 50%; font-family: var(--font-brand); font-size: 27px; font-weight: 500; letter-spacing: .08em; transform: translateX(-50%); }
   .nav-toggle { display: none; }
   .nav-menu {
     position: static;
@@ -865,7 +862,7 @@ a { color: inherit; }
     pointer-events: auto;
   }
   .nav-menu a { padding: 10px 0; border: 0; font-size: 12px; }
-  .home-hero-copy { margin-bottom: 12vh; padding: 36px; }
+  .home-hero-copy { right: clamp(28px, 5vw, 72px); bottom: clamp(28px, 6vw, 72px); margin: 0; padding: 0; }
   .service-section { padding-top: 62px; padding-bottom: 96px; }
   .service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
   .service-card { min-height: 310px; padding: 34px 30px 30px; }
@@ -883,8 +880,6 @@ a { color: inherit; }
 @media (max-width: 390px) {
   .nav-actions button { padding-inline: 4px; }
   .nav-actions span { font-size: 9px; }
-  .home-hero .home-image-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .home-hero .home-strip-image:nth-child(n + 3) { display: none; }
   .service-page-head br { display: none; }
   .service-page-head h1 { font-size: 38px; overflow-wrap: anywhere; word-break: normal; }
   .faq-spotlight { width: min(calc(100% - 24px), 1180px); }
