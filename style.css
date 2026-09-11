@@ -28,6 +28,33 @@
   --maxw: 1080px;
 }
 
+/* 브랜드 소개 페이지 전용 구성 */
+.brand-banner { min-height: 300px; background: var(--ink); color: var(--bg); }
+.brand-banner .eyebrow, .brand-banner .brand-tagline { color: color-mix(in srgb, var(--bg) 68%, transparent); }
+.brand-banner .about-page-title { max-width: 900px; margin-top: 12px; color: var(--bg); font-size: clamp(34px, 9vw, 78px); line-height: 1.08; letter-spacing: -.06em; }
+.brand-banner .brand-tagline { margin-top: 20px; font-family: var(--font-editorial); font-size: 16px; }
+.about-copy-gap { margin-top: 24px; }
+.about-philosophy-section { background: var(--surface); }
+.about-lineage-section { border-block: 1px solid var(--line); }
+.lineage-grid, .making-list { margin-top: 40px; border-top: 1px solid var(--line); }
+.lineage-grid { display: grid; }
+.lineage-grid article { padding: 22px 0 24px; border-bottom: 1px solid var(--line); }
+.lineage-grid span, .making-list strong { color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .1em; }
+.lineage-grid p { margin-top: 10px; font-size: 16px; }
+.lineage-signature, .closing-signature { margin-top: 34px; font-family: var(--font-editorial); font-size: 20px; font-style: italic; }
+.making-list p { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: baseline; padding: 17px 0; border-bottom: 1px solid var(--line); }
+.making-list strong { min-width: 170px; }
+.making-list span { font-size: 15px; }
+.about-closing-section { padding-bottom: 100px; }
+@media (min-width: 720px) {
+  .brand-banner { min-height: 430px; }
+  .lineage-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .lineage-grid article { min-height: 170px; padding: 24px 28px 24px 0; border-right: 1px solid var(--line); border-bottom: 0; }
+  .lineage-grid article + article { padding-left: 28px; }
+  .lineage-grid article:last-child { border-right: 0; }
+  .making-list { max-width: 760px; }
+}
+
 /* ===== 기본값 (모바일 우선 — 기본이 휴대폰 화면) ===== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
