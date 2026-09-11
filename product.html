@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>제품 상세 — 브랜드 이름</title>
   <meta name="description" content="제품 상세 정보" />
-  <link rel="stylesheet" href="style.css?v=20260826-buy-popup-2" />
+  <link rel="stylesheet" href="style.css?v=20260904-logo-font-1" />
   <link rel="stylesheet" href="rich-content.css?v=20260826-rich-editor-1" />
 </head>
 <body>
@@ -15,14 +15,13 @@
       <span class="nav-brand" aria-hidden="true">RE:STITCH</span>
     </a>
     <div class="nav-inner">
-      <a href="index.html" class="logo" aria-label="RE:STITCH 홈">Re:Stitch</a>
+      <a href="index.html" class="logo" aria-label="RE:STITCH 홈">RE:STITCH</a>
       <button class="nav-toggle" type="button" aria-label="메뉴 열기" aria-controls="site-menu" aria-expanded="false">☰</button>
       <nav class="nav-menu" id="site-menu">
         <a href="index.html">홈</a>
         <a href="about.html">About</a>
         <a href="products.html" class="active">제품</a>
         <a href="portfolio.html">포트폴리오</a>
-        <a href="reviews.html">리뷰</a>
         <a href="contact.html">서비스</a>
       </nav>
       <div class="nav-actions" aria-label="빠른 메뉴">
@@ -263,7 +262,7 @@
           '" data-product-name="' + esc(product.name) + '" aria-pressed="false">' +
           '<span data-wishlist-icon aria-hidden="true">♡</span> 좋아요</button>';
 
-        const reviewButton = '<a class="product-review-link" href="reviews.html?product=' + encodeURIComponent(product.id) + '">착용 리뷰 남기기 <span aria-hidden="true">→</span></a>';
+        const reviewButton = '<a class="product-review-link" href="#product-reviews">상품 후기 확인 <span aria-hidden="true">↓</span></a>';
 
         let sections = Array.isArray(product.sections)
           ? product.sections.map((section, index) => renderSection(section, product, index)).join("")
@@ -290,7 +289,13 @@
               reviewButton +
             "</div>" +
           "</section>" +
-          (sections ? '<div class="product-story">' + sections + "</div>" : "");
+          (sections ? '<div class="product-story">' + sections + "</div>" : "") +
+          '<section class="product-reviews" id="product-reviews" aria-labelledby="product-reviews-title">' +
+            '<div><p class="eyebrow">PRODUCT REVIEWS</p><h2 id="product-reviews-title">상품 후기</h2>' +
+            '<p>구매 고객의 후기는 이 상품 상세페이지에서 확인할 수 있습니다.</p></div>' +
+            '<div class="product-review-empty"><p>아직 등록된 후기가 없습니다.</p>' +
+            '<a class="btn ghost" href="review.html?product=' + encodeURIComponent(product.id) + '">후기 작성하기</a></div>' +
+          "</section>";
 
         setupProductCarousels();
         setupPurchaseDialog(product);

@@ -148,6 +148,27 @@ if (quickActionButtons.length) {
       title: "좋아요",
       body: '<div class="quick-wishlist" data-wishlist-results></div>'
     },
+    "on-you": {
+      eyebrow: "A COMMUNITY EDITORIAL",
+      title: "Re:Stitch on You",
+      body: `
+        <div class="quick-on-you">
+          <figure class="quick-on-you-visual">
+            <img src="images/restitch-home-hero.jpg" alt="Re:Stitch의 흰색 드레스" />
+            <figcaption>PRELUDE · 00</figcaption>
+          </figure>
+          <div class="quick-on-you-copy">
+            <p class="quick-on-you-script">Worn by you,<br />remembered by us.</p>
+            <p>리스티치를 입는 사람들의 표정과 움직임, 저마다의 스타일을 한 장면씩 기록합니다.</p>
+          </div>
+          <div class="quick-on-you-slots" aria-label="준비 중인 착장 기록">
+            <span>PORTRAIT 01<br /><strong>YOUR STORY</strong></span>
+            <span>PORTRAIT 02<br /><strong>COMING SOON</strong></span>
+          </div>
+          <p class="quick-on-you-note">고객·협찬 착장 사진이 모이면 동의를 거쳐 작은 화보처럼 소개합니다.</p>
+          <a class="quick-on-you-link" href="email-inquiry.html?type=on-you">착장 사진 보내기 <span aria-hidden="true">↗</span></a>
+        </div>`
+    },
     inquiries: {
       eyebrow: "CONTACT & SERVICE",
       title: "문의하기",
@@ -230,13 +251,14 @@ if (quickActionButtons.length) {
 
 syncWishlistButtons();
 
-if (new URLSearchParams(window.location.search).get("dialog") === "search" &&
+const requestedDialog = new URLSearchParams(window.location.search).get("dialog");
+if (["search", "on-you"].includes(requestedDialog) &&
     typeof window.openRestitchQuickDialog === "function") {
-  requestAnimationFrame(() => window.openRestitchQuickDialog("search"));
+  requestAnimationFrame(() => window.openRestitchQuickDialog(requestedDialog));
 }
 
-// 각 주요 페이지의 배너 아래에도 제품 검색창을 배치합니다.
-const siteSearchBanner = document.querySelector(".hero, .page-head");
+// 홈을 제외한 주요 페이지의 배너 아래에 제품 검색창을 배치합니다.
+const siteSearchBanner = document.querySelector(".hero:not(.home-hero), .page-head");
 if (siteSearchBanner && !document.getElementById("catalog-search")) {
   const siteSearchBand = document.createElement("section");
   siteSearchBand.className = "catalog-search-band site-search-band";
@@ -279,6 +301,10 @@ floatingQuickMenu.innerHTML = `
   <button type="button" data-floating-action="search">
     <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
     <span><small>SEARCH</small>제품 검색</span>
+  </button>
+  <button type="button" data-floating-action="on-you">
+    <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 21c.7-4.5 3-7 7-7s6.3 2.5 7 7"/><path d="m18.5 3 .6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6.6-1.4Z"/></svg>
+    <span><small>COMMUNITY EDITORIAL</small>Re:Stitch on You</span>
   </button>
   <button type="button" data-floating-action="inquiries">
     <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 5h14v11H9l-4 3V5Z"/><path d="M8 9h8M8 12h5"/></svg>
