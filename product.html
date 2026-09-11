@@ -22,7 +22,6 @@
         <a href="about.html">브랜드 소개</a>
         <a href="products.html" class="active">제품</a>
         <a href="portfolio.html">포트폴리오</a>
-        <a href="reviews.html">리뷰</a>
         <a href="contact.html">서비스</a>
       </nav>
       <div class="nav-actions" aria-label="빠른 메뉴">
@@ -263,7 +262,7 @@
           '" data-product-name="' + esc(product.name) + '" aria-pressed="false">' +
           '<span data-wishlist-icon aria-hidden="true">♡</span> 좋아요</button>';
 
-        const reviewButton = '<a class="product-review-link" href="reviews.html?product=' + encodeURIComponent(product.id) + '">착용 리뷰 남기기 <span aria-hidden="true">→</span></a>';
+        const reviewButton = '<a class="product-review-link" href="#product-reviews">상품 후기 확인 <span aria-hidden="true">↓</span></a>';
 
         let sections = Array.isArray(product.sections)
           ? product.sections.map((section, index) => renderSection(section, product, index)).join("")
@@ -290,7 +289,13 @@
               reviewButton +
             "</div>" +
           "</section>" +
-          (sections ? '<div class="product-story">' + sections + "</div>" : "");
+          (sections ? '<div class="product-story">' + sections + "</div>" : "") +
+          '<section class="product-reviews" id="product-reviews" aria-labelledby="product-reviews-title">' +
+            '<div><p class="eyebrow">PRODUCT REVIEWS</p><h2 id="product-reviews-title">상품 후기</h2>' +
+            '<p>구매 고객의 후기는 이 상품 상세페이지에서 확인할 수 있습니다.</p></div>' +
+            '<div class="product-review-empty"><p>아직 등록된 후기가 없습니다.</p>' +
+            '<a class="btn ghost" href="review.html?product=' + encodeURIComponent(product.id) + '">후기 작성하기</a></div>' +
+          "</section>";
 
         setupProductCarousels();
         setupPurchaseDialog(product);
