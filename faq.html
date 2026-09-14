@@ -6,7 +6,7 @@
   <title>FAQ | Re:Stitch</title>
   <meta name="description" content="Re:Stitch 자주 묻는 질문" />
   <link rel="icon" href="images/favicon.png" />
-  <link rel="stylesheet" href="style.css?v=20260904-logo-font-1" />
+  <link rel="stylesheet" href="style.css?v=20260915-faq-hero" />
 </head>
 <body>
   <header class="nav">
@@ -40,19 +40,42 @@
       <aside class="faq-sidebar" aria-label="FAQ 카테고리">
         <p class="faq-sidebar-title">FAQ</p>
         <nav>
-          <a href="#product">상품 문의</a>
-          <a href="#order">온라인 주문 문의</a>
-          <a href="#cancel">주문취소 및 교환/환불 문의</a>
-          <a href="#shipping">배송 문의</a>
-          <a class="is-active" href="#payment">결제 문의</a>
-          <a href="#account">계정 관련 문의</a>
-          <a href="#service">AS 및 고객 서비스</a>
-          <a href="#privacy">개인정보 보호 및 쿠키</a>
+          <a href="#product" data-faq-screen="product">상품 문의</a>
+          <a href="#order" data-faq-screen="order">온라인 주문 문의</a>
+          <a href="#cancel" data-faq-screen="cancel">주문취소 및 교환/환불 문의</a>
+          <a href="#shipping" data-faq-screen="shipping">배송 문의</a>
+          <a class="is-active" href="#payment" data-faq-screen="payment">결제 문의</a>
+          <a href="#account" data-faq-screen="account">계정 관련 문의</a>
+          <a href="#service" data-faq-screen="service">AS 및 고객 서비스</a>
         </nav>
       </aside>
-      <section class="faq-main" aria-labelledby="payment-title">
+      <section class="faq-main" id="shipping" data-faq-panel aria-labelledby="shipping-title" hidden>
+        <h2 id="shipping-title">배송 문의</h2>
+        <div class="faq-list">
+          <details><summary>어떤 택배사를 이용하나요?</summary><p>주문 상품은 브랜드가 지정한 택배사를 통해 배송됩니다. 출고 후 발송 안내에서 택배사와 운송장 번호를 확인할 수 있습니다.</p></details>
+          <details><summary>배송된 상품이 파손되거나 다른 물건이 왔을 경우 어떻게 해야 하나요?</summary><p>상품을 받은 즉시 박스와 상품의 상태를 사진으로 남긴 뒤, 주문번호와 함께 이메일로 문의해 주세요. 확인 후 교환 또는 재배송 방법을 안내해 드립니다.</p></details>
+          <details><summary>제주도도 무료배송이 되나요?</summary><p>제주도 및 도서·산간 지역은 기본 배송비 외 추가 배송비가 발생할 수 있습니다. 주문 화면에 표시되는 배송비를 확인해 주세요.</p></details>
+          <details><summary>배송 현황을 어떻게 알 수 있나요?</summary><p>상품이 출고되면 주문 안내에 운송장 번호가 전달됩니다. 해당 번호를 택배사 배송 조회 화면에 입력해 배송 현황을 확인해 주세요.</p></details>
+          <details><summary>배송지를 변경하고 싶은데 어떻게 해야 하나요?</summary><p>주문 상태가 결제 완료인 경우 주문 페이지에서 직접 수정할 수 있습니다. 배송 준비가 시작된 이후에는 배송지 변경이 어려우니, 변경이 필요하면 빠르게 이메일로 문의해 주세요.</p></details>
+          <details><summary>무료배송 기준과 배송료는 얼마인가요?</summary><p>무료배송 기준과 기본 배송료는 주문 화면에 표시되는 현재 정책을 따라 적용됩니다. 주문 전 결제 단계에서 최종 배송비를 확인해 주세요.</p></details>
+          <details><summary>선물 포장 및 쇼핑백 동봉이 가능한가요?</summary><p>상품과 주문 상황에 따라 선물 포장 및 쇼핑백 동봉이 가능할 수 있습니다. 주문 전 상품명과 함께 이메일로 요청 가능 여부를 문의해 주세요.</p></details>
+          <details><summary>주문 시 배송일은 언제인가요?</summary><p>재고가 있는 상품은 결제 완료 후 영업일 기준으로 순차 출고됩니다. 상품별 출고 일정과 택배사의 사정에 따라 배송일이 달라질 수 있으며, 정확한 일정은 주문 안내에서 확인해 주세요.</p></details>
+        </div>
+      </section>
+
+      <section class="faq-main" id="product" data-faq-panel aria-labelledby="product-title" hidden>
+        <h2 id="product-title">상품 문의</h2>
+        <div class="faq-list">
+          <details><summary>제품에 대한 세탁 방법을 어떻게 하면 알 수 있나요?</summary><p>제품에 부착된 케어 라벨에서 세탁 방법과 취급 주의사항을 확인해 주세요. 제품별 관리 방법이 궁금하거나 케어 라벨을 확인하기 어려운 경우 상품명을 적어 이메일로 문의해 주세요.</p></details>
+          <details><summary>A/S(제품수선)을 맡기고 싶은데 방법을 알려주세요.</summary><p>주문번호, 제품명, 수선이 필요한 부분을 적어 이메일로 접수해 주세요. 제품 상태 확인을 위해 사진을 함께 보내 주시면 수선 가능 여부와 진행 방법을 안내해 드립니다.</p></details>
+          <details><summary>품질 보증 및 피해보상기준</summary><p>정상적으로 사용한 상품에 품질 문제가 발생한 경우 제품 상태와 구매 정보를 확인한 뒤 보증 및 보상 기준에 따라 안내해 드립니다. 소비자 과실이나 사용 환경에 따른 손상은 대상에서 제외되거나 비용이 발생할 수 있습니다.</p></details>
+        </div>
+      </section>
+
+      <section class="faq-main" id="payment" data-faq-panel aria-labelledby="payment-title">
         <h2 id="payment-title">결제 문의</h2>
         <div class="faq-list">
+          <details><summary>RE:STITCH 온라인 결제는 어떻게 하나요?</summary><p>원하는 제품 상세 페이지에서 ‘구매하기’를 눌러 주문을 진행해 주세요. 구매 버튼을 누르면 브랜드가 안내한 안전한 결제 페이지로 이동하며, 해당 페이지에 표시되는 결제 수단을 선택해 결제를 완료할 수 있습니다. 결제가 끝나면 주문 정보와 배송 안내를 확인해 주세요.</p></details>
           <details><summary>결제는 어떻게 진행되나요?</summary><p>주문서에서 배송 정보를 입력한 뒤 원하는 결제 수단을 선택해 결제를 완료할 수 있습니다.</p></details>
           <details><summary>결제 방식은 어떤 것이 있나요?</summary><p>신용카드, 간편결제 등 주문 화면에 표시되는 안전한 결제 수단을 이용할 수 있습니다.</p></details>
           <details><summary>주문 후 결제 카드를 변경할 수 있나요?</summary><p>결제가 완료된 주문은 카드 변경이 어렵습니다. 주문 취소 후 새로 주문해 주세요.</p></details>
@@ -61,7 +84,61 @@
           <details><summary>결제 시 공인인증서가 꼭 필요한가요?</summary><p>결제 수단과 카드사 정책에 따라 추가 인증이 필요할 수 있습니다.</p></details>
           <details><summary>결제 오류가 발생할 때는 어떻게 해야 하나요?</summary><p>잠시 후 다시 시도해 주세요. 계속 문제가 발생하면 이메일 문의로 주문 정보를 남겨 주세요.</p></details>
           <details><summary>현금 결제 영수증 발급이 가능한가요?</summary><p>문의 접수 시 주문번호와 함께 요청해 주시면 발급 방법을 안내해 드립니다.</p></details>
-          <details><summary>세금계산서 발급이 가능한가요?</summary><p>사업자 정보 확인 후 발급을 도와드립니다. 이메일 문의를 이용해 주세요.</p></details>
+        </div>
+      </section>
+
+      <!-- [작성서 07: 온라인 주문 문의] 이미지로 전달된 질문을 RE:STITCH 주문 흐름에 맞춰 안내합니다. -->
+      <section class="faq-main" id="order" data-faq-panel aria-labelledby="order-title" hidden>
+        <h2 id="order-title">온라인 주문 문의</h2>
+        <div class="faq-list">
+          <details><summary>온라인 주문은 어떻게 하나요?</summary><p>제품 상세 페이지에서 원하는 상품과 옵션을 확인한 뒤 ‘구매하기’를 눌러 주문을 진행해 주세요. 주문서에 배송 정보를 입력하고 결제를 완료하면 주문이 접수됩니다.</p></details>
+          <details><summary>전화 주문이 가능한가요?</summary><p>온라인 주문이 어려운 경우 RE:STITCH 고객센터로 문의해 주세요. 상품명과 원하는 옵션을 알려 주시면 주문 가능 여부와 진행 방법을 안내해 드립니다.</p></details>
+          <details><summary>비회원 주문이 가능한가요?</summary><p>브랜드가 연결한 결제 페이지에서 비회원 주문을 지원하는 경우 로그인 없이 주문할 수 있습니다. 주문 완료 후 발급되는 주문번호는 배송 조회와 문의에 필요하니 꼭 보관해 주세요.</p></details>
+          <details><summary>상품 페이지에 가격이 확인되지 않는 상품을 주문하고 싶어요.</summary><p>가격이 표시되지 않는 상품은 제작·상담 상품일 수 있습니다. 상품명을 적어 이메일로 문의해 주시면 구매 가능 여부와 맞춤 안내를 도와드립니다.</p></details>
+          <details><summary>주문 내역 및 배송 내역을 확인하고 싶어요.</summary><p>주문 완료 안내에 포함된 주문번호 또는 결제 페이지의 주문 조회 메뉴에서 확인해 주세요. 확인이 어려우면 주문자명과 주문 시 사용한 연락처를 함께 보내 주세요.</p></details>
+          <details><summary>비회원 주문 조회는 어떻게 할 수 있나요?</summary><p>주문 완료 시 받은 주문번호와 주문자 정보를 이용해 결제 페이지의 주문 조회 메뉴에서 확인할 수 있습니다. 주문번호를 잃어버렸다면 이메일로 문의해 주세요.</p></details>
+          <details><summary>한 번 구매 시 몇 개의 상품을 구매할 수 있나요?</summary><p>상품별 재고와 구매 제한에 따라 수량이 달라질 수 있습니다. 주문 화면에서 선택 가능한 수량을 확인해 주세요.</p></details>
+          <details><summary>마음에 드는 상품을 상담 후 나중에 구매하고 싶어요.</summary><p>상품명이나 상세 페이지 주소를 이메일로 보내 상담을 신청해 주세요. 재고와 옵션을 확인한 뒤 구매 방법을 안내해 드리며, 상담 중인 상품은 별도 요청이 없는 경우 자동으로 예약되지 않습니다.</p></details>
+        </div>
+      </section>
+
+      <!-- [작성서 07: 주문취소 및 교환/환불 문의] RE:STITCH 주문 기준 안내 -->
+      <section class="faq-main" id="cancel" data-faq-panel aria-labelledby="cancel-title" hidden>
+        <h2 id="cancel-title">주문취소 및 교환/환불 문의</h2>
+        <div class="faq-list">
+          <details><summary>주문을 취소하고 싶어요.</summary><p>상품이 출고되기 전이라면 주문번호와 취소 사유를 함께 이메일로 보내 주세요. 출고가 시작된 뒤에는 취소 대신 반품 절차가 필요할 수 있으니, 가능한 한 빠르게 RE:STITCH 고객센터로 문의해 주세요.</p></details>
+          <details><summary>주문취소가 가능한가요?</summary><p>주문 상태가 ‘상품 준비 전’인 경우 취소를 도와드릴 수 있습니다. 이미 포장 또는 출고된 주문은 배송 단계에 따라 취소가 제한될 수 있습니다.</p></details>
+          <details><summary>교환을 진행하고 싶어요.</summary><p>상품 수령 후 교환을 원하시면 주문번호, 교환 사유, 원하는 옵션을 이메일로 남겨 주세요. 재고를 확인한 뒤 교환 가능 여부와 다음 절차를 안내해 드립니다.</p></details>
+          <details><summary>교환/반품 시 배송비는 누가 부담하나요?</summary><p>단순 변심으로 교환·반품하는 경우 배송비가 발생할 수 있습니다. 상품 불량이나 오배송이라면 RE:STITCH가 확인 후 배송비 부담 방법을 안내해 드립니다.</p></details>
+          <details><summary>반품 주소를 변경하고 싶어요.</summary><p>반품 상품을 보내기 전 이메일로 주문번호와 변경할 주소를 알려 주세요. 이미 수거가 접수된 뒤에는 주소 변경이 어려울 수 있으니 발송 전에 확인해 주세요.</p></details>
+          <details><summary>반품 신청 후 택배 예약은 어떻게 진행하나요?</summary><p>반품 접수 완료 후 안내받은 방법에 따라 택배를 예약해 주세요. 상품은 받으신 상태 그대로 포장하고, 구성품과 함께 보내 주시면 확인이 빠릅니다.</p></details>
+          <details><summary>환불 처리까지 얼마나 걸리나요?</summary><p>반품 상품이 도착해 검수된 후 환불을 진행합니다. 환불 완료 시점은 결제 수단과 카드사·결제사의 처리 일정에 따라 달라질 수 있습니다.</p></details>
+          <details><summary>반품 신청을 했는데 이미 대금지급이 완료됐어요.</summary><p>결제가 완료된 뒤에도 반품 접수는 가능합니다. 반품 상품이 확인되면 결제 수단에 맞춰 환불을 진행하니 주문번호와 함께 문의해 주세요.</p></details>
+          <details><summary>선물 받은 상품을 교환/환불하고 싶어요.</summary><p>선물 받은 상품은 주문자 확인이 필요할 수 있습니다. 상품명과 수령일, 주문 관련 정보를 준비해 이메일로 문의해 주시면 가능한 방법을 안내해 드립니다.</p></details>
+        </div>
+      </section>
+
+      <!-- [작성서 07: AS 및 고객 서비스] 수리 접수부터 완료 후 수령까지 안내합니다. -->
+      <section class="faq-main" id="service" data-faq-panel aria-labelledby="service-title" hidden>
+        <h2 id="service-title">AS 및 고객 서비스</h2>
+        <div class="faq-list">
+          <details><summary>A/S 기간은 어떻게 되나요?</summary><p>RE:STITCH의 A/S 기간은 구매일로부터 1년입니다. 보증 기간 내 제품 하자는 무상으로 처리되며, 소비자 과실로 인한 손상은 비용이 발생할 수 있습니다.</p></details>
+          <details><summary>A/S 진행 절차가 어떻게 되나요?</summary><p>A/S는 고객센터를 통해 접수되며, 접수 후 제품 상태와 수선 가능 여부를 판정하여 안내해 드립니다.<br><br><strong>유의사항</strong><br>· 판정 결과는 제품의 상태, 손상 부위 및 수선 난이도에 따라 달라질 수 있습니다.<br>· 소비자 과실로 인한 A/S의 경우 공임 비용이 발생할 수 있습니다.<br>· 생산이 종료된 상품은 동일 원단 및 부자재 수급이 어려워 원상 복구에 제한이 있을 수 있습니다.<br>· 수선 부위 및 범위에 따라 결과가 기대와 다를 수 있습니다.<br><br><strong>A/S 처리 불가 항목</strong><br>· 광범위한 찢김 또는 열로 인한 심한 손상<br>· 길이 수선, 디자인 변경, 원단 염색<br>· 충전재 복원, 리폼 등</p></details>
+        </div>
+      </section>
+
+      <!-- [작성서 07: 계정 관련 문의] 이미지로 전달된 질문을 계정 이용 흐름에 맞춰 안내합니다. -->
+      <section class="faq-main" id="account" data-faq-panel aria-labelledby="account-title" hidden>
+        <h2 id="account-title">계정 관련 문의</h2>
+        <div class="faq-list">
+          <details><summary>아이디가 기억나지 않아요.</summary><p>로그인 화면의 ‘아이디 찾기’를 이용해 주세요. 확인이 어렵다면 가입 시 사용한 이메일과 이름을 함께 이메일로 문의해 주세요.</p></details>
+          <details><summary>비밀번호가 기억나지 않아요.</summary><p>로그인 화면의 ‘비밀번호 찾기’를 선택한 뒤 안내에 따라 본인 확인을 진행해 주세요. 재설정 메일이 오지 않으면 스팸 메일함도 확인해 주세요.</p></details>
+          <details><summary>비밀번호 변경은 어떻게 하나요?</summary><p>로그인 후 계정 설정 또는 회원정보 관리 메뉴에서 비밀번호를 변경할 수 있습니다. 현재 비밀번호를 확인한 뒤 새로운 비밀번호를 입력해 저장해 주세요.</p></details>
+          <details><summary>비밀번호를 틀리게 입력하면 어떻게 되나요?</summary><p>비밀번호를 여러 번 잘못 입력하면 안전을 위해 로그인이 일시적으로 제한될 수 있습니다. 잠시 후 다시 시도하거나 ‘비밀번호 찾기’를 이용해 새 비밀번호를 설정해 주세요.</p></details>
+          <details><summary>가입했는데 회원정보가 없다고 나옵니다.</summary><p>가입할 때 사용한 아이디와 로그인 방법이 맞는지 확인해 주세요. 계속 문제가 발생하면 가입 시 사용한 이메일과 이름을 함께 이메일로 문의해 주세요.</p></details>
+          <details><summary>아이디를 변경하고 싶어요.</summary><p>아이디 변경 가능 여부는 계정 설정에서 확인해 주세요. 변경 메뉴가 보이지 않거나 도움이 필요하면 이메일로 문의해 주세요.</p></details>
+          <details><summary>아이디를 여러 개 사용할 수 있나요?</summary><p>한 사람이 여러 계정을 사용하는 경우 주문 및 문의 내역이 나뉠 수 있습니다. 가능한 한 하나의 계정을 이용해 주세요.</p></details>
+          <details><summary>임시 비밀번호로 로그인 후, 비밀번호를 변경하려는데 이전 비밀번호를 입력하라고 합니다.</summary><p>임시 비밀번호를 현재 비밀번호 입력란에 입력한 뒤 새로운 비밀번호를 설정해 주세요. 임시 비밀번호가 작동하지 않으면 ‘비밀번호 찾기’를 다시 진행해 주세요.</p></details>
         </div>
       </section>
     </div>
@@ -74,5 +151,25 @@
     <p>© Re:Stitch. All rights reserved.</p>
   </footer>
   <script src="script.js"></script>
+  <script>
+    // FAQ 메뉴를 클릭하면 한 화면에 해당 문의 내용만 표시합니다.
+    (() => {
+      const panels = [...document.querySelectorAll("[data-faq-panel]")];
+      const links = [...document.querySelectorAll("[data-faq-screen]")];
+      const showScreen = (screen) => {
+        const active = panels.find((panel) => panel.id === screen) || panels[0];
+        panels.forEach((panel) => { panel.hidden = panel !== active; });
+        links.forEach((link) => { link.classList.toggle("is-active", link.getAttribute("href") === "#" + active.id); });
+        if (window.location.hash !== "#" + active.id) history.replaceState(null, "", "#" + active.id);
+      };
+      links.forEach((link) => link.addEventListener("click", (event) => {
+        event.preventDefault();
+        showScreen(link.dataset.faqScreen);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }));
+      window.addEventListener("hashchange", () => showScreen(window.location.hash.slice(1)));
+      showScreen(window.location.hash.slice(1) || "payment");
+    })();
+  </script>
 </body>
 </html>
