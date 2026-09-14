@@ -398,8 +398,8 @@ a { color: inherit; }
 .product-grid .card:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
 .product-empty { grid-column: 1 / -1; padding: 72px 20px; border-radius: var(--radius); background: var(--surface); color: var(--ink-soft); text-align: center; }
 
-.tags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
-.tags span { font-size: 11.5px; border: 1px solid var(--line); border-radius: 999px; padding: 4px 10px; color: var(--ink-soft); }
+.tags { margin-top: 16px; display: grid; gap: 7px; }
+.tags span { display: block; padding: 0 0 7px; border: 0; border-bottom: 1px solid var(--line); color: var(--ink-soft); font-size: 12px; line-height: 1.5; }
 
 /* ===== 제품 상세페이지 =====
    브랜드 담당자가 편집기에서 만든 상세 내용은 아래 공통 클래스에 맞춰 표시됩니다.
@@ -407,9 +407,9 @@ a { color: inherit; }
 .product-hero { display: grid; grid-template-columns: 1fr; gap: 28px; }
 .product-hero-gallery { min-width: 0; }
 .product-hero-carousel { position: relative; min-width: 0; }
-.product-carousel-viewport { overflow: hidden; border-radius: var(--radius); touch-action: pan-y; }
+.product-carousel-viewport { overflow: hidden; border-radius: 0; touch-action: pan-y; }
 .product-carousel-track { display: flex; transition: transform .42s cubic-bezier(.22, .7, .25, 1); will-change: transform; }
-.product-hero-image { flex: 0 0 100%; min-width: 100%; min-height: 320px; aspect-ratio: 4/5; margin: 0; background: var(--surface); overflow: hidden; }
+.product-hero-image { flex: 0 0 100%; min-width: 100%; min-height: 320px; aspect-ratio: 4/5; margin: 0; background: var(--surface); overflow: hidden; border-radius: 0; }
 .product-hero-image img { width: 100%; height: 100%; object-fit: cover; }
 .product-image-placeholder { aspect-ratio: 3/4; }
 .product-carousel-button { position: absolute; top: 50%; z-index: 2; display: grid; width: 44px; height: 44px; padding: 0; border: 1px solid rgba(255,255,255,.55); border-radius: 50%; background: rgba(20,20,20,.72); color: #fff; font-size: 20px; line-height: 1; place-items: center; transform: translateY(-50%); cursor: pointer; backdrop-filter: blur(8px); }
@@ -425,13 +425,17 @@ a { color: inherit; }
 .product-carousel-dot { flex: 0 0 auto; width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: var(--line); cursor: pointer; transition: width .2s ease, background .2s ease; }
 .product-carousel-dot[aria-current="true"] { width: 24px; border-radius: 999px; background: var(--ink); }
 .product-info .k { font-size: 11px; letter-spacing: 2px; color: var(--ink-soft); text-transform: uppercase; }
-.product-info h1 { font-family: var(--font-display); font-size: clamp(28px, 8vw, 48px); line-height: 1.2; margin: 8px 0 14px; }
+.product-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; }
+.product-info h1 { min-width: 0; font-family: var(--font-display); font-size: clamp(28px, 8vw, 48px); line-height: 1.2; margin: 8px 0 14px; }
 .product-summary { color: var(--ink-soft); font-size: 16px; }
 .product-price { font-size: 20px; font-weight: 800; margin-top: 18px; }
-.product-buy { margin-top: 24px; text-align: center; }
-.product-wishlist { width: 100%; min-height: 48px; margin-top: 12px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--ink); font: inherit; cursor: pointer; }
-.product-wishlist[aria-pressed="true"] { border-color: var(--accent); background: var(--surface); }
-.product-wishlist span { margin-right: 6px; font-size: 18px; }
+.product-buy { width: 100%; min-height: 58px; margin-top: 24px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line); background: transparent; color: var(--ink); text-align: center; box-shadow: none; transition: background-color .2s ease, color .2s ease, border-color .2s ease; }
+.product-buy:hover, .product-buy:focus-visible { border-color: var(--accent); background-color: var(--accent); color: var(--bg); box-shadow: none; }
+.btn.product-buy:hover, .btn.product-buy:focus-visible { box-shadow: none; }
+.product-wishlist { flex: 0 0 auto; width: 44px; height: 44px; margin-top: 8px; padding: 0; display: grid; place-items: center; border: 0; border-radius: 0; background: transparent; color: var(--ink-soft); font: inherit; cursor: pointer; }
+.product-wishlist:hover, .product-wishlist:focus-visible { color: var(--accent); outline: 0; }
+.product-wishlist[aria-pressed="true"] { color: var(--accent); }
+.product-wishlist [data-wishlist-icon] { margin: 0; font-size: 30px; line-height: 1; }
 .purchase-dialog { width: min(calc(100% - 32px), 520px); max-height: calc(100dvh - 32px); margin: auto; padding: 0; border: 0; border-radius: var(--radius); background: var(--bg); color: var(--ink); box-shadow: 0 24px 80px rgba(0,0,0,.28); }
 .purchase-dialog::backdrop { background: rgba(15,15,15,.58); backdrop-filter: blur(4px); }
 .purchase-dialog-card { padding: 24px; }
@@ -479,14 +483,14 @@ a { color: inherit; }
 .product-rich-text iframe { aspect-ratio: 16 / 9; }
 .product-rich-text video { height: auto; }
 .product-full-image { width: min(calc(100% - 24px), 1320px); }
-.product-full-image img { width: 100%; max-height: 900px; object-fit: cover; border-radius: var(--radius); }
+.product-full-image img { width: 100%; max-height: 900px; object-fit: cover; border-radius: 0; }
 .product-full-image figcaption { color: var(--ink-soft); font-size: 13px; margin-top: 8px; text-align: center; }
 .product-image-text { display: grid; grid-template-columns: 1fr; gap: 24px; align-items: center; }
-.product-block-image { min-height: 280px; background: var(--surface); border-radius: var(--radius); overflow: hidden; }
+.product-block-image { min-height: 280px; background: var(--surface); border-radius: 0; overflow: hidden; }
 .product-block-image:empty { display: none; }
 .product-block-image img { width: 100%; height: 100%; max-height: 720px; object-fit: cover; }
 .product-gallery { display: grid; grid-template-columns: 1fr; gap: 12px; }
-.product-gallery figure { min-height: 240px; background: var(--surface); border-radius: var(--radius); overflow: hidden; }
+.product-gallery figure { min-height: 240px; background: var(--surface); border-radius: 0; overflow: hidden; }
 .product-gallery img { width: 100%; height: 100%; max-height: 760px; object-fit: cover; }
 .product-highlight { background: var(--surface); padding: 38px 24px; border-radius: var(--radius); text-align: center; }
 .product-highlight > :last-child { margin-bottom: 0; }
