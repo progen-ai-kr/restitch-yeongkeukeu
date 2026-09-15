@@ -33,7 +33,7 @@
   <main class="email-inquiry-page">
     <header class="email-inquiry-page-head">
       <p class="eyebrow">CONTACT</p>
-      <h1>이메일 문의하기</h1>
+      <h1>Get In Touch</h1>
       <p>아래 양식을 작성해 주시면 담당자가 가능한 한 빠른 시일 내 연락드리겠습니다.</p>
     </header>
 
@@ -61,29 +61,28 @@
       </fieldset>
 
       <fieldset>
-        <legend>내 요청</legend>
+        <legend>착장 사진 보내기</legend>
         <div class="email-inquiry-columns">
           <label>유형 <span aria-hidden="true">*</span>
             <select name="requestType" required>
-              <option value="">선택</option>
-              <option value="product">제품 문의</option>
-              <option value="order">주문 및 배송</option>
-              <option value="service">서비스 및 수선</option>
-              <option value="other">기타</option>
+            <option value="">선택</option>
+            <option value="outfit-photo">착용 제품 사진</option>
+            <option value="styling">제품 스타일링</option>
+            <option value="review">제품 후기</option>
+            <option value="other">기타</option>
             </select>
           </label>
-          <label>목적 <span aria-hidden="true">*</span><input name="subject" type="text" required /></label>
+          <label>사용하신 제품명 <span aria-hidden="true">*</span><input name="subject" type="text" required /></label>
         </div>
         <label>내용 <span aria-hidden="true">*</span>
           <textarea name="message" rows="8" placeholder="내용을 입력해 주세요." required></textarea>
         </label>
-        <label class="email-file-label">파일 첨부하기
+        <label class="email-file-label">착장 사진 첨부하기
           <input name="attachment" type="file" accept=".jpg,.jpeg,.png,.pdf" />
         </label>
       </fieldset>
 
       <div class="email-inquiry-agreements">
-        <label><input type="checkbox" required /> 사람입니다</label>
         <label><input type="checkbox" required /> 이용 약관에 동의합니다.</label>
         <label><input type="checkbox" required /> 개인정보 보호정책을 읽고 동의합니다.</label>
       </div>

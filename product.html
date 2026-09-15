@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>제품 상세 — 브랜드 이름</title>
   <meta name="description" content="제품 상세 정보" />
-  <link rel="stylesheet" href="style.css?v=20260914-product-detail" />
+  <link rel="stylesheet" href="style.css?v=20260916-product-buy" />
   <link rel="stylesheet" href="rich-content.css?v=20260826-rich-editor-1" />
 </head>
 <body>
@@ -185,7 +185,7 @@
       if (!trigger || !dialog) return;
 
       document.getElementById("purchaseDialogProduct").textContent = product.name || "";
-      document.getElementById("purchaseDialogContent").textContent = String(product.buyNotice || "").trim();
+      document.getElementById("purchaseDialogContent").textContent = String(product.buyNotice || "").trim() || "구매 방법은 브랜드에 문의해 주세요.";
       trigger.addEventListener("click", () => dialog.showModal());
       dialog.addEventListener("click", (event) => {
         if (event.target === dialog) dialog.close();
@@ -263,7 +263,8 @@
           : buyNotice
             ? '<button class="btn product-buy" type="button" data-purchase-dialog aria-haspopup="dialog">' +
               esc(product.buyLabel || "구매하기") + "</button>"
-            : "";
+            : '<button class="btn product-buy" type="button" data-purchase-dialog aria-haspopup="dialog">' +
+              esc(product.buyLabel || "구매하기") + "</button>";
         const wishlistButton =
           '<button class="product-wishlist" type="button" data-wishlist-toggle data-product-id="' + esc(product.id) +
           '" data-product-name="' + esc(product.name) + '" aria-pressed="false">' +
@@ -288,9 +289,10 @@
               '<p class="k">' + esc(visibleLabel) + "</p>" +
               '<div class="product-title-row"><h1>' + esc(product.name) + "</h1>" + wishlistButton + "</div>" +
               '<p class="product-summary">' + esc(product.summary || "") + "</p>" +
+              (tags ? '<div class="tags">' + tags + "</div>" : "") +
               price +
               buyButton +
-              (tags ? '<div class="tags">' + tags + "</div>" : "") +
+              '<div class="product-info-squares" aria-label="추가 이미지 영역"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></div>' +
             "</div>" +
           "</section>" +
           (sections ? '<div class="product-story">' + sections + "</div>" : "");
