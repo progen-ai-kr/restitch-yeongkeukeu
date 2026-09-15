@@ -224,13 +224,21 @@
         };
         if ("IntersectionObserver" in window) {
           const nextPlanObserver = new IntersectionObserver((entries, observer) => {
-            if (!entries.some((entry) => entry.isIntersecting)) return;
-            revealNextPlan();
-            observer.disconnect();
-          }, { threshold: 0.12, rootMargin: "0px 0px -8%" });
-          nextPlanObserver.observe(nextPlanSection);
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            });
+          }, { threshold: 0.08, rootMargin: "0px 0px -5%" });
+          nextPlanRevealItems.forEach((item) => nextPlanObserver.observe(item));
+          requestAnimationFrame(() => {
+            nextPlanRevealItems.forEach((item) => {
+              const box = item.getBoundingClientRect();
+              if (box.top < window.innerHeight * .95 && box.bottom > 0) item.classList.add("is-visible");
+            });
+          });
         } else {
-          revealNextPlan();
+          nextPlanRevealItems.forEach((item) => item.classList.add("is-visible"));
         }
         updateNextPlanPage();
       })
