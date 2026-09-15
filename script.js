@@ -90,7 +90,7 @@ if (quickActionButtons.length) {
   const dialogViews = {
     search: {
       eyebrow: "SEARCH",
-      title: "제품 검색",
+      title: "",
       body: `
         <form class="header-search-form" data-header-search-form role="search">
           <label class="sr-only" for="header-search-input">제품 검색어</label>
@@ -150,7 +150,7 @@ if (quickActionButtons.length) {
     },
     "on-you": {
       eyebrow: "A COMMUNITY EDITORIAL",
-      title: "Re:Stitch on You",
+      title: "RE:STITCH on You",
       body: `
         <div class="quick-on-you">
           <figure class="quick-on-you-visual">
@@ -170,14 +170,13 @@ if (quickActionButtons.length) {
         </div>`
     },
     inquiries: {
-      eyebrow: "CONTACT & SERVICE",
+        eyebrow: "CONTACT & SERVICE",
       title: "문의하기",
       body: `
         <nav class="service-quick-links" aria-label="문의 및 서비스">
-          <a href="email-inquiry.html"><span>이메일 문의</span><span aria-hidden="true">→</span></a>
+          <a href="contact.html"><span>이메일 문의</span><span aria-hidden="true">→</span></a>
           <a href="contact.html"><span>전화 문의</span><span aria-hidden="true">→</span></a>
           <a href="https://map.naver.com/p/search/%EB%8C%80%EC%A0%84%20%EC%A4%91%EA%B5%AC%20%EC%A4%91%EC%B4%8C%EB%8F%99%20410-3" target="_blank" rel="noopener noreferrer"><span>매장 위치</span><span aria-hidden="true">→</span></a>
-          <a href="contact.html"><span>서비스 센터</span><span aria-hidden="true">→</span></a>
           <span class="service-links-divider" aria-hidden="true"></span>
           <a href="/faq.html" class="service-faq-link"><span>자주 묻는 질문</span><span aria-hidden="true">→</span></a>
         </nav>`
@@ -302,18 +301,19 @@ floatingQuickMenu.innerHTML = `
     <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
     <span><small>SEARCH</small>제품 검색</span>
   </button>
+  <button type="button" data-floating-action="wishlist">
+    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.8 5.8a5.5 5.5 0 0 0-7.8 0L12 6.9l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 22l8.8-8.4a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+    <span><small>WISHLIST</small>좋아요 제품</span>
+  </button>
   <button type="button" data-floating-action="on-you">
     <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 21c.7-4.5 3-7 7-7s6.3 2.5 7 7"/><path d="m18.5 3 .6 1.4 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6.6-1.4Z"/></svg>
-    <span><small>COMMUNITY EDITORIAL</small>Re:Stitch on You</span>
+    <span><small>COMMUNITY EDITORIAL</small>RE:STITCH on You</span>
   </button>
   <button type="button" data-floating-action="inquiries">
     <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 5h14v11H9l-4 3V5Z"/><path d="M8 9h8M8 12h5"/></svg>
     <span><small>CONTACT & SERVICE</small>문의하기</span>
   </button>
-  <button type="button" data-floating-action="wishlist">
-    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.8 5.8a5.5 5.5 0 0 0-7.8 0L12 6.9l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 22l8.8-8.4a5.5 5.5 0 0 0 0-7.8Z"/></svg>
-    <span><small>WISHLIST</small>좋아요 제품</span>
-  </button>`;
+  `;
 document.body.appendChild(floatingQuickMenu);
 
 function openCatalogSearch() {
