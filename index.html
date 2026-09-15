@@ -187,15 +187,12 @@
           nextPlanDragStartX = event.clientX;
           nextPlanDragStartScroll = nextPlanScroll.scrollLeft;
           nextPlanScroll.classList.add("is-dragging");
-
+          nextPlanScroll.setPointerCapture(event.pointerId);
         });
         nextPlanScroll.addEventListener("pointermove", (event) => {
           if (!isNextPlanDragging) return;
           const distance = nextPlanDragStartX - event.clientX;
-          if (Math.abs(distance) > 4) {
-            nextPlanDragMoved = true;
-            nextPlanScroll.setPointerCapture(event.pointerId);
-          }
+          if (Math.abs(distance) > 4) nextPlanDragMoved = true;
           nextPlanScroll.scrollLeft = nextPlanDragStartScroll + distance;
         });
         const endNextPlanDrag = (event) => {
@@ -205,14 +202,36 @@
           if (nextPlanScroll.hasPointerCapture(event.pointerId)) nextPlanScroll.releasePointerCapture(event.pointerId);
           setTimeout(() => { nextPlanDragMoved = false; }, 0);
         };
-        window.addEventListener("pointerup", endNextPlanDrag);
+        nextPlanScroll.addEventListener("pointerup", endNextPlanDrag);
         nextPlanScroll.addEventListener("pointercancel", endNextPlanDrag);
         nextPlanScroll.addEventListener("click", (event) => {
           if (!nextPlanDragMoved) return;
           event.preventDefault();
           event.stopPropagation();
         }, true);
-        window.addEventListener("resize", updateNextPlanPage);
+
+        // NEXT PLAN 영역이 화면에 들어오면 제목부터 이미지 순서로 나타납니다.
+        const nextPlanSection = document.querySelector(".home-next-plan");
+        const nextPlanRevealItems = [
+          nextPlanScroll.querySelector("h2"),
+          ...nextPlanScroll.querySelectorAll(".home-next-plan-card")
+        ].filter(Boolean);
+        nextPlanRevealItems.forEach((item, index) => item.style.setProperty("--next-plan-index", index));
+        const revealNextPlan = () => {
+          if (nextPlanSection.classList.contains("is-visible")) return;
+          nextPlanSection.classList.add("is-visible");
+          nextPlanRevealItems.forEach((item) => item.classList.add("is-visible"));
+        };
+        if ("IntersectionObserver" in window) {
+          const nextPlanObserver = new IntersectionObserver((entries, observer) => {
+            if (!entries.some((entry) => entry.isIntersecting)) return;
+            revealNextPlan();
+            observer.disconnect();
+          }, { threshold: 0.12, rootMargin: "0px 0px -8%" });
+          nextPlanObserver.observe(nextPlanSection);
+        } else {
+          revealNextPlan();
+        }
         updateNextPlanPage();
       })
       .catch(() => {});
