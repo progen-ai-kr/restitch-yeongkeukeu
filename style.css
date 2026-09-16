@@ -152,7 +152,7 @@ a { color: inherit; }
 .header-search-control input::placeholder { color: color-mix(in srgb, var(--ink-soft) 72%, transparent); }
 .header-search-control input:focus { outline: 0; }
 .header-search-control button { min-width: 72px; min-height: 56px; padding: 0 16px; border: 0; background: var(--ink); color: var(--bg); font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; }
-.header-search-control button:hover, .header-search-control button:focus-visible { background: var(--ink-soft); outline: 0; }
+.header-search-control button:hover, .header-search-control button:focus-visible { background: var(--pure-white); color: var(--pure-black); outline: 0; }
 .header-search-hint { margin-top: 12px; color: var(--ink-soft); font-size: 11px; }
 .header-search-recommend { margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--line); }
 .header-search-recommend > p { color: var(--ink-soft); font-size: 10px; letter-spacing: .15em; }
@@ -234,7 +234,7 @@ a { color: inherit; }
 .email-inquiry-agreements { display: grid; gap: 14px; margin-top: 44px; }
 .email-inquiry-agreements label { min-height: 44px; display: flex; align-items: center; gap: 12px; color: var(--ink); font-size: 15px; cursor: pointer; }
 .email-inquiry-agreements input { width: 22px; height: 22px; accent-color: var(--accent); }
-.email-inquiry-submit { min-width: 160px; min-height: 56px; margin-top: 36px; padding: 14px 28px; border: 0; background: var(--accent); color: var(--bg); font: inherit; font-weight: 700; cursor: pointer; }
+.email-inquiry-submit { min-width: 160px; min-height: 56px; margin-top: 36px; padding: 14px 28px; border: 0; background: var(--pure-black); color: var(--bg); font: inherit; font-weight: 700; cursor: pointer; }
 .email-inquiry-status { min-height: 26px; margin-top: 14px; color: var(--ink-soft); font-size: 14px; }
 
 /* ===== 히어로 (홈 첫 화면) ===== */
@@ -279,7 +279,7 @@ a { color: inherit; }
 .home-gallery-intro p { max-width: 720px; font-family: var(--font-brand); font-size: clamp(17px, 2.4vw, 25px); line-height: 1.35; color: color-mix(in srgb, var(--pure-white) 80%, transparent); }
 .home-gallery-rule { width: min(80vw, 740px); height: 3px; background: radial-gradient(circle, color-mix(in srgb, var(--pure-white) 72%, transparent) 1px, transparent 1.3px) 0 50% / 9px 3px repeat-x; }
 .mobile-only { display: none; }
-.home-best-title { width: min(calc(100% - 44px), var(--maxw)); margin: 0 auto clamp(42px, 8vw, 84px); color: var(--brown); font-family: var(--font-brand); font-size: clamp(38px, 7vw, 76px); font-weight: 600; letter-spacing: .04em; line-height: 1; text-align: center; }
+.home-best-title { width: min(calc(100% - 44px), var(--maxw)); margin: 0 auto clamp(42px, 8vw, 84px); color: var(--brown); font-family: var(--font-brand); font-size: clamp(38px, 7vw, 76px); font-weight: 300; letter-spacing: .04em; line-height: 1; text-align: center; }
 .home-product-scroll { display: grid; width: 100%; gap: clamp(68px, 18vw, 110px); padding: 0 16px; }
 .home-scroll-image { position: relative; display: grid; width: min(62vw, 364px); max-width: 100%; color: var(--ink); text-decoration: none; justify-self: start; }
 .home-scroll-image:nth-child(even) { justify-self: end; }
@@ -299,7 +299,7 @@ a { color: inherit; }
 .home-next-plan-scroll { position: relative; z-index: 1; display: flex; width: min(100%, 1320px); margin: 0 auto; align-items: center; gap: clamp(24px, 5vw, 74px); overflow-x: auto; padding: 0 22px 12px; cursor: grab; scrollbar-width: none; -ms-overflow-style: none; touch-action: pan-x pan-y; }
 .home-next-plan-scroll::-webkit-scrollbar { display: none; }
 .home-next-plan-scroll.is-dragging { cursor: grabbing; scroll-behavior: auto; }
-.home-next-plan-scroll > h2 { flex: 0 0 clamp(150px, 18vw, 230px); color: var(--pure-black); font-family: var(--font-brand); font-size: clamp(36px, 6vw, 64px); font-weight: 600; letter-spacing: .05em; line-height: 1; }
+.home-next-plan-scroll > h2 { flex: 0 0 clamp(150px, 18vw, 230px); color: var(--pure-black); font-family: var(--font-brand); font-size: clamp(36px, 6vw, 64px); font-weight: 300; letter-spacing: .05em; line-height: 1; }
 .home-next-plan-grid { display: flex; flex: 0 0 auto; gap: clamp(16px, 2.2vw, 30px); align-items: center; }
 .home-next-plan-card { display: block; flex: 0 0 clamp(164px, 23vw, 270px); color: var(--pure-white); text-decoration: none; }
 .home-next-plan-frame { position: relative; aspect-ratio: 3 / 4; overflow: hidden; border: 0; border-radius: 0; clip-path: none; }
@@ -313,7 +313,7 @@ a { color: inherit; }
 .home-next-plan-controls { position: relative; z-index: 1; display: flex; width: min(100%, 1320px); margin: 20px auto 0; padding: 0 22px; align-items: center; justify-content: flex-end; gap: 16px; color: var(--ink-soft); font-size: 12px; }
 .home-next-plan-controls button { width: 44px; height: 44px; padding: 0; border: 0; background: transparent; color: var(--ink); font-size: 25px; line-height: 1; cursor: pointer; }
 .home-next-plan-controls button:hover { color: var(--teal); }
-.btn { display: inline-block; border: 0; background: var(--accent); color: var(--bg); padding: 14px 32px; border-radius: 999px; font: inherit; font-size: 15px; letter-spacing: 1px; text-decoration: none; cursor: pointer; }
+.btn { display: inline-block; border: 0; background: var(--pure-black); color: var(--bg); padding: 14px 32px; border-radius: 999px; font: inherit; font-size: 15px; letter-spacing: 1px; text-decoration: none; cursor: pointer; }
 .btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
 
 /* ===== 공통 섹션 ===== */
@@ -388,7 +388,7 @@ a { color: inherit; }
 .catalog-reset,
 .catalog-apply { min-height: 46px; border: 1px solid var(--ink); border-radius: 999px; font: inherit; font-size: 14px; cursor: pointer; }
 .catalog-reset { background: transparent; color: var(--ink); }
-.catalog-apply { background: var(--accent); color: var(--bg); }
+.catalog-apply { background: var(--pure-black); color: var(--bg); }
 .sort-menu { padding: 8px; }
 .sort-menu button { display: flex; width: 100%; min-height: 46px; align-items: center; padding: 10px 14px; border: 0; border-radius: 8px; background: transparent; color: var(--ink); font: inherit; font-size: 14px; text-align: left; cursor: pointer; }
 .sort-menu button:hover,
@@ -450,7 +450,11 @@ a { color: inherit; }
 .product-buy:hover, .product-buy:focus-visible { border-color: var(--ink); background-color: var(--ink); color: var(--pure-white); box-shadow: none; }
 .btn.product-buy:hover, .btn.product-buy:focus-visible { box-shadow: none; }
 .product-info-squares { display: flex; align-items: flex-start; justify-content: flex-start; gap: 12px; margin-top: 72px; }
-.product-info-squares span { width: 88px; aspect-ratio: 1; border: 1px solid color-mix(in srgb, var(--ink) 45%, transparent); background: transparent; }
+.product-info-square { display: block; width: 88px; aspect-ratio: 1; padding: 0; border: 1px solid color-mix(in srgb, var(--ink) 45%, transparent); background: transparent; cursor: pointer; }
+.product-info-square:hover,
+.product-info-square:focus-visible { border-color: var(--ink); outline: 0; }
+.product-info-square:disabled { cursor: default; }
+.product-info-square-image { display: block; width: 100%; height: 100%; object-fit: cover; }
 .product-wishlist { flex: 0 0 auto; width: 44px; height: 44px; margin-top: 8px; padding: 0; display: grid; place-items: center; border: 0; border-radius: 0; background: transparent; color: var(--ink-soft); font: inherit; cursor: pointer; }
 .product-wishlist:hover, .product-wishlist:focus-visible { color: var(--teal); outline: 0; }
 .product-wishlist[aria-pressed="true"] { color: var(--teal); }
@@ -466,6 +470,14 @@ a { color: inherit; }
 .purchase-dialog-content { overflow-wrap: anywhere; margin-top: 10px; padding: 18px; border-radius: var(--radius); background: var(--surface); color: var(--ink-soft); line-height: 1.8; white-space: pre-wrap; }
 .purchase-dialog-actions { margin-top: 20px; text-align: right; }
 .purchase-dialog-actions .btn { min-width: 112px; }
+.purchase-dialog-actions .btn:hover,
+.purchase-dialog-actions .btn:focus-visible,
+.quick-dialog-panel .btn:hover,
+.quick-dialog-panel .btn:focus-visible {
+  /* 확인·제품 둘러보기 버튼은 호버 시 시각적 변화가 없습니다. */
+  transform: none;
+  box-shadow: none;
+}
 .product-story { padding: 24px 0 64px; }
 .product-block { width: min(calc(100% - 44px), var(--maxw)); margin: 0 auto 54px; }
 .product-rich-text { max-width: 760px; }
@@ -638,7 +650,7 @@ a { color: inherit; }
 
 /* ===== 모든 화면 크기에서 가로 넘침을 막는 반응형 보정 ===== */
 html,
-body { overflow-x: hidden; }
+body { overflow-x: clip; }
 
 img,
 video,
@@ -657,15 +669,60 @@ table { max-width: 100%; }
 
 @media (max-width: 719px) {
   .nav-inner { width: 100%; padding-inline: 8px; }
-  .nav .logo { left: 50%; font-size: 20px; transform: translateX(-50%); }
+  .nav .logo { position: static; left: auto; order: 2; margin-left: 10px; font-size: 20px; transform: none; }
+  .nav-toggle { position: relative; z-index: 50; order: 1; border: 0; border-radius: 0; background: transparent; }
   .nav-actions { gap: 0; }
+  .nav-actions { order: 3; }
   .nav-actions button { width: 34px; min-width: 34px; padding-inline: 2px; }
   .nav-actions svg { width: 18px; height: 18px; }
+  .nav-menu {
+    position: fixed;
+    z-index: 40;
+    inset: 0;
+    display: flex;
+    width: 42vw;
+    height: 100dvh;
+    min-height: 100dvh;
+    padding: 72px 14px 24px;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0;
+    overflow-y: auto;
+    background: var(--brown);
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    transform: translateX(-100%);
+    opacity: 1;
+    transition: transform .3s ease, visibility .3s;
+  }
+  .nav-menu.open { opacity: 1; transform: translateX(0); }
+  .nav-menu a,
+  .nav-menu a.active,
+  .nav-menu a:hover { padding: 14px 0; border-top: 1px solid color-mix(in srgb, var(--pure-white) 42%, transparent); color: var(--pure-white); font-size: 12px; line-height: 1.3; }
 
   .page-head { padding-inline: 16px; }
   .product-category-links a { min-width: 0; padding-inline: 2px; font-size: clamp(8px, 2.5vw, 14px); letter-spacing: -.04em; }
   .catalog-search-band { padding-inline: 16px; }
-  .catalog-page-search { width: min(100%, 220px); }
+  .catalog-search-band { padding-top: 19px; }
+  .catalog-page-search { width: min(100%, 176px); min-height: 34px; }
+  .catalog-page-search input { padding: 6px 6px 6px 10px; font-size: 11px; }
+  .catalog-page-search button { min-width: 46px; padding-inline: 8px; font-size: 11px; }
+  /* 모바일에서는 필터·정렬 버튼을 작은 컨트롤로 표시합니다. */
+  .catalog-toolbar {
+    grid-template-columns: repeat(2, max-content);
+    justify-content: end;
+  }
+  .catalog-control {
+    width: 144px;
+    min-height: 36px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+  }
+  .catalog-control span { font-size: 17px; }
+  .product-showcase-head .eyebrow,
+  .product-showcase-head .product-count { font-size: 8px; }
 
   .section { width: 100%; padding-inline: 16px; }
   .product-hero { gap: 24px; }
@@ -968,7 +1025,7 @@ table { max-width: 100%; }
 .service-card-title h2 { margin: 0; color: var(--ink); font-size: 20px; font-weight: 800; }
 .service-card > p { margin-top: 18px; font-family: var(--font-main); font-size: 14px; }
 .service-card > a,
-.service-card > button { position: relative; z-index: 1; min-height: 44px; padding: 13px 18px; border: 0; border-radius: 999px; background: var(--accent); color: var(--pure-white); font-size: 13px; font-weight: 700; }
+.service-card > button { position: relative; z-index: 1; min-height: 44px; padding: 13px 18px; border: 0; border-radius: 999px; background: var(--pure-black); color: var(--pure-white); font-size: 13px; font-weight: 700; }
 .service-card > a:hover,
 .service-card > a:focus-visible,
 .service-card > button:hover,
@@ -1133,17 +1190,28 @@ table { max-width: 100%; }
 }
 .quick-dialog[data-view="on-you"] .quick-dialog-card { padding: clamp(20px, 4vw, 38px); }
 .quick-dialog[data-view="on-you"] .quick-dialog-content { margin-top: 20px; }
+.quick-dialog[data-view="on-you"] .quick-dialog-eyebrow,
+.quick-dialog[data-view="on-you"] #quick-dialog-title,
+.quick-dialog[data-view="on-you"] .quick-on-you-visual figcaption,
+.quick-dialog[data-view="on-you"] .quick-on-you-script,
+.quick-dialog[data-view="on-you"] .quick-on-you-slots span,
+.quick-dialog[data-view="on-you"] .quick-on-you-slots strong {
+  /* 팝업의 모든 영문을 YOUR STORY / COMING SOON과 같은 스타일로 통일합니다. */
+  font-family: var(--font-brand);
+  font-weight: 500;
+  letter-spacing: normal;
+}
 .quick-on-you { display: grid; gap: 20px; }
 .quick-on-you-visual { margin: 0; }
 .quick-on-you-visual img { width: 100%; max-height: 310px; object-fit: cover; }
-.quick-on-you-visual figcaption { margin-top: 8px; color: var(--ink-soft); font-size: 9px; letter-spacing: .2em; }
+.quick-on-you-visual figcaption { margin-top: 8px; color: var(--ink-soft); font-size: 9px; letter-spacing: normal; }
 .quick-on-you-copy { display: grid; gap: 12px; }
-.quick-on-you-script { font-family: var(--font-script); font-size: clamp(30px, 5vw, 48px); line-height: .9; }
+.quick-on-you-script { font-size: clamp(30px, 5vw, 48px); line-height: .9; }
 .quick-on-you-copy > p:last-child,
 .quick-on-you-note { color: var(--ink-soft); font-size: 14px; line-height: 1.8; word-break: keep-all; }
 .quick-on-you-slots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
-.quick-on-you-slots span { min-height: 86px; padding: 12px; border: 1px solid var(--line); color: var(--ink-soft); font-size: 8px; letter-spacing: .14em; }
-.quick-on-you-slots strong { display: block; margin-top: 12px; color: var(--ink); font-family: var(--font-brand); font-size: 16px; font-weight: 500; letter-spacing: .02em; }
+.quick-on-you-slots span { min-height: 86px; padding: 12px; border: 1px solid var(--line); color: var(--ink-soft); font-size: 8px; letter-spacing: normal; }
+.quick-on-you-slots strong { display: block; margin-top: 12px; color: var(--ink); font-family: var(--font-brand); font-size: 16px; font-weight: 500; letter-spacing: normal; }
 .quick-on-you-note { margin: 0; font-size: 12px; }
 .quick-on-you-link { width: fit-content; padding: 10px 0; border-bottom: 1px solid currentColor; font-size: 12px; text-decoration: none; }
 
@@ -1242,7 +1310,14 @@ table { max-width: 100%; }
   .guide-intro { padding-top: 80px; padding-bottom: 38px; }
   .guide-cover img { aspect-ratio: 16 / 9; }
   .guide-layout { grid-template-columns: 190px minmax(0, 680px); justify-content: space-between; gap: 60px; margin-top: 76px; }
-  .guide-index { position: sticky; top: 150px; }
+  /* 데스크톱에서는 상단 메뉴 아래에 목차가 고정되어 스크롤을 따라옵니다. */
+  .guide-index {
+    position: sticky;
+    top: 88px;
+    z-index: 2;
+    max-height: calc(100vh - 112px);
+    overflow-y: auto;
+  }
   .guide-chapter { margin-bottom: 88px; }
   .guide-values > div { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center; }
   .guide-values dd { margin-top: 0; }
@@ -1253,6 +1328,13 @@ table { max-width: 100%; }
 .home-next-plan-scroll > h2, .home-next-plan-card { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; transition-delay: calc(var(--next-plan-index, 0) * 110ms); }
 .home-next-plan-scroll > h2.is-visible, .home-next-plan-card.is-visible { opacity: 1; transform: translate(0); }
 .nav-actions a:hover, .nav-actions a:focus-visible, .nav-actions button:hover, .nav-actions button:focus-visible { background: transparent; border-radius: 0; outline: 0; }
+/* 홈 화면을 제외한 모든 버튼은 호버·포커스 시 그림자를 사용하지 않습니다. */
+body:not(.home-page) button:hover,
+body:not(.home-page) button:focus-visible,
+body:not(.home-page) .btn:hover,
+body:not(.home-page) .btn:focus-visible {
+  box-shadow: none !important;
+}
 .page-head.service-page-head { min-height: 22px; padding: 11px 22px; }
 .service-page-head::before, .service-page-head::after { display: none; }
 .service-contact-layout { display: grid; gap: 54px; width: min(100%, 1180px); margin: 0 auto; }
@@ -1277,7 +1359,7 @@ table { max-width: 100%; }
 
 /* ===== 최종 반응형 안전장치: 공통 스타일보다 뒤에서 화면별로 적용 ===== */
 html,
-body { overflow-x: hidden; }
+body { overflow-x: clip; }
 img,
 video,
 iframe,
@@ -1292,15 +1374,62 @@ svg { max-width: 100%; }
 
 @media (max-width: 719px) {
   .nav-inner { width: 100%; padding-inline: 8px; }
-  .nav .logo { left: 50%; font-size: 20px; transform: translateX(-50%); }
+  .nav .logo { position: static; left: auto; order: 2; margin-left: 10px; font-size: 20px; transform: none; }
+  .nav-toggle { position: relative; z-index: 50; order: 1; border: 0; border-radius: 0; background: transparent; }
   .nav-actions { gap: 0; }
+  .nav-actions { order: 3; }
   .nav-actions button { width: 34px; min-width: 34px; padding-inline: 2px; }
   .nav-actions svg { width: 18px; height: 18px; }
+  .nav-menu {
+    position: fixed;
+    z-index: 40;
+    inset: 0;
+    display: flex;
+    width: 42vw;
+    height: 100dvh;
+    min-height: 100dvh;
+    padding: 72px 14px 24px;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0;
+    overflow-y: auto;
+    background: var(--brown);
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    transform: translateX(-100%);
+    opacity: 1;
+    transition: transform .3s ease, visibility .3s;
+  }
+  .nav-menu.open { opacity: 1; transform: translateX(0); }
+  .nav-menu a,
+  .nav-menu a.active,
+  .nav-menu a:hover { padding: 14px 0; border-top: 1px solid color-mix(in srgb, var(--pure-white) 42%, transparent); color: var(--pure-white); font-size: 12px; line-height: 1.3; }
   .page-head { padding-inline: 16px; }
+  .brand-top-rule { height: 11px; }
+  .page-head.service-page-head { height: 11px; min-height: 11px; padding: 0 16px; }
   .product-category-links a { min-width: 0; padding-inline: 2px; font-size: clamp(8px, 2.5vw, 14px); letter-spacing: -.04em; }
   .catalog-search-band { padding-inline: 16px; }
   .catalog-page-search { width: min(100%, 220px); }
+  .catalog-search-band { padding-top: 19px; }
+  .catalog-page-search { width: min(100%, 176px); min-height: 34px; }
+  .catalog-page-search input { padding: 6px 6px 6px 10px; font-size: 11px; }
+  .catalog-page-search button { min-width: 46px; padding-inline: 8px; font-size: 11px; }
+  .product-showcase-head .eyebrow,
+  .product-showcase-head .product-count { font-size: 8px; }
   .section { width: 100%; padding-inline: 16px; }
+  .footer { padding: 28px 12px 30px; font-size: 10px; }
+  .footer-brand { font-size: 20px; }
+  .footer-newsletter-copy { margin-top: 10px; font-size: 10px; }
+  .footer-newsletter { margin: 10px auto 18px; }
+  .footer-newsletter input { min-height: 40px; padding: 6px 8px; font-size: 11px; }
+  .footer-newsletter button { min-height: 40px; padding-inline: 8px; font-size: 8px; }
+  .footer .biz { line-height: 1.45; }
+  .service-contact-list { gap: 18px; }
+  .service-contact-item { gap: 4px; }
+  .service-contact-item h2 { font-size: 14px; }
+  .service-contact-item p { font-size: 11px; line-height: 1.5; }
+  .service-submit { min-width: 104px; min-height: 46px; padding: 10px 20px; font-size: 14px; }
   .product-title-row { flex-wrap: wrap; }
   .product-title-row h1 { flex: 1 1 100%; }
   .product-wishlist { margin-top: 0; }
