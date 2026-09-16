@@ -136,7 +136,7 @@
         const slides = Array.from(carousel.querySelectorAll("[data-carousel-slide]"));
         const dots = Array.from(carousel.querySelectorAll("[data-carousel-index]"));
         const currentLabel = carousel.querySelector("[data-carousel-current]");
-        if (!track || !viewport || slides.length < 2) return;
+        if (!track || !viewport || !slides.length) return;
 
         let current = 0;
         let touchStartX = 0;
@@ -150,6 +150,10 @@
           if (currentLabel) currentLabel.textContent = String(current + 1);
         }
 
+        // 오른쪽 썸네일 칸에서도 같은 슬라이드를 선택할 수 있도록 공개합니다.
+        carousel.showProductSlide = showSlide;
+
+        if (slides.length < 2) return;
         carousel.querySelector("[data-carousel-previous]").addEventListener("click", () => showSlide(current - 1));
         carousel.querySelector("[data-carousel-next]").addEventListener("click", () => showSlide(current + 1));
         dots.forEach((dot) => dot.addEventListener("click", () => showSlide(Number(dot.dataset.carouselIndex))));
@@ -176,6 +180,21 @@
           if (Math.abs(distanceX) < 45 || Math.abs(distanceX) <= Math.abs(distanceY)) return;
           showSlide(current + (distanceX < 0 ? 1 : -1));
         }, { passive: true });
+      });
+    }
+
+    function setupProductInfoPreviews() {
+      const carousel = document.querySelector("[data-product-carousel]");
+      if (!carousel || typeof carousel.showProductSlide !== "function") return;
+
+      document.querySelectorAll("[data-product-preview]").forEach((preview) => {
+        if (preview.disabled) return;
+        const index = Number(preview.dataset.productPreview);
+        if (!Number.isInteger(index)) return;
+
+        // 마우스 호버와 키보드 포커스 모두 큰 이미지 전환을 지원합니다.
+        preview.addEventListener("mouseenter", () => carousel.showProductSlide(index));
+        preview.addEventListener("focus", () => carousel.showProductSlide(index));
       });
     }
 
@@ -244,6 +263,18 @@
 
         const esc = ProductCatalog.escapeHtml;
         const gallery = renderHeroGallery(product);
+        const previewImages = (Array.isArray(product.images) ? product.images : [])
+          .map((source) => ProductCatalog.safeImageUrl(source))
+          .filter(Boolean)
+          .slice(0, 3);
+        const previews = Array.from({ length: 3 }, (_, index) => {
+          const source = previewImages[index];
+          const image = source
+            ? imageMarkup(source, product.name + " 추가 이미지 " + (index + 1), "product-info-square-image", false)
+            : "";
+          return '<button class="product-info-square" type="button" data-product-preview="' + index + '"' +
+            (source ? "" : " disabled") + ' aria-label="' + (index + 1) + '번째 이미지 크게 보기">' + image + "</button>";
+        }).join("");
 
         const productLabel = String(product.label || product.category || "").trim();
         const visibleLabel = productLabel
@@ -292,12 +323,13 @@
               (tags ? '<div class="tags">' + tags + "</div>" : "") +
               price +
               buyButton +
-              '<div class="product-info-squares" aria-label="추가 이미지 영역"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></div>' +
+              '<div class="product-info-squares" aria-label="추가 이미지 영역">' + previews + "</div>" +
             "</div>" +
           "</section>" +
           (sections ? '<div class="product-story">' + sections + "</div>" : "");
 
         setupProductCarousels();
+        setupProductInfoPreviews();
         setupPurchaseDialog(product);
         if (typeof syncWishlistButtons === "function") syncWishlistButtons();
       })
