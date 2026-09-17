@@ -298,7 +298,7 @@ a { color: inherit; }
 .brand-best-group-right .brand-best-detail-one { top: 17%; right: 0; }
 .brand-best-group-right .brand-best-detail-two { top: 60%; right: 0; bottom: auto; }
 .mobile-only { display: none; }
-.home-best-title { position: relative; width: min(calc(100% - 44px), var(--maxw)); margin: 0 auto clamp(42px, 8vw, 84px); padding-top: 28px; color: var(--brown); font-family: var(--font-brand); font-size: clamp(19px, 3.5vw, 38px); font-weight: 300; letter-spacing: .04em; line-height: 1; text-align: center; }
+.home-best-title { position: relative; width: min(calc(100% - 44px), var(--maxw)); margin: 0 auto clamp(42px, 8vw, 84px); padding-top: 28px; color: var(--brown); font-family: var(--font-brand); font-size: clamp(26px, 5vw, 50px); font-weight: 300; letter-spacing: .04em; line-height: 1; text-align: center; }
 .home-best-title::before { position: absolute; top: 0; left: 50%; width: 100vw; border-top: 1px solid color-mix(in srgb, currentColor 50%, transparent); content: ""; transform: translateX(-50%); }
 .home-product-scroll { display: grid; width: 100%; gap: clamp(68px, 18vw, 110px); padding: 0 16px; }
 .home-scroll-image { position: relative; display: grid; width: min(62vw, 364px); max-width: 100%; color: var(--ink); text-decoration: none; justify-self: start; }
@@ -311,6 +311,10 @@ a { color: inherit; }
 .home-scroll-image:hover .home-scroll-photo::after,
 .home-scroll-image:focus-visible .home-scroll-photo::after { opacity: 0; }
 .home-card-info { padding: 18px 2px 0; background: transparent; color: var(--pure-black); opacity: 1; transform: none; transition: opacity .28s ease, transform .28s ease; }
+.home-product-scroll .home-scroll-photo::after { display: none; }
+.home-product-scroll .home-scroll-photo img { transition: none; }
+.home-product-scroll .home-scroll-image:hover .home-scroll-photo img,
+.home-product-scroll .home-scroll-image:focus-visible .home-scroll-photo img { transform: none; }
 .home-scroll-image:focus-visible { outline: 3px solid var(--teal); outline-offset: 5px; }
 .home-card-label { color: var(--teal); font-size: 11px; letter-spacing: .14em; }
 .home-card-info h3 { margin-top: 4px; font-size: clamp(17px, 2vw, 22px); line-height: 1.35; }
@@ -1422,6 +1426,7 @@ table { max-width: 100%; }
 }
 .guide-craft img { width: 100%; height: auto; aspect-ratio: 6 / 5; object-fit: cover; }
 .guide-craft figcaption { margin-top: 12px; color: var(--ink-soft); font-size: 11px; }
+.guide-craft > p:last-child { font-family: var(--font-editorial); font-style: italic; }
 .guide-next { margin: 8px 0 72px; padding: 44px 12px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line); text-align: center; }
 .guide-next h2 { margin-top: 16px; font-size: clamp(26px, 4vw, 40px); font-weight: 500; letter-spacing: -.04em; word-break: keep-all; }
 .guide-next > p:not(.guide-label) { margin-top: 12px; color: var(--ink-soft); font-size: 14px; word-break: keep-all; }
