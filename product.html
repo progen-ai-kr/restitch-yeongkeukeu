@@ -57,7 +57,23 @@
     </section>
   </dialog>
 
-  <section class="section product-back">
+  <section class="section product-reference-gallery" id="product-reference-gallery" aria-labelledby="product-reference-gallery-title">
+    <h2 id="product-reference-gallery-title">RE:STITCH on YOU</h2>
+    <div class="product-reference-gallery-grid">
+      <figure><img src="images/product-gallery-1.jpg" alt="아이보리 셋업 착용 모습" loading="lazy" /></figure>
+      <figure><img src="images/product-gallery-2.png" alt="RE:STITCH 라벨과 소재 디테일" loading="lazy" /></figure>
+      <figure><img src="images/product-gallery-3.png" alt="아이보리 블라우스와 스커트 착용 모습" loading="lazy" /></figure>
+      <figure><img src="images/product-gallery-4.png" alt="블랙 드레스의 새틴 디테일" loading="lazy" /></figure>
+      <figure><img src="images/sample-product-02-black-bag.jpg" alt="블랙 가죽 토트백" loading="lazy" /></figure>
+      <figure><img src="images/products/look-01/1787721867694-3d3d0607.jpg" alt="니트 가디건 자수 디테일" loading="lazy" /></figure>
+    </div>
+    <script>
+      // 갤러리 사진이 열릴 때마다 서로 다른 순서로 배치됩니다.
+      // 사진 리스트는 HTML에 작성된 원래 순서대로 표시합니다.
+    </script>
+  </section>
+
+  <section class="section product-back" id="product-back">
     <a href="products.html" class="btn ghost">← 제품 목록으로</a>
   </section>
 
@@ -342,6 +358,7 @@
               price +
               buyButton +
               '<div class="product-info-squares" aria-label="추가 이미지 영역">' + previews + "</div>" +
+              '<a class="quick-on-you-link product-on-you-link" href="#product-reference-gallery">RE:STITCH on You <span aria-hidden="true">↗</span></a>' +
             "</div>" +
           "</section>" +
           (sections ? '<div class="product-story">' + sections + "</div>" : "");
