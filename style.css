@@ -835,29 +835,38 @@ table { max-width: 100%; }
 }
 
 @media (min-width: 720px) and (max-width: 900px) {
-  .nav-inner { padding-inline: 12px; }
-  .nav .logo { left: 50%; font-size: 24px; transform: translateX(-50%); }
-  .nav-toggle { display: block; }
+  /* 창 분할에서도 모바일과 같은 왼쪽 메뉴를 유지합니다. */
+  .nav-inner { width: 100%; padding-inline: 8px; }
+  .nav .logo { position: static; left: auto; order: 2; margin-left: 10px; font-size: 20px; transform: none; }
+  .nav-toggle { display: block; position: relative; z-index: 50; order: 1; border: 0; border-radius: 0; background: transparent; }
+  .nav-actions { order: 3; gap: 0; }
   .nav-menu {
-    position: absolute;
-    top: calc(100% + 1px);
-    right: 12px;
-    left: 12px;
+    position: fixed;
+    z-index: 40;
+    inset: 0;
     display: flex;
-    width: auto;
-    padding: 12px 18px 18px;
+    width: 42vw;
+    height: 100dvh;
+    min-height: 100dvh;
+    padding: 72px 14px 24px;
     flex-direction: column;
-    background: var(--bg);
-    border: 1px solid var(--line);
-    border-radius: 0 0 18px 18px;
-    box-shadow: 0 24px 50px color-mix(in srgb, var(--ink) 14%, transparent);
-    opacity: 0;
+    justify-content: flex-start;
+    gap: 0;
+    overflow-y: auto;
+    background: var(--brown);
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    opacity: 1;
     visibility: hidden;
-    transform: translateY(-8px);
+    transform: translateX(-100%);
     pointer-events: none;
+    transition: transform .3s ease, visibility .3s;
   }
-  .nav-menu.open { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
-  .nav-menu a { padding: 12px 2px; border-top: 1px solid var(--line); font-size: 15px; }
+  .nav-menu.open { opacity: 1; visibility: visible; transform: translateX(0); pointer-events: auto; }
+  .nav-menu a,
+  .nav-menu a.active,
+  .nav-menu a:hover { padding: 14px 0; border-top: 1px solid color-mix(in srgb, var(--pure-white) 42%, transparent); color: var(--pure-white); font-size: 12px; line-height: 1.3; }
   .nav-actions span { display: none; }
   .nav-actions button { width: 38px; min-width: 38px; padding: 0; }
   .nav-actions svg { display: block; width: 19px; height: 19px; }
@@ -1316,20 +1325,51 @@ table { max-width: 100%; }
 /* ===== 헤더 겹침 방지 ===== */
 /* 태블릿·작은 노트북에서는 중앙 로고가 메뉴와 만나지 않도록 일반 흐름에 배치합니다. */
 @media (min-width: 720px) and (max-width: 1199px) {
-  .nav-inner { gap: 14px; padding-inline: 18px; }
+  /* 모바일 직전까지는 폭이 바뀌어도 하나의 상단바 규칙을 사용합니다. */
+  .nav-inner { gap: 14px; padding-inline: clamp(8px, 2vw, 24px); }
   .nav .logo {
     position: static;
     left: auto;
     flex: 0 0 auto;
-    margin-right: 4px;
-    font-size: 22px;
+    order: 2;
+    margin-left: 10px;
+    margin-right: 0;
+    font-size: clamp(20px, 2.2vw, 24px);
     transform: none;
   }
-  .nav-menu { flex: 1 1 auto; gap: 12px; }
-  .nav-actions { flex: 0 0 auto; gap: 0; }
-  .nav-actions button { width: 36px; min-width: 36px; padding: 0; }
-  .nav-actions svg { display: block; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; }
-  .nav-actions span { display: none; }
+  .nav-toggle { display: block; order: 1; width: clamp(44px, 5vw, 52px); min-height: clamp(44px, 5vw, 52px); border: 0; border-radius: 0; background: transparent; }
+  .nav-menu {
+    position: fixed;
+    z-index: 40;
+    inset: 0;
+    display: flex;
+    width: min(42vw, 360px);
+    height: 100dvh;
+    min-height: 100dvh;
+    padding: clamp(72px, 8vw, 96px) clamp(14px, 2.4vw, 26px) 32px;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0;
+    overflow-y: auto;
+    background: var(--brown);
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    opacity: 1;
+    visibility: hidden;
+    transform: translateX(-100%);
+    pointer-events: none;
+    transition: transform .3s ease, visibility .3s;
+  }
+  .nav-menu.open { visibility: visible; transform: translateX(0); pointer-events: auto; }
+  .nav-menu a,
+  .nav-menu a.active,
+  .nav-menu a:hover { padding: clamp(14px, 1.8vw, 18px) 0; border-top: 1px solid color-mix(in srgb, var(--pure-white) 42%, transparent); color: var(--pure-white); font-size: clamp(12px, 1.5vw, 15px); line-height: 1.3; }
+  .nav-actions { order: 3; flex: 0 0 auto; gap: 0; }
+  /* 분할 화면에서는 검색·좋아요·계정·장바구니를 아이콘으로만 표시합니다. */
+  .nav-actions button { width: clamp(36px, 4vw, 44px); min-width: clamp(36px, 4vw, 44px); padding: 0; }
+  .nav-actions svg { display: block !important; width: clamp(18px, 2vw, 21px); height: clamp(18px, 2vw, 21px); fill: none; stroke: currentColor; stroke-width: 1.7; }
+  .nav-actions span { display: none !important; }
 }
 
 /* ===== 브랜드 소개: 사진과 긴 글을 함께 읽는 에디토리얼 ===== */
@@ -1541,32 +1581,6 @@ svg { max-width: 100%; }
 }
 
 @media (min-width: 720px) and (max-width: 900px) {
-  .nav-inner { padding-inline: 12px; }
-  .nav .logo { left: 50%; font-size: 24px; transform: translateX(-50%); }
-  .nav-toggle { display: block; }
-  .nav-menu {
-    position: absolute;
-    top: calc(100% + 1px);
-    right: 12px;
-    left: 12px;
-    display: flex;
-    width: auto;
-    padding: 12px 18px 18px;
-    flex-direction: column;
-    background: var(--bg);
-    border: 1px solid var(--line);
-    border-radius: 0 0 18px 18px;
-    box-shadow: 0 24px 50px color-mix(in srgb, var(--ink) 14%, transparent);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-8px);
-    pointer-events: none;
-  }
-  .nav-menu.open { opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
-  .nav-menu a { padding: 12px 2px; border-top: 1px solid var(--line); font-size: 15px; }
-  .nav-actions span { display: none; }
-  .nav-actions button { width: 38px; min-width: 38px; padding: 0; }
-  .nav-actions svg { display: block; width: 19px; height: 19px; }
   .product-category-links a { padding-inline: 4px; font-size: clamp(9px, 1.6vw, 14px); }
 }
 @media (min-width: 720px) { .service-contact-layout { grid-template-columns: minmax(0, 7fr) minmax(220px, 3fr); gap: clamp(42px, 6vw, 84px); } .service-contact-list { border-left: 1px solid var(--line); padding: 4px 0 0 clamp(28px, 4vw, 56px); } .service-form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 28px; } }\n\n/* Home fade-in and topbar hover correction */\n.home-next-plan-scroll > h2,\n.home-next-plan-card { will-change: opacity, transform; }\n.nav-actions a:hover,\n.nav-actions a:focus-visible,\n.nav-actions button:hover,\n.nav-actions button:focus-visible,\n.nav-actions button { border-radius: 0 !important; }\n.nav-actions a:hover,\n.nav-actions a:focus-visible,\n.nav-actions button:hover,\n.nav-actions button:focus-visible { background: transparent !important; outline: 0 !important; box-shadow: none !important; }\n
