@@ -57,6 +57,18 @@
       <span class="home-gallery-rule" aria-hidden="true"></span>
       <p>Bespoke craftsmanship,<br class="mobile-only" /> reimagined for modern women</p>
     </div>
+    <div class="brand-best-collage" aria-label="BRAND BEST 제품 이미지">
+      <div class="brand-best-group brand-best-group-left">
+        <figure class="brand-best-main"><img src="images/brand-best-1.jpg" alt="화이트 셔츠 드레스 정면" /></figure>
+        <figure class="brand-best-detail brand-best-detail-one"><img src="images/brand-best-2.jpg" alt="화이트 셔츠 드레스 뒷모습" /></figure>
+        <figure class="brand-best-detail brand-best-detail-two"><img src="images/brand-best-3.png" alt="화이트 셔츠 드레스 봉제 디테일" /></figure>
+      </div>
+      <div class="brand-best-group brand-best-group-right">
+        <figure class="brand-best-main"><img src="images/brand-best-a.png" alt="블랙 드레스 전체 모습" /></figure>
+        <figure class="brand-best-detail brand-best-detail-one"><img src="images/brand-best-b.png" alt="블랙 드레스 원단 디테일" /></figure>
+        <figure class="brand-best-detail brand-best-detail-two"><img src="images/brand-best-c.png" alt="블랙 드레스와 재봉 소품" /></figure>
+      </div>
+    </div>
     <h2 class="home-best-title">BRAND BEST</h2>
     <div class="home-product-scroll" id="home-product-scroll"></div>
     <div class="home-next-plan">
@@ -108,6 +120,12 @@
         while (stripProducts.length < 4) {
           stripProducts.push(imageProducts[stripProducts.length % imageProducts.length]);
         }
+        const nextPlanImageOverrides = [
+          "",
+          "images/next-plan-2.png",
+          "images/next-plan-3.png",
+          "images/next-plan-4.png",
+        ];
 
         const imageLink = (product, className, showInfo = false) => {
           const image = ProductCatalog.safeImageUrl(product.images && product.images[0]);
@@ -127,8 +145,9 @@
         };
 
         document.getElementById("home-next-plan").innerHTML = stripProducts
-          .map((product) => {
-            const image = ProductCatalog.safeImageUrl(product.images && product.images[0]);
+          .map((product, index) => {
+            const image = ProductCatalog.safeImageUrl(nextPlanImageOverrides[index]) ||
+              ProductCatalog.safeImageUrl(product.images && product.images[0]);
             const name = ProductCatalog.escapeHtml(product.name || "제품");
             return (
               '<a class="home-next-plan-card" href="product.html?id=' + encodeURIComponent(product.id) + '" aria-label="' + name + ' 상세 보기">' +
